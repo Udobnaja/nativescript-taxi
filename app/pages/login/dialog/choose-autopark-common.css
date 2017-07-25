@@ -1,0 +1,20 @@
+StackLayout{
+    color: #de000000;
+}
+
+Button{
+    color: #ffc107;
+    border-width: 1;
+    border-color: transparent;
+    margin: 8;
+    padding: 8;
+}
+
+.active,
+.highlighted{
+    background-color: #ffc107;
+}
+
+.list-group .list-group-item.active {
+    background-color: #ffc107
+}

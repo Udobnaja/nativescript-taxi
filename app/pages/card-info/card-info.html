@@ -1,0 +1,32 @@
+<ActionBar title="Мой баланс">
+    <ActionItem text="Настройки"
+                icon="res://ic_action_settings"
+                class="icon"
+                (tap)="goToSettings()">
+    </ActionItem>
+    <StackLayout orientation="horizontal" horizontalAlignment="center">
+        <Label class="text-center title" text="Мой баланс"></Label>
+    </StackLayout>
+</ActionBar>
+<StackLayout>
+    <CardView class="card" elevation="5" radius="2" margin="8 8 0">
+        <GridLayout class="card-body" rows="auto 70 auto 42 auto" columns="187 *" horizontalAlignment="left">
+            <Label text="Текущий баланс" class="text" row="0"></Label>
+            <Label text="1296,49 р." row="1" class="price"></Label>
+            <Label text="Дата ближайшей выплаты" class="text" row="2"></Label>
+            <Label text="31 июля 2017" row="3"></Label>
+            <Button text="ВЫВЕСТИ ДЕНЬГИ"
+                    class="btn btn-primary"
+                    (tap)="goToWithdrawal()"
+                    row="4" col="0" marginLeft="0"></Button>
+        </GridLayout>
+    </CardView>
+    <StackLayout class="personal-info container">
+        <Label  text="ФИО" class="headline"></Label>
+        <Label text="Иванов Иван Иванович" class="text"></Label>
+        <Label text="Позывной" class="headline"></Label>
+        <Label text="Первый-Первый" class="text"></Label>
+    </StackLayout>
+</StackLayout>
+
+

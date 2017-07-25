@@ -1,0 +1,39 @@
+<StackLayout horizontalAlignment="center" verticalAlignment="center">
+    <StackLayout orientation="horizontal"
+                 height="28"
+                 margin="22 24 10"
+                 class="header" >
+        <Label text="Таксопарк"
+               class="h1"></Label>
+    </StackLayout>
+    <StackLayout class="hr-light"></StackLayout>
+
+    <ListView [items]="autoparks"
+              (itemTap)="onItemTap($event)"
+              (setupItemView)="onSetupItemView($event)"
+              separatorColor="transparent"
+              height="78%"
+              class="list-group"
+              listSelector="#000"
+              #list>
+        <ng-template let-autopark="item" let-i="index" let-active="active" >
+            <GridLayout class="list-group-item"
+                        [class.active]="active"
+                        [class.highlighted]="i===selectedIndex">
+                <Label [text]="autopark.title" textWrap="true"></Label>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+    <StackLayout class="hr-light"></StackLayout>
+    <StackLayout orientation="horizontal"
+                 horizontalAlignment="right"
+                 height="52">
+        <Button text="ОТМЕНА"
+                class="btn btn-active"
+                (tap)="close()"></Button>
+        <Button text="OK"
+                width="40"
+                class="btn btn-active"
+                (tap)="close()"></Button>
+    </StackLayout>
+</StackLayout>

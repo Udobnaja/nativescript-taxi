@@ -1,0 +1,27 @@
+.title{
+    color: #fff;
+    font-size: 20;
+    font-family: 'Roboto Medium';
+}
+
+.row{
+    padding-top: 20;
+    padding-bottom: 20;
+}
+
+.row + .row{
+    padding-top: 5;
+}
+
+.row_bottom{
+    padding-bottom: 0;
+}
+
+.switch{
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.logout{
+    color: #ee3b4b;
+}

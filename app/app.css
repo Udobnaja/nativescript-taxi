@@ -1,0 +1,96 @@
+@import url("~/platform.css");
+@import '~/nativescript-theme-core/css/core.light.css';
+
+
+ActionBar {
+    background-color: #2196f3;
+    color: white;
+}
+
+Button{
+    color: #ffc107;
+}
+
+Button:highlighted{
+    color: #fff;
+    background-color: #fff3cd;
+}
+
+Page {
+    background-color: white;
+    font-size: 16;
+    color: #de000000;
+}
+
+.h1{
+    font-family: 'Roboto Medium';
+    font-size: 20;
+}
+
+.hr-light{
+    background-color: #80e0e0e0;
+}
+
+.btn{
+    font-size: 14;
+}
+
+.btn-primary{
+    background-color: #ffc107;
+    color: #fff;
+}
+
+.btn.btn-active:highlighted {
+    color: #fff;
+    background-color: #fff3cd
+}
+
+.btn[isEnabled=false] {
+    color: #fff;
+    background-color: #fff3cd;
+    border-color: #fff3cd;
+}
+
+.list-group .list-group-item {
+    font-size: 14;
+    padding: 16 24;
+}
+
+.list-group .list-group-item.active {
+    background-color: #ffc107;
+}
+
+.activity-indicator {
+    color: #ffc107;
+}
+
+.switch {
+    color: #e0e0e0;
+    background-color: #e0e0e0
+}
+.switch[checked=true] {
+    color: #ffc107;
+    background-color: #ffc107
+}
+
+.card {
+    background-color: #fff;
+    border-width: 1;
+    border-color: #1e000000;
+}
+
+.text{
+    color: #8b000000;
+    font-size: 14;
+}
+
+.container{
+    padding-left: 16;
+    padding-right: 16;
+}
+
+.price{
+    font-family: 'Roboto Medium';
+    font-size: 40;
+    color: #de000000;
+}

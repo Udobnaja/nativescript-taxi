@@ -1,0 +1,22 @@
+<ActionBar title="Мой баланс">
+    <StackLayout orientation="horizontal" horizontalAlignment="center">
+        <Label class="text-center title" text="Настройки"></Label>
+    </StackLayout>
+</ActionBar>
+<StackLayout>
+    <GridLayout rows="auto" columns="* auto" class="container">
+        <Label  text="Не оповещать о сообщениях" class="row" row></Label>
+        <Switch checked="{{isMessageEnabled}}"
+                (tap)="toggleMessagePermissions()"
+                class="switch text-right"></Switch>
+    </GridLayout>
+    <StackLayout class="hr-light"></StackLayout>
+    <Label  text="Политика конфиденциальности" class="row container"></Label>
+    <Label  text="Условия использования" class="row container"></Label>
+    <StackLayout class="hr-light"></StackLayout>
+    <StackLayout class="container" >
+        <Label text="Версия приложения" class="row row_bottom"></Label>
+        <Label [text]="ver"  class="row text"></Label>
+        <Label text="Выйти" class="row logout" (tap)="logout()"></Label>
+    </StackLayout>
+</StackLayout>

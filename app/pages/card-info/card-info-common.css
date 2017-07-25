@@ -1,0 +1,15 @@
+
+.title{
+    color: #fff;
+    font-size: 20;
+    font-family: 'Roboto Medium';
+}
+
+.personal-info .headline{
+    margin-top: 20;
+}
+
+.card-body{
+    padding: 24 20;
+}
+

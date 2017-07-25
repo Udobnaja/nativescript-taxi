@@ -1,0 +1,47 @@
+Image {
+    margin-bottom: 15;
+}
+
+TextField{
+    padding: 20 0 8;
+    border-width: 0 0 2 0;
+    border-color: #1e000000;
+    color: #de000000;
+}
+
+.hint{
+    color: #61000000;
+    padding-top: 20;
+}
+
+.container{
+    opacity: 0;
+    height: 370;
+    background-color: white;
+}
+
+.headline,
+.choose-autopark{
+    font-size: 14;
+    color: #8b000000;
+}
+
+.headline{
+    font-weight: bold;
+}
+
+.error{
+    color: #fe335b;
+}
+
+
+.visible {
+    animation-name: show;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes show {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
