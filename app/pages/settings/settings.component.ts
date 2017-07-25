@@ -5,6 +5,7 @@ import { Page } from "ui/page";
 import {Router} from "@angular/router";
 import {Config} from "../../shared/config";
 import * as appversion from "nativescript-appversion";
+import {RouterExtensions} from "nativescript-angular";
 
 @Component({
     selector: "settings",
@@ -17,13 +18,12 @@ export class SettingsComponent implements OnInit {
     public isMessageEnabled:boolean = Config.messagePermissons;
 
     constructor(private page: Page,
-                private router: Router){
+                private router: RouterExtensions){
     }
 
     logout(){
-        /* delete token from storage*/
         localStorage.removeItem("token");
-        this.router.navigate(["/login"]); /* in future it will be login*/
+        this.router.navigate(["/login"], { clearHistory: true });
     }
 
     toggleMessagePermissions(){ /* mb create observable on isMessageEnabled*/

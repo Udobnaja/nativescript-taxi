@@ -4,6 +4,7 @@ import {Color} from "tns-core-modules/color";
 import { Page } from "ui/page";
 import {Router} from "@angular/router";
 import {Config} from "../../shared/config";
+import {RouterExtensions} from "nativescript-angular";
 
 @Component({
     selector: "card",
@@ -13,12 +14,18 @@ import {Config} from "../../shared/config";
 
 export class CardInfoComponent implements OnInit {
     constructor(private page: Page,
-                private router: Router){
+                private router: RouterExtensions){
 
     }
 
     goToSettings(){
-        this.router.navigate(["/settings"]);
+        this.router.navigate(["/settings"], {
+            transition: {
+                name: "slide",
+                duration: 500,
+                curve: "linear"
+            }
+        });
     }
 
     goToWithdrawal(){

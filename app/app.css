@@ -4,7 +4,7 @@
 
 ActionBar {
     background-color: #2196f3;
-    color: white;
+    color: #fff;
 }
 
 Button{
@@ -17,7 +17,7 @@ Button:highlighted{
 }
 
 Page {
-    background-color: white;
+    background-color: #fff;
     font-size: 16;
     color: #de000000;
 }

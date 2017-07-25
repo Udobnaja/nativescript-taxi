@@ -10,6 +10,7 @@ import * as platform from "platform";
 import * as utils from "utils/utils";
 import * as app from "tns-core-modules/application";
 import {Config} from "../../shared/config";
+import {RouterExtensions} from "nativescript-angular";
 
 declare var android: any;
 
@@ -21,11 +22,11 @@ declare var android: any;
 
 export class WithdrawalComponent implements OnInit {
     constructor(private page: Page,
-                private router: Router){
+                private router: RouterExtensions){
     }
 
     goBack(){
-        this.router.navigate([""]);
+        this.router.back();
     }
 
     onPickerLoaded(args){
