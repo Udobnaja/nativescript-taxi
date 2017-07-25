@@ -1,4 +1,4 @@
-import { Component,  ElementRef, OnInit, OnDestroy, ViewChild, ViewContainerRef, NgZone, AfterViewChecked} from "@angular/core";
+import { Component,  ElementRef, OnInit, OnDestroy, ViewChild, ViewContainerRef, AfterViewChecked} from "@angular/core";
 import { User } from "../../shared/user/user.class";
 import { UserService } from "../../shared/user/user.service";
 import { Router } from "@angular/router";
@@ -46,8 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
                 private autoparkListService: AutoparkListService,
                 private page: Page,
                 private modalService: ModalDialogService,
-                private viewContainerRef: ViewContainerRef,
-                private zone: NgZone){
+                private viewContainerRef: ViewContainerRef){
 
         this.user = new User();
         //HardCode
@@ -151,11 +150,10 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         this.autoparkListService.load().subscribe(loadedAutoparks => {
             this.autoparkList = loadedAutoparks;
             this.isLoading = false;
-        }, () => alert("Try Rerun application."))
+        }, () => alert("Попробуйте перезапустить приложение."))
     }
 
     ngOnDestroy(){
-        console.log('on destroy');
         <TextField>this.password.nativeElement.off(textFieldModule.TextField.blurEvent);
         <TextField>this.signal.nativeElement.off(textFieldModule.TextField.blurEvent);
     }

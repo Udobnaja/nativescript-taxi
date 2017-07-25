@@ -23,13 +23,7 @@ export class CardInfoComponent implements OnInit {
     }
 
     goToSettings(){
-        this.router.navigate(["/settings"], {
-            transition: {
-                name: "slide",
-                duration: 500,
-                curve: "linear"
-            }
-        });
+        this.router.navigate(["/settings"]);
     }
 
     goToWithdrawal(){

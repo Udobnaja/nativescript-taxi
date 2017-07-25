@@ -1,13 +1,14 @@
 import {Color} from "tns-core-modules/color";
 import {LabelState} from "./enums/floatLabel.enum";
 export class Config {
-  static apiUrl = "https://api.everlive.com/v1/GWfRtXi1Lwt4jcqK/";
   static token = "";
   static APIURL = "https://dgorod.com/api/v1/";
-  static appVersion = "1.0.0";
   static messagePermissons = false;
   static ActionBarColor: Color = new Color("#1e88e5");
   static DefaultActionBarColor: Color = new Color("#332c2c2c");
+
+  static TermOfUseLInk = "https://yandex.ru/legal/taxi_termsofuse/index.html";
+  static PrivacyPolicyLink = "https://yandex.ru/legal/confidential/index.html";
 
   static getLabelsSettings(type) {
     let state;

@@ -1,4 +1,5 @@
-<ActionBar title="Мой баланс">
+<ActionBar title="Настройки">
+    <NavigationButton icon="res://ic_stat_go_back" (tap)="goBack()"></NavigationButton>
     <StackLayout orientation="horizontal" horizontalAlignment="center">
         <Label class="text-center title" text="Настройки"></Label>
     </StackLayout>
@@ -11,8 +12,8 @@
                 class="switch text-right"></Switch>
     </GridLayout>
     <StackLayout class="hr-light"></StackLayout>
-    <Label  text="Политика конфиденциальности" class="row container"></Label>
-    <Label  text="Условия использования" class="row container"></Label>
+    <Button  text="Политика конфиденциальности" (tap)="goToPrivacyPolicy()" class="row container btn "></Button>
+    <Button  text="Условия использования" (tap)="goToTermOfUse()" class="row container btn"></Button>
     <StackLayout class="hr-light"></StackLayout>
     <StackLayout class="container" >
         <Label text="Версия приложения" class="row row_bottom"></Label>

@@ -26,12 +26,23 @@ export class SettingsComponent implements OnInit {
         this.router.navigate(["/login"], { clearHistory: true });
     }
 
+    goBack(){
+        this.router.back();
+    }
+
+    goToPrivacyPolicy(){
+        this.router.navigate(["/privacyPolicy"])
+    }
+
+    goToTermOfUse(){
+        this.router.navigate(["/termOfUse"])
+    }
+
     toggleMessagePermissions(){ /* mb create observable on isMessageEnabled*/
         Config.messagePermissons = !this.isMessageEnabled;
     }
 
     ngOnInit(){
-        this.page.androidStatusBarBackground = Config.ActionBarColor;
         appversion.getVersionName().then(v => this.ver = v);
     }
 }
