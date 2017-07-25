@@ -41,25 +41,6 @@ export class Config {
 
     return state;
   }
-
 }
 
-  // static floatLabelsStyles = [
-  //
-  //   "focus": {
-  //
-  //   },
-  //   // "blur": {
-  //   //   fontSize: 16,
-  //   //   translateY: 0,
-  //   //   color: new Color("#1e000000")
-  //   // },
-  //   // "error": {
-  //   //   color: new Color("#fe335b"),
-  //   //   fontSize: 12,
-  //   //   translateY: -20
-  //   // },
-  //   // "default": {
-  //   //   color: new Color("#61000000")
-  //   // }
 

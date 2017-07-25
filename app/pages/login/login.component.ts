@@ -51,8 +51,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
 
         this.user = new User();
         //HardCode
-        // this.user.signal = "01002";
-        // this.user.password = "1830221";
+        this.user.signal = "01002";
+        this.user.password = "1830221";
     }
 
     private setLabel(textField:TextField):Label{
@@ -114,7 +114,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
     }
 
     signUp(){
-        this.router.navigate(["/card"]);
+        localStorage.setItem("token", "MySecretToken");
+        this.router.navigate([""]);
         // this.userService.register(this.user, this.autopark).subscribe(
         //     () => this.router.navigate(["/list"]),
         //     () => alert("Not real account.")

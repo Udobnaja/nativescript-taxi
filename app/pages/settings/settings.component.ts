@@ -22,7 +22,8 @@ export class SettingsComponent implements OnInit {
 
     logout(){
         /* delete token from storage*/
-        this.router.navigate([""]); /* in future it will be login*/
+        localStorage.removeItem("token");
+        this.router.navigate(["/login"]); /* in future it will be login*/
     }
 
     toggleMessagePermissions(){ /* mb create observable on isMessageEnabled*/

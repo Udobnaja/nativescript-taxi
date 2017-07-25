@@ -9,8 +9,11 @@ import { routes, navigatableComponents } from "./app.routing";
 import {DialogContent} from "./pages/login/dialog/choose-autopark.component";
 
 import * as elementRegistryModule from 'nativescript-angular/element-registry';
-elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
+import {AuthGuard} from "./shared/guards/auth.guard";
 
+var localStorage = require('nativescript-localstorage');
+
+elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
 @NgModule({
   imports: [
       NativeScriptModule,
@@ -23,6 +26,7 @@ elementRegistryModule.registerElement("CardView", () => require("nativescript-ca
       AppComponent,
       DialogContent,
       ...navigatableComponents],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [AuthGuard]
 })
 export class AppModule {}
