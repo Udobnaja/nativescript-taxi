@@ -3,7 +3,7 @@ import {LabelState} from "./enums/floatLabel.enum";
 export class Config {
   static apiUrl = "https://api.everlive.com/v1/GWfRtXi1Lwt4jcqK/";
   static token = "";
-  static taxiURL = "https://dgorod.com/api/v1/";
+  static APIURL = "https://dgorod.com/api/v1/";
   static appVersion = "1.0.0";
   static messagePermissons = false;
   static ActionBarColor: Color = new Color("#1e88e5");

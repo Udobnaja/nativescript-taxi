@@ -67,7 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         });
     }
 
-    private initFloatingLabels(textField){
+    private initFloatingLabels(textField:TextField){
         let label = this.setLabel(textField);
         let state = (!textField.text.length) ? LabelState.blur : LabelState.focus;
 
@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         this.animateLabel(label, state);
     }
 
-    private setFloatingLabels(textField, state:LabelState){
+    private setFloatingLabels(textField:TextField, state:LabelState){
         let label = this.setLabel(textField);
 
         textField.borderBottomColor = Config.getLabelsSettings(state).color;

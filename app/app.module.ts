@@ -10,10 +10,19 @@ import {DialogContent} from "./pages/login/dialog/choose-autopark.component";
 
 import * as elementRegistryModule from 'nativescript-angular/element-registry';
 import {AuthGuard} from "./shared/guards/auth.guard";
+import {InterceptedHttp} from "./shared/interceptedHttp.service";
 
 var localStorage = require('nativescript-localstorage');
 
+import {XHRBackend, Http, RequestOptions} from "@angular/http";
+
 elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
+
+function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
+    return new InterceptedHttp(xhrBackend, requestOptions);
+}
+
+
 @NgModule({
   imports: [
       NativeScriptModule,
@@ -27,6 +36,12 @@ elementRegistryModule.registerElement("CardView", () => require("nativescript-ca
       DialogContent,
       ...navigatableComponents],
   bootstrap: [AppComponent],
-  providers: [AuthGuard]
+  providers: [
+      {
+          provide: Http,
+          useFactory: httpFactory,
+          deps: [XHRBackend, RequestOptions]
+      },
+      AuthGuard]
 })
 export class AppModule {}

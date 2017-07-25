@@ -25,7 +25,7 @@ export class WithdrawalComponent implements OnInit {
     }
 
     goBack(){
-        this.router.navigate(["card"]);
+        this.router.navigate([""]);
     }
 
     onPickerLoaded(args){
