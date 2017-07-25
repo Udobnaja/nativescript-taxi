@@ -166,6 +166,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         for(let i = 0; i < cLength; i++){
             let child = this.layout.getChildAt(i);
             if (child instanceof TextField){
+                this.initFloatingLabels(child);
                 child.on(textFieldModule.TextField.blurEvent, () => {
                     this.setFloatingLabels(child, LabelState.blur);
                 });

@@ -1,12 +1,13 @@
-Image {
-    margin-bottom: 15;
-}
-
 TextField{
     padding: 20 0 8;
     border-width: 0 0 2 0;
     border-color: #1e000000;
     color: #de000000;
+}
+
+.logo{
+    margin-top: 25;
+    margin-bottom: 15;
 }
 
 .hint{
@@ -16,7 +17,6 @@ TextField{
 
 .container{
     opacity: 0;
-    height: 370;
     background-color: white;
 }
 

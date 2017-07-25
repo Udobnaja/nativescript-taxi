@@ -23,9 +23,9 @@
     </CardView>
     <StackLayout class="personal-info container">
         <Label  text="ФИО" class="headline"></Label>
-        <Label text="Иванов Иван Иванович" class="text"></Label>
+        <Label [text]="user.name" class="text"></Label>
         <Label text="Позывной" class="headline"></Label>
-        <Label text="Первый-Первый" class="text"></Label>
+        <Label [text]="user.signal" class="text"></Label>
     </StackLayout>
 </StackLayout>
 

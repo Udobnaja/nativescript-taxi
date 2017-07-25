@@ -1,10 +1,8 @@
 import {Component, OnInit} from "@angular/core";
-import {Color} from "tns-core-modules/color";
-
 import { Page } from "ui/page";
-import {Router} from "@angular/router";
 import {Config} from "../../shared/config";
 import {RouterExtensions} from "nativescript-angular";
+import {User} from "../../shared/user/user.class";
 
 @Component({
     selector: "card",
@@ -13,8 +11,14 @@ import {RouterExtensions} from "nativescript-angular";
 })
 
 export class CardInfoComponent implements OnInit {
+    user: User;
+
     constructor(private page: Page,
                 private router: RouterExtensions){
+
+        this.user = new User();
+        this.user.signal = "01002";
+        this.user.name = "Мария Ивановна Петрова"
 
     }
 
@@ -34,5 +38,7 @@ export class CardInfoComponent implements OnInit {
 
     ngOnInit(){
         this.page.androidStatusBarBackground = Config.ActionBarColor;
+
+        /* get user info from server */
     }
 }
