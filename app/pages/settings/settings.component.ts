@@ -1,8 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {Color} from "tns-core-modules/color";
 
-import { Page } from "ui/page";
-import {Router} from "@angular/router";
 import {Config} from "../../shared/config";
 import * as appversion from "nativescript-appversion";
 import {RouterExtensions} from "nativescript-angular";
@@ -17,25 +14,32 @@ export class SettingsComponent implements OnInit {
     public ver:string;
     public isMessageEnabled:boolean = Config.messagePermissons;
 
-    constructor(private page: Page,
-                private router: RouterExtensions){
-    }
+    constructor(private router: RouterExtensions){}
 
     logout(){
         localStorage.removeItem("token");
         this.router.navigate(["/login"], { clearHistory: true });
     }
 
-    goBack(){
+    goBack():void{
         this.router.back();
     }
 
-    goToPrivacyPolicy(){
-        this.router.navigate(["/privacyPolicy"])
+    goToWebView(title: string, link:string):void{
+        this.router.navigate(["/webview"], {
+            queryParams: {
+                title: title,
+                link:  link
+            }
+        })
     }
 
-    goToTermOfUse(){
-        this.router.navigate(["/termOfUse"])
+    goToPrivacyPolicy(args){
+        this.goToWebView(args.object.text, Config.PrivacyPolicyLink);
+    }
+
+    goToTermOfUse(args){
+        this.goToWebView(args.object.text, Config.TermOfUseLInk);
     }
 
     toggleMessagePermissions(){ /* mb create observable on isMessageEnabled*/
