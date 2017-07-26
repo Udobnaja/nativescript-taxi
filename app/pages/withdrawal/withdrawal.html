@@ -6,15 +6,15 @@
 </ActionBar>
 <GridLayout rows="auto *">
     <CardView class="card" elevation="5" radius="2"  row="0" >
-        <DatePicker (loaded)="onPickerLoaded($event)"></DatePicker>
+        <DatePicker (loaded)="onPickerLoaded($event)" (dateChange)="onDateChanged($event)"></DatePicker>
     </CardView>
-    <!--<StackLayout class="container" row="1" verticalAlignment="center" horizontalAlignment="center">-->
-        <!--<Image src="res://ic_action_warning" marginBottom="30" width="44"></Image>-->
-        <!--<Label text="Вывод денег недоступен в выбранный день, попробуйте изменить дату."-->
-               <!--class="text text-center"-->
-               <!--textWrap="true"></Label>-->
-    <!--</StackLayout>-->
-    <GridLayout rows="155 175" row="1" marginTop="24">
+    <StackLayout class="container" *ngIf="!available && !isLoading" row="1" verticalAlignment="center" horizontalAlignment="center">
+        <Image src="res://ic_action_warning" marginBottom="30" width="44"></Image>
+        <Label text="Вывод денег недоступен в выбранный день, попробуйте изменить дату."
+               class="text text-center"
+               textWrap="true"></Label>
+    </StackLayout>
+    <GridLayout rows="155 175"  row="1" marginTop="24" *ngIf="available && !isLoading">
         <StackLayout row="0" class="container">
             <Label text="Доступно к выводу"></Label>
             <Label text="1296,49 р." class="price"></Label>
@@ -36,4 +36,9 @@
             <Button text="ГОТОВО" class="btn btn-primary" marginTop="36"></Button>
         </StackLayout>
     </GridLayout>
+    <ActivityIndicator [busy]="isLoading" row="1"
+                       [visibility]="isLoading ? 'visible' : 'collapse'"
+                       horizontalAlignment="center"
+                       verticalAlignment="center"
+                       class="activity-indicator"></ActivityIndicator>
 </GridLayout>

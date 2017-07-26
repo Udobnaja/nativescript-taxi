@@ -4,60 +4,49 @@ import { Observable } from "rxjs/Rx";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 
-// const jwt = require("jwt-js");
-
 import { User } from "./user.class";
-import { Config } from "../config";
 import {Autopark} from "../autopark/autopark.class";
+import {Config} from "../config";
 
 @Injectable()
 export class UserService {
+    private user: Observable<User>;
+
+    private mock = {
+        name: 'Мария Ивановна Петрова',
+        signal: "01002",
+        balance: "1296,49 р.",
+        date: null
+    };
+
     constructor(private http: Http){
 
     }
-    register({ signal, password }: User, {city, name}: Autopark) {
+    // register({ signal, password }: User, {city, name}: Autopark) {
+    //
+    //     let payload = {
+    //         signal: signal,
+    //         password: password,
+    //         city: city,
+    //         name: name
+    //     };
+    //
+    //     return this.http.post(
+    //         "auth",
+    //         payload
+    //     ).map(response => { console.log('hhhh',response); return response.json()})
+    //     .do(data => {
+    //        // Config.token = data.Result.access_token;
+    //     }).catch(this.handleErrors);
+    // }
 
-        let payload = {
-            signal: signal,
-            password: password,
-            autopark: `${name}$${city}`,
-        };
+    getProfile():Observable<User>{
+       this.user = Observable.of(this.mock);
+        return this.user;
+    }
 
-        var formData = new FormData();
-
-        for (var k in payload) {
-            formData.append(k, payload[k]);
-        }
-
-        // let secret = "S(=+]n)M`^..&U4Www_kMSN#bwTpE";
-        //
-        // // let token = new jwt.WebToken(JSON.stringify(payload));
-        //
-        // let token ="";
-        //
-        let headers = new Headers();
-        headers.append("Content-Type", "application/x-www-form-urlencoded");
-        headers.append("Accept","application/json");
-        // headers.append("token", token);
-        //
-        // console.log(token);
-
-        // return this.http.get(
-        //     Config.taxiURL + "driver/info"
-        // ).map(response => response.json())
-        //  .do(() => {
-        //      Config.token = token;
-        //  })
-        //  .catch(this.handleErrors);
-
-        return this.http.post(
-            "https://dgorod.com/auth",
-            formData,
-            { headers: headers }
-        ).map(response => { console.log('hhhh',response); return response.json()})
-        .do(data => {
-           // Config.token = data.Result.access_token;
-        }).catch(this.handleErrors);
+    getDate():string{
+        return this.mock.date;
     }
 
     handleErrors(error: Response) {

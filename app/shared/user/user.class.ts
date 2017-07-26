@@ -4,4 +4,6 @@ export class User implements UserInterface{
     signal;
     password;
     name;
+    balance;
+    date;
 }

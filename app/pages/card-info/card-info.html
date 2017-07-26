@@ -10,15 +10,19 @@
 </ActionBar>
 <StackLayout>
     <CardView class="card" elevation="5" radius="2" margin="8 8 0">
-        <GridLayout class="card-body" rows="auto 70 auto 42 auto" columns="187 *" horizontalAlignment="left">
-            <Label text="Текущий баланс" class="text" row="0"></Label>
-            <Label text="1296,49 р." row="1" class="price"></Label>
-            <Label text="Дата ближайшей выплаты" class="text" row="2"></Label>
-            <Label text="31 июля 2017" row="3"></Label>
+        <GridLayout class="card-body" rows="auto auto auto" columns="187 *" horizontalAlignment="left">
+            <StackLayout row="0">
+                <Label text="Текущий баланс" class="text" ></Label>
+                <Label [text]="user.balance" class="price"></Label>
+            </StackLayout>
+            <StackLayout row="1" marginTop="22" *ngIf="user.date">
+                <Label text="Дата ближайшей выплаты" class="text" ></Label>
+                <Label [text]="user.date"></Label>
+            </StackLayout>
             <Button text="ВЫВЕСТИ ДЕНЬГИ"
                     class="btn btn-primary"
                     (tap)="goToWithdrawal()"
-                    row="4" col="0" marginLeft="0"></Button>
+                    row="3" col="0" marginLeft="0" marginTop="22"></Button>
         </GridLayout>
     </CardView>
     <StackLayout class="personal-info container">
