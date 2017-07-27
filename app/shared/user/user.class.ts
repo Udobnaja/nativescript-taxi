@@ -1,6 +1,6 @@
-import {UserInterface} from "./user.model";
+import {IUser} from "./user.model";
 
-export class User implements UserInterface{
+export class User implements IUser{
     signal;
     password;
     name;

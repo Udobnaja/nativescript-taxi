@@ -1,4 +1,4 @@
-export interface UserInterface{
+export interface IUser{
     signal: string;
     password: string;
     name: string;

@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import './operators';
 
 @Component({
     selector: "main",

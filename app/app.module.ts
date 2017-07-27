@@ -18,6 +18,13 @@ import {XHRBackend, Http, RequestOptions} from "@angular/http";
 
 elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
 
+import { StoreModule } from '@ngrx/store';
+import {reducers} from "./modules/ngrx/index";
+import {UserInitialState} from "./modules/state-managment/states/user.state";
+import {EffectsModule} from "@ngrx/effects";
+import {UserEffects} from "./modules/state-managment/effects/user.effect";
+import {UserService} from "./shared/user/user.service";
+
 function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
     return new InterceptedHttp(xhrBackend, requestOptions);
 }
@@ -29,7 +36,15 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
       NativeScriptFormsModule,
       NativeScriptHttpModule,
       NativeScriptRouterModule,
-      NativeScriptRouterModule.forRoot(routes)],
+      NativeScriptRouterModule.forRoot(routes),
+      StoreModule.forRoot(reducers, {
+          initialState: {
+              user: null
+          }
+      }),
+      EffectsModule.forRoot([
+          UserEffects
+      ])],
   entryComponents: [DialogContent],
   declarations: [
       AppComponent,
@@ -42,6 +57,6 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
           useFactory: httpFactory,
           deps: [XHRBackend, RequestOptions]
       },
-      AuthGuard]
+      AuthGuard, UserService]
 })
 export class AppModule {}

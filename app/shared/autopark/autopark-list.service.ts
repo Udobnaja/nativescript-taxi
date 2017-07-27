@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
 import { Observable } from "rxjs/Rx";
-import "rxjs/add/operator/map";
 
 import {Autopark} from "./autopark.class";
-import {AutoparkInterface} from "./autopark.model";
+import {IAutopark} from "./autopark.model";
 
 @Injectable()
 export class AutoparkListService {
@@ -12,7 +11,7 @@ export class AutoparkListService {
 
     load() {
         return this.http.get("autoparks").map(res => res.json()).map(data => {
-            let autoparkList:AutoparkInterface[] = [];
+            let autoparkList:IAutopark[] = [];
             data["autoparks"].forEach((autopark) => {
                 autoparkList.push(new Autopark(autopark.city, autopark.name, autopark.title));
             });

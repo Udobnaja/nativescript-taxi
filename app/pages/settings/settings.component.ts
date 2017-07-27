@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 
-import {Config} from "../../shared/config";
+import {Config} from "../../modules/core/config";
 import * as appversion from "nativescript-appversion";
 import {RouterExtensions} from "nativescript-angular";
 

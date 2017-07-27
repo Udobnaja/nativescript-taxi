@@ -20,6 +20,8 @@ export class WithdrawalComponent implements OnInit {
         private userService: UserService){
         this.isLoading = true;
         this.available = false;
+
+        this.date = this.userService.getDate();
     }
 
     goBack(){
@@ -54,7 +56,11 @@ export class WithdrawalComponent implements OnInit {
 
     }
 
+    saveNewDate(){
+        this.userService.saveDate('17 июня 20017');
+    }
+
     ngOnInit(){
-        this.date = this.userService.getDate();
+
     }
 }

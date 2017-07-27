@@ -1,5 +1,5 @@
 import {Color} from "tns-core-modules/color";
-import {LabelState} from "./enums/floatLabel.enum";
+import {LabelState} from "../../shared/enums/floatLabel.enum";
 export class Config {
   static token = "";
   static APIURL = "https://dgorod.com/api/v1/";
@@ -10,7 +10,7 @@ export class Config {
   static TermOfUseLInk = "https://yandex.ru/legal/taxi_termsofuse/index.html";
   static PrivacyPolicyLink = "https://yandex.ru/legal/confidential/index.html";
 
-  static getLabelsSettings(type) {
+  static getLabelsSettings(type:LabelState) {
     let state;
     switch (type) {
       case  LabelState.focus:

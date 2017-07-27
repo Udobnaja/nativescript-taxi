@@ -1,23 +1,15 @@
 import { Injectable } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
-import { Observable } from "rxjs/Rx";
+import {Observable, BehaviorSubject} from "rxjs/Rx";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 
-import { User } from "./user.class";
 import {Autopark} from "../autopark/autopark.class";
-import {Config} from "../config";
+import {IUser} from "./user.model";
+import {Config} from "../../modules/core/config";
 
 @Injectable()
 export class UserService {
-    private user: Observable<User>;
-
-    private mock = {
-        name: 'Мария Ивановна Петрова',
-        signal: "01002",
-        balance: "1296,49 р.",
-        date: null
-    };
 
     constructor(private http: Http){
 
@@ -40,14 +32,34 @@ export class UserService {
     //     }).catch(this.handleErrors);
     // }
 
-    getProfile():Observable<User>{
-       this.user = Observable.of(this.mock);
-        return this.user;
+
+
+    getProfile(data){
+        let {signal, password} = data.payload.user;
+        let {city, name} = data.payload.autopark;
+
+        let headers = new Headers();
+        headers.append('X-Driver-Auth', `${signal}:${password}:${city}:${name}`);
+
+        return this.http.get("driver/info", {headers: headers})
+            .map(res => res.json().driver).do(data => {
+                localStorage.setItem("token", data.uuid);
+            }).catch(this.handleErrors)
     }
 
     getDate():string{
-        return this.mock.date;
+      return  null;
     }
+
+    saveDate(date:string){
+        // this.mock = {name: '', signal: '', balance: '', date: date}
+        //
+        // // this.user.date = date;
+        // // this.mock.date = date;
+        // // console.dir(this.mock);
+        // // this.user.next(date);
+    }
+
 
     handleErrors(error: Response) {
         console.log(JSON.stringify(error.json()));

@@ -15,8 +15,14 @@ import {AutoparkListService} from "../../shared/autopark/autopark-list.service";
 import {DialogContent} from "./dialog/choose-autopark.component";
 import {AnimationCurve} from "ui/enums";
 import {Layout} from "tns-core-modules/ui/layouts/layout";
-import {Config} from "../../shared/config";
+import {Config} from "../../modules/core/config";
 import {LabelState} from "../../shared/enums/floatLabel.enum";
+import {IUser} from "../../shared/user/user.model";
+import {IAutopark} from "../../shared/autopark/autopark.model";
+
+import { Store } from '@ngrx/store';
+import {IAppState} from "../../modules/ngrx/index";
+import {NUser} from "../../modules/state-managment/actions/user.action";
 
 
 
@@ -28,8 +34,8 @@ import {LabelState} from "../../shared/enums/floatLabel.enum";
 })
 
 export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
-    user: User;
-    autopark: Autopark = null;
+    user: IUser;
+    autopark: IAutopark = null;
 
     @ViewChild("container") container: ElementRef;
     @ViewChild("signal") signal: ElementRef;
@@ -46,7 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
                 private autoparkListService: AutoparkListService,
                 private page: Page,
                 private modalService: ModalDialogService,
-                private viewContainerRef: ViewContainerRef){
+                private viewContainerRef: ViewContainerRef,
+                private store: Store<IAppState>){
 
         this.user = new User();
         //HardCode
@@ -113,12 +120,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
     }
 
     signUp(){
-        localStorage.setItem("token", "MySecretToken");
-        this.router.navigate([""]);
-        // this.userService.register(this.user, this.autopark).subscribe(
-        //     () => this.router.navigate(["/list"]),
-        //     () => alert("Not real account.")
-        // );
+        this.store.dispatch(new NUser.LoadAction({user: this.user, autopark: this.autopark}));
     }
 
     public show() {

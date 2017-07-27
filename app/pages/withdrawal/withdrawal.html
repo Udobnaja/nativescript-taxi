@@ -33,7 +33,7 @@
                 <Label row="2" text="ФИО: Иванова Мариа Петровна" col="0" class="text"></Label>
                 <Image src="res://ic_action_mode_edit" col="1" rowspan="3"></Image>
             </GridLayout>
-            <Button text="ГОТОВО" class="btn btn-primary" marginTop="36"></Button>
+            <Button text="ГОТОВО" class="btn btn-primary" (tap)="saveNewDate()" marginTop="36"></Button>
         </StackLayout>
     </GridLayout>
     <ActivityIndicator [busy]="isLoading" row="1"
