@@ -5,6 +5,10 @@ import {User} from "../../shared/user/user.class";
 import {Router} from "@angular/router";
 import {UserService} from "../../shared/user/user.service";
 import {IUser} from "../../shared/user/user.model";
+import {NUser} from "../../modules/state-managment/actions/user.action";
+import {Store} from "@ngrx/store";
+import {IAppState} from "../../modules/ngrx/index";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -16,15 +20,22 @@ import {IUser} from "../../shared/user/user.model";
 
 export class CardInfoComponent implements OnInit {
     user:IUser;
+    user$:Observable<any>;
 
     constructor(private page: Page,
                 private router: Router,
-                private userService: UserService,){
+                private store: Store<IAppState>){
 
-        this.user = new User();
+         this.user = new User();
+         this.user$ = this.store.select("user");
 
-
-        /* @TODO: create Requset -> get User Profile from server & subscribe */
+         this.user$.subscribe( e => {
+             if (e){
+                 this.user.balance = Number(e.balance).toFixed(2);
+                 this.user.signal = e.signal;
+                 this.user.name = e.name;
+             }
+         });
     }
 
     goToSettings(){
@@ -36,13 +47,8 @@ export class CardInfoComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.page.androidStatusBarBackground = Config.ActionBarColor;
+        this.store.dispatch(new NUser.LoadAction()); /* this is dispatcher for loading user */
 
-        // this.userService.getProfile().subscribe(({ signal, name, balance, date } : User)=>{
-        //     this.user.signal = signal;
-        //     this.user.name = name;
-        //     this.user.balance = balance;
-        //     this.user.date = date;
-        // });
+        this.page.androidStatusBarBackground = Config.ActionBarColor;
     }
 }

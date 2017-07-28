@@ -20,7 +20,7 @@ export class UserEffects {
 
     @Effect() load$: Observable<Action> = this.actions$
         .ofType(NUser.ActionTypes.LOAD)
-        .switchMap(payload =>   this.userService.getProfile(payload))
+        .switchMap(() =>   this.userService.getProfile())
         .map((user:IUser) => new NUser.LoadedAction(user))
         .catch(() => Observable.of(new NUser.LoadFailedAction()));
 

@@ -47,7 +47,7 @@ export class InterceptedHttp extends Http {
             options.headers = new Headers();
         }
         options.headers.append('Content-Type', 'application/json');
-        // options.headers.append('X-Driver-Auth', localStorage.getItem("token"));
+        options.headers.append('X-Driver-Auth', localStorage.getItem("token"));
 
         return options;
     }

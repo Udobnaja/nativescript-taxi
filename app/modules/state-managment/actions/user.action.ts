@@ -19,8 +19,7 @@ export namespace NUser {
 
     export class LoadAction implements Action {
         type = ActionTypes.LOAD;
-
-        constructor(public payload: any) { }
+        payload:string = null;
     }
 
     export class LoadedAction implements Action {

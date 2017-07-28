@@ -20,11 +20,6 @@ import {LabelState} from "../../shared/enums/floatLabel.enum";
 import {IUser} from "../../shared/user/user.model";
 import {IAutopark} from "../../shared/autopark/autopark.model";
 
-import { Store } from '@ngrx/store';
-import {IAppState} from "../../modules/ngrx/index";
-import {NUser} from "../../modules/state-managment/actions/user.action";
-
-
 
 @Component({
     selector: "my-app",
@@ -52,8 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
                 private autoparkListService: AutoparkListService,
                 private page: Page,
                 private modalService: ModalDialogService,
-                private viewContainerRef: ViewContainerRef,
-                private store: Store<IAppState>){
+                private viewContainerRef: ViewContainerRef){
 
         this.user = new User();
         //HardCode
@@ -120,7 +114,9 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
     }
 
     signUp(){
-        this.store.dispatch(new NUser.LoadAction({user: this.user, autopark: this.autopark}));
+        // hardCode
+        localStorage.setItem('token', '01002:1830221:spb:dg');
+        this.router.navigate([""]);
     }
 
     public show() {
