@@ -1,6 +1,5 @@
 import { Component,  ElementRef, OnInit, OnDestroy, ViewChild, ViewContainerRef, AfterViewChecked} from "@angular/core";
 import { User } from "../../shared/user/user.class";
-import { UserService } from "../../shared/user/user.service";
 import { Router } from "@angular/router";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 
@@ -19,11 +18,13 @@ import {Config} from "../../modules/core/config";
 import {LabelState} from "../../shared/enums/floatLabel.enum";
 import {IUser} from "../../shared/user/user.model";
 import {IAutopark} from "../../shared/autopark/autopark.model";
+import {AuthService} from "../../shared/auth.service";
+import * as dialogs from "ui/dialogs";
 
 
 @Component({
     selector: "my-app",
-    providers: [UserService, AutoparkListService],
+    providers: [AuthService, AutoparkListService],
     templateUrl: "pages/login/login.html",
     styleUrls: ["pages/login/login-common.css", "pages/login/login.css"]
 })
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
     layout;
 
     constructor(private router: Router,
-                private userService: UserService,
+                private authService: AuthService,
                 private autoparkListService: AutoparkListService,
                 private page: Page,
                 private modalService: ModalDialogService,
@@ -51,8 +52,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
 
         this.user = new User();
         //HardCode
-        this.user.signal = "01002";
-        this.user.password = "1830221";
+        this.user.signal = "11589";
+        this.user.password = "297876";
     }
 
     private setLabel(textField:TextField):Label{
@@ -106,6 +107,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
             return;
         }
 
+
         this.signUp();
     }
 
@@ -115,8 +117,13 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
 
     signUp(){
         // hardCode
-        localStorage.setItem('token', '01002:1830221:spb:dg');
-        this.router.navigate([""]);
+        let data = {user: this.user, autopark: this.autopark};
+
+        this.authService.auth(data)
+            .subscribe(
+                () => this.router.navigate([""]),
+                e => dialogs.alert({title: "Ошибка", message: e.message, okButtonText: "OK"})
+            );
     }
 
     public show() {

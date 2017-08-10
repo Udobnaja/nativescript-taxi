@@ -54,7 +54,6 @@ export class InterceptedHttp extends Http {
 
     private catchAuthError (self: InterceptedHttp) {
         return (res: Response) => {
-            console.log(res);
             if (res.status === 401 || res.status === 403) {
                 console.log(res);
             }
