@@ -10,6 +10,9 @@ export function reducer(
         case NUser.ActionTypes.LOADED:
             return (<any>Object).assign({}, state, action.payload);
 
+        case NUser.ActionTypes.ACCOUNT_LOADED:
+            return  (<any>Object).assign({}, state, {account: action.payload});
+
         default:
             return state;
     }

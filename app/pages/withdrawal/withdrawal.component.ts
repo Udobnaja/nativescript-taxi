@@ -1,8 +1,11 @@
 import {Component, OnInit} from "@angular/core";
 import {DatePicker} from "tns-core-modules/ui/date-picker";
 import {RouterExtensions, PageRoute} from "nativescript-angular";
-import {User} from "../../shared/user/user.class";
 import {UserService} from "../../shared/user/user.service";
+import {Store} from "@ngrx/store";
+import {IAppState} from "../../modules/ngrx/index";
+import {NUser} from "../../modules/state-managment/actions/user.action";
+import {IAccount} from "../../shared/account/account.model";
 
 @Component({
     selector: "withdrawal",
@@ -15,13 +18,18 @@ export class WithdrawalComponent implements OnInit {
     isLoading:boolean;
     date: string;
     available: boolean;
+    account: IAccount;
 
     constructor(private router: RouterExtensions,
-        private userService: UserService){
+        private userService: UserService,  private store: Store<IAppState>){
         this.isLoading = true;
         this.available = false;
 
         this.date = this.userService.getDate();
+
+        this.store.select("user").subscribe(u => {
+            if (u) this.account = u.account;
+        });
     }
 
     goBack(){
@@ -61,6 +69,6 @@ export class WithdrawalComponent implements OnInit {
     }
 
     ngOnInit(){
-
+        this.store.dispatch(new NUser.LoadAccountAction());
     }
 }

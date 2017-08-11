@@ -18,21 +18,21 @@ export class Config {
           fontSize: 12,
           translateY: -20,
           color: new Color("#ffc107")
-        }
+        };
         break;
       case  LabelState.blur:
         state = {
           fontSize: 16,
           translateY: 0,
           color: new Color("#1e000000")
-        }
+        };
         break;
       case LabelState.error:
         state = {
           color: new Color("#fe335b"),
           fontSize: 12,
           translateY: -20
-        }
+        };
         break
       case LabelState.default:
         state = {

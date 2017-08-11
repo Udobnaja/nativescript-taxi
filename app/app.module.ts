@@ -24,6 +24,7 @@ import {UserInitialState} from "./modules/state-managment/states/user.state";
 import {EffectsModule} from "@ngrx/effects";
 import {UserEffects} from "./modules/state-managment/effects/user.effect";
 import {UserService} from "./shared/user/user.service";
+import {AccountService} from "./shared/account/account.service";
 
 function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
     return new InterceptedHttp(xhrBackend, requestOptions);
@@ -57,6 +58,6 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
           useFactory: httpFactory,
           deps: [XHRBackend, RequestOptions]
       },
-      AuthGuard, UserService]
+      AuthGuard, UserService, AccountService]
 })
 export class AppModule {}

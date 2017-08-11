@@ -9,12 +9,18 @@ export namespace NUser {
         LOAD: string;
         LOADED: string;
         LOAD_FAILED: string;
+        LOAD_ACCOUNT: string;
+        ACCOUNT_LOADED: string;
+        ACCOUNT_FAILED: string;
     }
 
     export const ActionTypes: IUserActions = {
         LOAD: type(`${CATEGORY} Load`),
         LOADED: type(`${CATEGORY} Loaded successful`),
         LOAD_FAILED: type(`${CATEGORY} Load Failed`),
+        LOAD_ACCOUNT: type(`${CATEGORY} Load Account`),
+        ACCOUNT_LOADED: type(`${CATEGORY} Account Loaded successful`),
+        ACCOUNT_FAILED: type(`${CATEGORY} Account Load Failed`),
     };
 
     export class LoadAction implements Action {
@@ -33,8 +39,25 @@ export namespace NUser {
         payload: string = null;
     }
 
+    export class LoadAccountAction implements Action {
+        type = ActionTypes.LOAD_ACCOUNT;
+        payload:string = null;
+    }
+
+    export class AccountLoadedAction implements Action {
+        type = ActionTypes.ACCOUNT_LOADED;
+
+        constructor(public payload: any) {}
+    }
+
+    export class AccountLoadFailedAction implements Action {
+        type = ActionTypes.ACCOUNT_FAILED;
+        payload: string = null;
+    }
+
     export type Actions
         = LoadAction
         | LoadedAction
-        | LoadFailedAction;
+        | LoadFailedAction
+        | LoadAccountAction | AccountLoadedAction | AccountLoadFailedAction;
 }

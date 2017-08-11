@@ -6,4 +6,5 @@ export class User implements IUser{
     name;
     balance;
     date;
+    account;
 }

@@ -6,25 +6,15 @@ import "rxjs/add/operator/map";
 
 
 @Injectable()
-export class UserService {
-
+export class AccountService {
     constructor(private http: Http){
 
     }
 
-    getProfile(){
-        return this.http.get("driver/info")
-            .map(res => res.json().driver).catch(this.handleErrors)
+    getAccount(){
+        return this.http.get("driver/account")
+            .map(res => res.json().account).catch(this.handleErrors)
     }
-
-    getDate():string{
-      return  null;
-    }
-
-    saveDate(date:string){
-
-    }
-
 
     handleErrors(error: Response) {
         return Observable.throw(error);
