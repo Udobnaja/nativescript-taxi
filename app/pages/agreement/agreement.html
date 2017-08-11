@@ -1,0 +1,10 @@
+<ActionBar title="Политика Конфиденциальности">
+    <NavigationButton icon="res://ic_action_close" (tap)="close()"></NavigationButton>
+    <ActionItem text="ПРИНЯТЬ" class="action-button" (tap)="goNext()"></ActionItem>
+    <StackLayout orientation="horizontal" horizontalAlignment="center">
+        <Label class="text-center title" text="Политика Конфиденциальности"></Label>
+    </StackLayout>
+</ActionBar>
+<StackLayout class="container">
+    <HtmlView html="{{content}}" ></HtmlView>
+</StackLayout>

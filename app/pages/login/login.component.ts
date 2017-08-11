@@ -50,6 +50,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
                 private modalService: ModalDialogService,
                 private viewContainerRef: ViewContainerRef){
 
+        localStorage.removeItem("token");
+
         this.user = new User();
         //HardCode
         this.user.signal = "11589";
@@ -121,7 +123,10 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
 
         this.authService.auth(data)
             .subscribe(
-                () => this.router.navigate([""]),
+                () => {
+                    /* if this user accepy confidentional  then this.router.navigate(["card-info"]) else navigate to agreement*/
+                    this.router.navigate(["agreement"])
+                },
                 e => dialogs.alert({title: "Ошибка", message: e.message, okButtonText: "OK"})
             );
     }

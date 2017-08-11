@@ -17,7 +17,6 @@ export class SettingsComponent implements OnInit {
     constructor(private router: RouterExtensions){}
 
     logout(){
-        localStorage.removeItem("token");
         this.router.navigate(["/login"], { clearHistory: true });
     }
 

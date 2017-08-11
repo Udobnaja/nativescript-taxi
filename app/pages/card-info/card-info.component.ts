@@ -9,6 +9,7 @@ import {NUser} from "../../modules/state-managment/actions/user.action";
 import {Store} from "@ngrx/store";
 import {IAppState} from "../../modules/ngrx/index";
 import {Observable} from "rxjs";
+import * as dialogs from "ui/dialogs";
 
 
 @Component({
@@ -21,6 +22,7 @@ import {Observable} from "rxjs";
 export class CardInfoComponent implements OnInit {
     user:IUser;
     user$:Observable<any>;
+    public isLoading: boolean = true;
 
     constructor(private page: Page,
                 private router: Router,
@@ -31,11 +33,12 @@ export class CardInfoComponent implements OnInit {
 
          this.user$.subscribe( e => {
              if (e){
+                 this.isLoading = false;
                  this.user.balance = Number(e.balance).toFixed(2);
                  this.user.signal = e.signal;
                  this.user.name = e.name;
              }
-         });
+         }, e => dialogs.alert(e.message));
     }
 
     goToSettings(){
@@ -47,6 +50,7 @@ export class CardInfoComponent implements OnInit {
     }
 
     ngOnInit(){
+
         this.store.dispatch(new NUser.LoadAction()); /* this is dispatcher for loading user */
 
         this.page.androidStatusBarBackground = Config.ActionBarColor;

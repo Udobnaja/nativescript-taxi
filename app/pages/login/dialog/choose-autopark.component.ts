@@ -1,9 +1,7 @@
 import {Component, ChangeDetectionStrategy, OnInit,ViewChild, ElementRef} from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 import { SetupItemViewArgs } from "nativescript-angular/directives";
-import { ListView } from "ui/list-view";
 import {Autopark} from "../../../shared/autopark/autopark.class";
-import {Color} from "tns-core-modules/color";
 
 @Component({
     selector: "modal-content",
@@ -20,7 +18,6 @@ export class DialogContent implements OnInit{
 
     constructor(private params: ModalDialogParams) {
         this.autoparks = params.context.autoparkList;
-        // this.listView = <ListView>this.list.nativeElement;
     }
 
     public close() {
@@ -28,10 +25,7 @@ export class DialogContent implements OnInit{
     }
 
     public onItemTap(args) {
-        // let listView = <ListView>args.object;
-        // listView.android.setBackgroundResource(0);
         this.selectedIndex = args.index;
-        // listView.refresh();
         this.params.closeCallback(args.index);
     }
 

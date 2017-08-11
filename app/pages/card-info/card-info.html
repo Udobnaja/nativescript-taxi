@@ -8,7 +8,7 @@
         <Label class="text-center title" text="Мой баланс"></Label>
     </StackLayout>
 </ActionBar>
-<StackLayout>
+<StackLayout [class.visible]="!isLoading" class="card-info">
     <CardView class="card" elevation="5" radius="2" margin="8 8 0">
         <GridLayout class="card-body" rows="auto auto auto" horizontalAlignment="left">
             <StackLayout row="0">
@@ -33,5 +33,10 @@
         <Label [text]="user.signal" class="text"></Label>
     </StackLayout>
 </StackLayout>
+<ActivityIndicator [busy]="isLoading"
+                   [visibility]="isLoading ? 'visible' : 'collapse'"
+                   horizontalAlignment="center"
+                   verticalAlignment="center"
+                   class="activity-indicator"></ActivityIndicator>
 
 
