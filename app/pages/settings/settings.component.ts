@@ -12,7 +12,7 @@ import {RouterExtensions} from "nativescript-angular";
 
 export class SettingsComponent implements OnInit {
     public ver:string;
-    public isMessageEnabled:boolean = Config.messagePermissons;
+    // public isMessageEnabled:boolean = Config.messagePermissons;
 
     constructor(private router: RouterExtensions){}
 
@@ -41,9 +41,9 @@ export class SettingsComponent implements OnInit {
         this.goToWebView(args.object.text, Config.TermOfUseLInk);
     }
 
-    toggleMessagePermissions(){ /* mb create observable on isMessageEnabled*/
-        Config.messagePermissons = !this.isMessageEnabled;
-    }
+    // toggleMessagePermissions(){ /* mb create observable on isMessageEnabled*/
+    //     Config.messagePermissons = !this.isMessageEnabled;
+    // }
 
     ngOnInit(){
         appversion.getVersionName().then(v => this.ver = v);
