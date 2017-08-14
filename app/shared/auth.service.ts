@@ -19,7 +19,7 @@ export class AuthService {
         return this.http.get("driver/info").map(res => res).catch(this.handleErrors);
     }
 
-    handleErrors(error: Response) {
+    private handleErrors(error: Response) {
         let message =  (error.status === 404) ? 'Такого пользователя не существует' : 'Произошла ошибка';
         localStorage.removeItem('token');
         return Observable.throw(new Error(message));

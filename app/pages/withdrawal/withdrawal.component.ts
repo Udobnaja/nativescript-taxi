@@ -6,6 +6,7 @@ import {Store} from "@ngrx/store";
 import {IAppState} from "../../modules/ngrx/index";
 import {NUser} from "../../modules/state-managment/actions/user.action";
 import {IAccount} from "../../shared/account/account.model";
+import {ConfigBackend} from "../../shared/config.service";
 
 @Component({
     selector: "withdrawal",
@@ -21,7 +22,9 @@ export class WithdrawalComponent implements OnInit {
     account: IAccount;
 
     constructor(private router: RouterExtensions,
-        private userService: UserService,  private store: Store<IAppState>){
+                private userService: UserService,
+                private store: Store<IAppState>,
+                private config: ConfigBackend){
         this.isLoading = true;
         this.available = false;
 
@@ -56,6 +59,7 @@ export class WithdrawalComponent implements OnInit {
 
     onDateChanged(args){
         this.isLoading = true;
+
         let timer = setTimeout(()=> {
             this.available = (!(new Date(args.value).getDate()%2));
             this.isLoading = false;

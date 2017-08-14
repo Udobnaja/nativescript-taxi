@@ -16,7 +16,7 @@ export class AccountService {
             .map(res => res.json().account).catch(this.handleErrors)
     }
 
-    handleErrors(error: Response) {
+    private handleErrors(error: Response) {
         return Observable.throw(error);
     }
 }

@@ -14,7 +14,7 @@ import {InterceptedHttp} from "./shared/interceptedHttp.service";
 
 var localStorage = require('nativescript-localstorage');
 
-import {XHRBackend, Http, RequestOptions} from "@angular/http";
+import {XHRBackend, Http, RequestOptions, HttpModule} from "@angular/http";
 
 elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
 
@@ -25,6 +25,10 @@ import {EffectsModule} from "@ngrx/effects";
 import {UserEffects} from "./modules/state-managment/effects/user.effect";
 import {UserService} from "./shared/user/user.service";
 import {AccountService} from "./shared/account/account.service";
+
+import { APP_INITIALIZER } from '@angular/core';
+import {ConfigBackend} from "./shared/config.service";
+import {ScheduleService} from "./shared/schedule/schedule.service";
 
 function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
     return new InterceptedHttp(xhrBackend, requestOptions);
@@ -45,7 +49,8 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
       }),
       EffectsModule.forRoot([
           UserEffects
-      ])],
+      ]),
+      HttpModule],
   entryComponents: [DialogContent],
   declarations: [
       AppComponent,
@@ -58,6 +63,8 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
           useFactory: httpFactory,
           deps: [XHRBackend, RequestOptions]
       },
-      AuthGuard, UserService, AccountService]
+      ConfigBackend,
+      { provide: APP_INITIALIZER, useFactory: (config: ConfigBackend) => () => config.load(), deps: [ConfigBackend], multi: true },
+      AuthGuard, UserService, AccountService, ScheduleService]
 })
 export class AppModule {}

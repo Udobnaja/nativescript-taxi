@@ -4,29 +4,26 @@ import {Observable} from "rxjs/Rx";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 
-
 @Injectable()
-export class UserService {
+export class ScheduleService {
 
     constructor(private http: Http){
 
     }
 
-    getProfile(){
-        return this.http.get("driver/info")
-            .map(res => res.json().driver).catch(this.handleErrors)
+    getSchedule(){
+        return this.http.get("driver/schedule")
+            .map(res => res.json().schedule).catch(this.handleErrors)
     }
 
-    getDate():string{
-      return  null;
-    }
-
-    saveDate(date:string){
-
+    getPaymentSchedules(){
+        return this.http.get("payment_schedules").map(res => res.json().payment_schedules).catch(this.handleErrors);
     }
 
 
     private handleErrors(error: Response) {
         return Observable.throw(error);
     }
+
+
 }

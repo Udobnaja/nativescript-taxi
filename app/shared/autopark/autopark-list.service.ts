@@ -20,7 +20,7 @@ export class AutoparkListService {
 
     }
 
-    handleErrors(error: Response) {
+    private handleErrors(error: Response) {
         console.log(JSON.stringify(error.json()));
         return Observable.throw(error);
     }
