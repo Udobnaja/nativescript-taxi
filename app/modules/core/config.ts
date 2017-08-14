@@ -7,8 +7,8 @@ export class Config {
   static ActionBarColor: Color = new Color("#1e88e5");
   static DefaultActionBarColor: Color = new Color("#332c2c2c");
 
-  static TermOfUseLInk = "https://yandex.ru/legal/taxi_termsofuse/index.html";
-  static PrivacyPolicyLink = "https://yandex.ru/legal/confidential/index.html";
+  static TermOfUseLInk = "https://dgorod.com/terms-of-use.html";
+  static PrivacyPolicyLink = "https://dgorod.com/privacy-policy.html";
 
   static getLabelsSettings(type:LabelState) {
     let state;

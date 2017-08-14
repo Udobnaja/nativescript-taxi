@@ -1,4 +1,4 @@
-import {Component, AfterViewInit, ElementRef, ViewChild} from "@angular/core";
+import {Component, AfterViewInit, ElementRef, ViewChild, NgZone} from "@angular/core";
 import {RouterExtensions, PageRoute} from "nativescript-angular";
 import {WebView, LoadEventData} from "tns-core-modules/ui/web-view";
 import "rxjs/add/operator/switchMap";
@@ -9,14 +9,15 @@ import "rxjs/add/operator/switchMap";
 })
 
 export class WebViewComponent implements AfterViewInit{
-    url: string = "http://google.com";
+    url: string = "";
     title: string = "";
     isLoading: boolean = true;
 
     @ViewChild("webview") webview: ElementRef;
 
     constructor(private router: RouterExtensions,
-                private route: PageRoute){
+                private route: PageRoute, private zone: NgZone){
+
         this.route.activatedRoute
             .switchMap(activatedRoute => activatedRoute.queryParams)
             .forEach(params => {
@@ -32,8 +33,11 @@ export class WebViewComponent implements AfterViewInit{
     ngAfterViewInit() {
         let webview: WebView = this.webview.nativeElement;
 
-        webview.on(WebView.loadFinishedEvent, function (args: LoadEventData) {
-            this.isLoading = false;
+        webview.on(WebView.loadFinishedEvent, (args: LoadEventData) => {
+
+            this.zone.run(() => {
+                this.isLoading = false;
+            });
 
             if (args.error) {
                 alert("Попробуйте перезагрузить приложение...");
