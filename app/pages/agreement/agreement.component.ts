@@ -3,11 +3,13 @@ import {Router} from "@angular/router";
 import { Page } from "ui/page";
 import {Config} from "../../modules/core/config";
 import {WebView, LoadEventData} from "tns-core-modules/ui/web-view";
+import {AuthService} from "../../shared/auth.service";
 
 @Component({
     selector: "agreement-content",
     templateUrl: "pages/agreement/agreement.html",
     styleUrls: ["pages/agreement/agreement-common.css", "pages/agreement/agreement.css"],
+    providers: [AuthService]
 })
 
 export class AgreementComponent implements OnInit, AfterViewInit{
@@ -18,12 +20,11 @@ export class AgreementComponent implements OnInit, AfterViewInit{
 
     constructor(private router: Router,
                 private page: Page,
-                private zone: NgZone){}
+                private zone: NgZone,
+                private authService: AuthService){}
 
     ngOnInit(){
         this.page.androidStatusBarBackground = Config.ActionBarColor;
-        /* In this place get confidential */
-        // this.content = "<h1>Политика Конфиденциальности</h1><span color='#000'>Test</span>";
 
     }
 
@@ -33,7 +34,12 @@ export class AgreementComponent implements OnInit, AfterViewInit{
 
     goNext(){
         /* in this place post accept to server for this user */
-        this.router.navigate(["card-info"]);
+        this.authService.acceptUser().subscribe(() => {
+            localStorage.setItem('agreement', "1");
+            this.router.navigate(["card-info"]);
+        }, () => {
+            alert("error");
+        })
     }
 
     ngAfterViewInit() {

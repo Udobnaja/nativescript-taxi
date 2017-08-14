@@ -29,6 +29,7 @@ import {AccountService} from "./shared/account/account.service";
 import { APP_INITIALIZER } from '@angular/core';
 import {ConfigBackend} from "./shared/config.service";
 import {ScheduleService} from "./shared/schedule/schedule.service";
+import {AcceptedGuard} from "./shared/guards/accept.guard";
 
 function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
     return new InterceptedHttp(xhrBackend, requestOptions);
@@ -65,6 +66,6 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
       },
       ConfigBackend,
       { provide: APP_INITIALIZER, useFactory: (config: ConfigBackend) => () => config.load(), deps: [ConfigBackend], multi: true },
-      AuthGuard, UserService, AccountService, ScheduleService]
+      AuthGuard, AcceptedGuard, UserService, AccountService, ScheduleService]
 })
 export class AppModule {}

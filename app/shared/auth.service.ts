@@ -19,6 +19,10 @@ export class AuthService {
         return this.http.get("driver/info").map(res => res).catch(this.handleErrors);
     }
 
+    acceptUser(){
+       return this.http.post("license_accepted", '').map(res => res).catch(this.handleErrors);
+    }
+
     private handleErrors(error: Response) {
         let message =  (error.status === 404) ? 'Такого пользователя не существует' : 'Произошла ошибка';
         localStorage.removeItem('token');

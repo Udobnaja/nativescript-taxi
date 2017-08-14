@@ -3,7 +3,7 @@ import {IUser} from "../../../shared/user/user.model";
 
 
 export interface IUserState extends IUser{
-
+    info:{}
 }
 export const UserInitialState: IUserState = null;
 //

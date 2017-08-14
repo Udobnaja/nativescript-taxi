@@ -123,9 +123,14 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
 
         this.authService.auth(data)
             .subscribe(
-                () => {
-                    /* if this user accepy confidentional  then this.router.navigate(["card-info"]) else navigate to agreement*/
-                    this.router.navigate(["agreement"])
+                (res) => {
+                    if (res.json().info.mob_license_accepted){
+                        localStorage.setItem('agreement', res.json().info.mob_license_accepted);
+                        this.router.navigate(["card-info"])
+                    } else {
+                        this.router.navigate(["agreement"])
+                    }
+
                 },
                 e => dialogs.alert({title: "Ошибка", message: e.message, okButtonText: "OK"})
             );
