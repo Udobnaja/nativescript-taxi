@@ -31,7 +31,7 @@
                 <Label row="0" text="{{'БИК: ' + ((account?.bic) ? account.bic : 'неизвестно')}}" col="0" class="text"></Label>
                 <Label row="1" text="{{'Номер счёта: ' + ((account?.bnk_corr) ? account.bnk_corr : 'неизвестно' )}}" col="0" class="text"></Label>
                 <Label row="2" text="{{'ФИО: ' + ((account?.fio) ? account.fio : 'неизвестно')}}" col="0" class="text"></Label>
-                <Image src="res://ic_action_mode_edit" col="1" rowspan="3"></Image>
+                <Image src="res://ic_action_mode_edit" col="1" rowspan="3" (tap)="edit()"></Image>
             </GridLayout>
             <Button text="ГОТОВО" class="btn btn-primary" (tap)="saveNewDate()" marginTop="36"></Button>
         </StackLayout>

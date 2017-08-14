@@ -89,6 +89,10 @@ export class WithdrawalComponent implements OnInit {
         this.router.back();
     }
 
+    edit(){
+        this.router.navigate(['edit-requisites']);
+    }
+
     onPickerLoaded(args){
        /* this.isLoading = true;*/
 

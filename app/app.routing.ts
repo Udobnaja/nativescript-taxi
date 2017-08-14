@@ -6,6 +6,7 @@ import {AuthGuard} from "./shared/guards/auth.guard";
 import {WebViewComponent} from "./pages/web-view/web-view.component";
 import {AgreementComponent} from "./pages/agreement/agreement.component";
 import {AcceptedGuard} from "./shared/guards/accept.guard";
+import {EditRequisitesComponent} from "./pages/withdrawal/edit-requisites/edit-requisites.component";
 
 export const routes = [
     { path: "login", component: LoginComponent },
@@ -14,7 +15,8 @@ export const routes = [
     { path: "agreement", component: AgreementComponent, canActivate: [AuthGuard]},
     { path: "settings", component: SettingsComponent},
     { path: "withdrawal", component: WithdrawalComponent },
-    { path: "webview", component: WebViewComponent }
+    { path: "webview", component: WebViewComponent },
+    { path: "edit-requisites", component: EditRequisitesComponent}
 ];
 
 export const navigatableComponents = [
@@ -23,5 +25,6 @@ export const navigatableComponents = [
     SettingsComponent,
     WithdrawalComponent,
     WebViewComponent,
-    AgreementComponent
+    AgreementComponent,
+    EditRequisitesComponent
 ];
