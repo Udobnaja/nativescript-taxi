@@ -1,8 +1,8 @@
 <ActionBar title="Вывод денег">
     <NavigationButton icon="res://ic_stat_go_back" (tap)="goBack()"></NavigationButton>
-    <ActionItem text=""
-                icon="res://ic_action_more_vert">
-    </ActionItem>
+    <!--<ActionItem text=""-->
+                <!--icon="res://ic_action_more_vert">-->
+    <!--</ActionItem>-->
 </ActionBar>
 <GridLayout rows="auto *">
     <CardView class="card" elevation="5" radius="2"  row="0" >
@@ -10,7 +10,7 @@
     </CardView>
     <StackLayout class="container" *ngIf="!available && !isLoading" row="1" verticalAlignment="center" horizontalAlignment="center">
         <Image src="res://ic_action_warning" marginBottom="30" width="44"></Image>
-        <Label text="Вывод денег недоступен в выбранный день, попробуйте изменить дату."
+        <Label [text]="reason"
                class="text text-center"
                textWrap="true"></Label>
     </StackLayout>

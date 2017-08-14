@@ -124,8 +124,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         this.authService.auth(data)
             .subscribe(
                 (res) => {
-                    if (res.json().info.mob_license_accepted){
-                        localStorage.setItem('agreement', res.json().info.mob_license_accepted);
+                    if (res.json().driver.info.mob_license_accepted){
+                        localStorage.setItem('agreement', res.json().driver.info.mob_license_accepted);
                         this.router.navigate(["card-info"])
                     } else {
                         this.router.navigate(["agreement"])
