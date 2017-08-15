@@ -11,7 +11,7 @@ import {EditRequisitesComponent} from "./pages/withdrawal/edit-requisites/edit-r
 export const routes = [
     { path: "login", component: LoginComponent },
     { path: "card-info", component: CardInfoComponent, canActivate: [AuthGuard, AcceptedGuard]},
-    { path: "", redirectTo: 'card-info', pathMatch: 'full'}, /* @TODO: create guard for redirecting to card-info if user is already accepted */
+    { path: "", redirectTo: 'card-info', pathMatch: 'full'},
     { path: "agreement", component: AgreementComponent, canActivate: [AuthGuard]},
     { path: "settings", component: SettingsComponent},
     { path: "withdrawal", component: WithdrawalComponent },

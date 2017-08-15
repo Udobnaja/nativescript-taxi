@@ -23,6 +23,7 @@
     "@ngrx/store": "^4.0.0",
     "email-validator": "^1.0.7",
     "nativescript-angular": "~3.0.0",
+    "nativescript-angular-snapshot": "3.0.0-5.5.372.32",
     "nativescript-appversion": "^1.4.1",
     "nativescript-cardview": "^2.0.2",
     "nativescript-localstorage": "^1.1.5",

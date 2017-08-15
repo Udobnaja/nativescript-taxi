@@ -8,6 +8,7 @@ import {NUser} from "../../modules/state-managment/actions/user.action";
 import {IAccount} from "../../shared/account/account.model";
 import {ConfigBackend} from "../../shared/config.service";
 import {ScheduleService} from "../../shared/schedule/schedule.service";
+import {Config} from "../../modules/core/config";
 
 @Component({
     selector: "withdrawal",
@@ -23,7 +24,7 @@ export class WithdrawalComponent implements OnInit {
     account: IAccount;
     scheduleEnum = {};
     schedule: string = "";
-    reason: string = "Вывод денег недоступен в выбранный день, попробуйте изменить дату.";
+    reason: string = "";
     currentDate: Date;
 
     constructor(private router: RouterExtensions,
@@ -35,6 +36,7 @@ export class WithdrawalComponent implements OnInit {
         this.available = false;
 
         this.date = this.userService.getDate();
+        this.reason = Config.messages.schedule.default;
 
         this.store.select("user").subscribe(u => {
             if (u) this.account = u.account;
@@ -45,36 +47,32 @@ export class WithdrawalComponent implements OnInit {
         let date = new Date(val).getDate();
         let day = new Date(val).getDay();
 
+        this.reason = Config.messages.schedule[this.schedule] || Config.messages.schedule.default;
+
         switch (this.scheduleEnum[this.schedule]){
             case this.scheduleEnum["1-5"]:
                 this.available = (date >= 1 || date <= 5);
-                this.reason = "Вывод денег осуществляется с 1 по 5 число месяца, попробуйте изменить дату.";
                 break;
             case this.scheduleEnum["1-5_15-20"]:
                 this.available = (date >= 1 || date <= 5 || date >=15 || date <= 20);
-                this.reason = "Вывод денег осуществляется с 1 по 5 и с 15 по 20 число месяца, попробуйте изменить дату.";
                 break;
             case this.scheduleEnum["daily"]:
                 this.available = true;
                 break;
             case this.scheduleEnum["every_fri"]:
                 this.available = (day === 5);
-                this.reason = "Вывод денег осуществляется каждую пятницу месяца, попробуйте изменить дату.";
                 break;
             case this.scheduleEnum["every_mon_every_thu"]:
                 this.available = (day === 1 || day === 4);
-                this.reason = "Вывод денег осуществляется каждый понедельник и четверг месяца, попробуйте изменить дату.";
                 break;
             case this.scheduleEnum["every_thu"]:
                 this.available = (day === 4);
-                this.reason = "Вывод денег осуществляется каждый четверг месяца, попробуйте изменить дату.";
                 break;
             case this.scheduleEnum["immediately"]:
                 this.available = true;
                 break;
             case this.scheduleEnum["no_payment"]:
                 this.available = false;
-                this.reason = "В данный момент мы не осуществляем вывод денег.";
                 break;
             case this.scheduleEnum["weekly"]:
                 this.available = (day === 0);

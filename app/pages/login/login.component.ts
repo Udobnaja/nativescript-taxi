@@ -109,7 +109,6 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
             return;
         }
 
-
         this.signUp();
     }
 

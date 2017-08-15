@@ -1,14 +1,29 @@
 import {Color} from "tns-core-modules/color";
 import {LabelState} from "../../shared/enums/floatLabel.enum";
+// static token = "";
+// static messagePermissons = false;
 export class Config {
-  static token = "";
   static APIURL = "https://dgorod.com/api/v1/";
-  static messagePermissons = false;
+
   static ActionBarColor: Color = new Color("#1e88e5");
   static DefaultActionBarColor: Color = new Color("#332c2c2c");
 
   static TermOfUseLInk = "https://dgorod.com/terms-of-use.html";
   static PrivacyPolicyLink = "https://dgorod.com/privacy-policy.html";
+
+  static messages = {
+    "schedule": {
+      "1-5": "Вывод денег осуществляется с 1 по 5 число месяца, попробуйте изменить дату.",
+      "1-5_15-20": "Вывод денег осуществляется с 1 по 5 и с 15 по 20 число месяца, попробуйте изменить дату.",
+      "daily": "",
+      "every_fri": "Вывод денег осуществляется каждую пятницу месяца, попробуйте изменить дату.",
+      "every_mon_every_thu": "Вывод денег осуществляется каждый понедельник и четверг месяца, попробуйте изменить дату.",
+      "every_thu": "Вывод денег осуществляется каждый четверг месяца, попробуйте изменить дату.",
+      "no_payment": "В данный момент мы не осуществляем вывод денег.",
+      "weekly": "",
+      "default": "Вывод денег недоступен в выбранный день, попробуйте изменить дату."
+    }
+  };
 
   static getLabelsSettings(type:LabelState) {
     let state;
@@ -33,7 +48,7 @@ export class Config {
           fontSize: 12,
           translateY: -20
         };
-        break
+        break;
       case LabelState.default:
         state = {
           color: new Color("#61000000")
@@ -41,7 +56,7 @@ export class Config {
     }
 
     return state;
-  }
+  };
 }
 
 
