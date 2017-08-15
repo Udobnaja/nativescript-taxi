@@ -105,7 +105,7 @@ export class WithdrawalComponent implements OnInit {
         datePicker.day = this.currentDate.getDate();
         datePicker.minDate = today;
 
-        let maxDate = today.setMonth(today.getMonth() + 3); /* + three month*/
+        let maxDate = today.setMonth(today.getMonth() + Config.maxNextMonth);
 
         datePicker.maxDate = new Date(maxDate);
     }
@@ -126,7 +126,7 @@ export class WithdrawalComponent implements OnInit {
             this.checkDates(this.currentDate);
             this.isLoading = false;
         }, () => {
-            console.log('error');
+            alert(Config.messages.error.body.restart);
         });
 
     }

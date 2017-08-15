@@ -131,7 +131,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
                     }
 
                 },
-                e => dialogs.alert({title: "Ошибка", message: e.message, okButtonText: "OK"})
+                e => dialogs.alert({title: Config.messages.error.title, message: e.message, okButtonText: Config.messages.button.ok})
             );
     }
 
@@ -164,7 +164,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         this.autoparkListService.load().subscribe(loadedAutoparks => {
             this.autoparkList = loadedAutoparks;
             this.isLoading = false;
-        }, () => alert("Попробуйте перезапустить приложение."))
+        }, () => alert(Config.messages.error.body.restart))
     }
 
     ngOnDestroy(){

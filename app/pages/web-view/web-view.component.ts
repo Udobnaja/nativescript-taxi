@@ -2,6 +2,7 @@ import {Component, AfterViewInit, ElementRef, ViewChild, NgZone} from "@angular/
 import {RouterExtensions, PageRoute} from "nativescript-angular";
 import {WebView, LoadEventData} from "tns-core-modules/ui/web-view";
 import "rxjs/add/operator/switchMap";
+import {Config} from "../../modules/core/config";
 
 @Component({
     selector: "wV",
@@ -40,7 +41,7 @@ export class WebViewComponent implements AfterViewInit{
             });
 
             if (args.error) {
-                alert("Попробуйте перезагрузить приложение...");
+                alert(Config.messages.error.body.restart);
             }
         })
     }

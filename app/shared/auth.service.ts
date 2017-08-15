@@ -3,6 +3,7 @@ import { Http, Response } from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
+import {Config} from "../modules/core/config";
 
 
 @Injectable()
@@ -24,7 +25,7 @@ export class AuthService {
     }
 
     private handleErrors(error: Response) {
-        let message =  (error.status === 404) ? 'Такого пользователя не существует' : 'Произошла ошибка';
+        let message =  (error.status === 404) ? Config.messages.error.body["user-not-found"] : Config.messages.error.body.restart;
         localStorage.removeItem('token');
         return Observable.throw(new Error(message));
     }

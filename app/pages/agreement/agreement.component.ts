@@ -51,7 +51,7 @@ export class AgreementComponent implements OnInit, AfterViewInit{
             });
 
             if (args.error) {
-                alert("Попробуйте перезагрузить приложение...");
+                alert(Config.messages.error.body.restart);
             }
         })
     }

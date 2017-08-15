@@ -3,13 +3,13 @@ import {LabelState} from "../../shared/enums/floatLabel.enum";
 // static token = "";
 // static messagePermissons = false;
 export class Config {
-  static APIURL = "https://dgorod.com/api/v1/";
+  static APIURL:string = "https://dgorod.com/api/v1/";
 
-  static ActionBarColor: Color = new Color("#1e88e5");
-  static DefaultActionBarColor: Color = new Color("#332c2c2c");
+  static ActionBarColor:Color = new Color("#1e88e5");
+  static DefaultActionBarColor:Color = new Color("#332c2c2c");
 
-  static TermOfUseLInk = "https://dgorod.com/terms-of-use.html";
-  static PrivacyPolicyLink = "https://dgorod.com/privacy-policy.html";
+  static TermOfUseLInk:string = "https://dgorod.com/terms-of-use.html";
+  static PrivacyPolicyLink:string = "https://dgorod.com/privacy-policy.html";
 
   static messages = {
     "schedule": {
@@ -22,10 +22,22 @@ export class Config {
       "no_payment": "В данный момент мы не осуществляем вывод денег.",
       "weekly": "",
       "default": "Вывод денег недоступен в выбранный день, попробуйте изменить дату."
+    },
+    "error": {
+      "title": "Ошибка",
+      "body": {
+        "restart": "Попробуйте перезапустить приложение.",
+        "user-not-found": "Такого пользователя не существует."
+      }
+    },
+    "button":{
+      "ok": "OK"
     }
   };
 
-  static getLabelsSettings(type:LabelState) {
+  static maxNextMonth:number = 3;
+
+  static getLabelsSettings(type:LabelState):Object{
     let state;
     switch (type) {
       case  LabelState.focus:
