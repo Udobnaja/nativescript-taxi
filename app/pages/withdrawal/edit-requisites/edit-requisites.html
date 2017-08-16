@@ -1,5 +1,5 @@
 <ActionBar title="">
-    <Label class="title" text="Редактировать реквизиты"></Label>
+    <Label class="title" text="Редактировать реквизиты  "></Label>
     <NavigationButton icon="res://ic_stat_go_back" (tap)="goBack()"></NavigationButton>
 </ActionBar>
 <ScrollView>
@@ -11,20 +11,24 @@
                    class="hint"></Label>
             <TextField row="1"
                        autocorrect="false"
-                       autocapitalizationType="none"></TextField>
+                       autocapitalizationType="none" [(ngModel)]="user.account.bic"></TextField>
             <Label row="3"
                    text="Номер счёта"
                    textWrap="true"
                    class="hint"></Label>
-            <TextField secure="true"
-                       row="3"></TextField>
+            <TextField autocorrect="false"
+                       autocapitalizationType="none"
+                       row="3"
+                       [(ngModel)]="user.account.bnk_corr"
+            ></TextField>
             <Label row="5"
                    text="ФИО"
                    textWrap="true"
                    class="hint"></Label>
-            <TextField secure="true"
-                       row="5"></TextField>
+            <TextField autocorrect="false"
+                       autocapitalizationType="none"
+                       row="5" [(ngModel)]="user.account.fio"></TextField>
         </GridLayout>
-        <Button text="ГОТОВО" class="btn btn-primary" marginTop="36" marginLeft="0" marginRight="0"></Button>
+        <Button text="ГОТОВО" class="btn btn-primary" marginTop="36" marginLeft="0" marginRight="0" (tap)="save()"></Button>
     </StackLayout>
 </ScrollView>
