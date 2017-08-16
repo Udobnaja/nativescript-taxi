@@ -101,7 +101,7 @@ Page {
     font-family: 'Roboto Medium';
 }
 
-.input{
+.input-control{
     padding: 20 0 8;
     border-width: 0 0 2 0;
     border-color: #1e000000;

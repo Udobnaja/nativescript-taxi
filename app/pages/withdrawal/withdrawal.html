@@ -9,7 +9,7 @@
         <CardView class="card" elevation="5" radius="2"  row="0" >
             <DatePicker (loaded)="onPickerLoaded($event)" (dateChange)="onDateChanged($event)"></DatePicker>
         </CardView>
-        <StackLayout class="container" *ngIf="!available && !isLoading" row="1" verticalAlignment="center" horizontalAlignment="center">
+        <StackLayout height="220" class="container" *ngIf="!available && !isLoading" row="1" verticalAlignment="center" horizontalAlignment="center">
             <Image src="res://ic_action_warning" marginBottom="30" width="44"></Image>
             <Label [text]="reason"
                    class="text text-center"
@@ -37,7 +37,7 @@
                 <Button text="ГОТОВО" class="btn btn-primary" (tap)="saveNewDate()" marginTop="36"></Button>
             </StackLayout>
         </GridLayout>
-        <ActivityIndicator [busy]="isLoading" row="1"
+        <ActivityIndicator height="220" [busy]="isLoading" row="1"
                            [visibility]="isLoading ? 'visible' : 'collapse'"
                            horizontalAlignment="center"
                            verticalAlignment="center"

@@ -11,7 +11,7 @@
                    class="input-hint"></Label>
             <TextField row="1"
                        autocorrect="false"
-                       autocapitalizationType="none" class="input"
+                       autocapitalizationType="none" class="input-control"
                        (tap)="onTap($event)"
                        [(ngModel)]="user.account.bic"></TextField>
             <Label row="3"
@@ -21,10 +21,9 @@
             <TextField autocorrect="false"
                        autocapitalizationType="none"
                        row="3"
-                       class="input"
+                       class="input-control"
                        (tap)="onTap($event)"
-                       [(ngModel)]="user.account.bnk_corr"
-            ></TextField>
+                       [(ngModel)]="user.account.bnk_corr"></TextField>
             <Label row="5"
                    text="ФИО"
                    textWrap="true"
@@ -32,7 +31,7 @@
             <TextField autocorrect="false"
                        autocapitalizationType="none"
                        (tap)="onTap($event)"
-                       row="5" [(ngModel)]="user.account.fio" class="input"></TextField>
+                       row="5" [(ngModel)]="user.account.fio" class="input-control"></TextField>
         </GridLayout>
         <Button text="ГОТОВО" class="btn btn-primary" marginTop="36" marginLeft="0" marginRight="0" (tap)="save()"></Button>
     </StackLayout>

@@ -8,6 +8,7 @@ import {Layout} from "tns-core-modules/ui/layouts/layout";
 import {FloatLabelsUtil} from "../../../utils/float-labels-util";
 import {LabelState} from "../../../shared/enums/floatLabel.enum";
 import {TextField} from "tns-core-modules/ui/text-field";
+import {UserService} from "../../../shared/user/user.service";
 
 @Component({
     selector: "edit-requisites",
@@ -21,11 +22,15 @@ export class EditRequisitesComponent implements OnInit, AfterViewChecked {
     FloatLabels;
 
     @ViewChild("container") container: ElementRef;
-    constructor(private router: RouterExtensions,  private store: Store<IAppState>){
+    constructor(private router: RouterExtensions,
+                private store: Store<IAppState>,
+                private userService: UserService){
         this.user = new User();
 
         this.store.select("user").subscribe(u => {
-            if (u) this.user.account = u.account;
+            if (u)
+                if (u.account)
+                    this.user.account = u.account;
         });
     }
 
@@ -38,7 +43,21 @@ export class EditRequisitesComponent implements OnInit, AfterViewChecked {
     }
 
     save(){
-        this.router.navigate(['card-info']);
+        // this.user.account.bik
+
+        this.checkBik();
+        // if (!this.checkBik()) alert("Номера такого Бик не существует");
+
+        // this.router.navigate(['card-info']);
+    }
+
+    checkBik(){
+        this.userService.checkBik(this.user.account.bic).subscribe(e => {
+            console.log('ok');
+            console.dir(e);
+        }, e => {
+            console.dir(e);
+        });
     }
 
     onTap(args){

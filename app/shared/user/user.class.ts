@@ -1,4 +1,5 @@
 import {IUser} from "./user.model";
+import {Account} from "../account/account.class";
 
 export class User implements IUser{
     signal;
@@ -7,4 +8,7 @@ export class User implements IUser{
     balance;
     date;
     account;
+    constructor(){
+        this.account = new Account();
+    }
 }

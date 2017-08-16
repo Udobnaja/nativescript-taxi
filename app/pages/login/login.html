@@ -1,6 +1,5 @@
 <ScrollView>
-    <StackLayout class="container"
-                 [class.visible]="!isLoading"
+    <StackLayout class="container" [class.visible]="!isLoading"
                  verticalAlignment="top">
         <Image src="res://ic_directions_car"
                stretch="none"
@@ -12,13 +11,13 @@
             <Label row="1"
                    text="Позывной"
                    textWrap="true"
-                   class="hint"></Label>
+                   class="input-hint"></Label>
             <TextField row="1"
                        autocorrect="false"
                        autocapitalizationType="none"
                        (tap)="onTap($event)"
                        [(ngModel)]="user.signal"
-                       class="input"
+                       class="input-control"
                        #signal></TextField>
             <Label row="3"
                    text="Пароль"
@@ -28,7 +27,7 @@
                        row="3"
                        [(ngModel)]="user.password"
                        (tap)="onTap($event)"
-                       class="input"
+                       class="input-control"
                        #password></TextField>
         </GridLayout>
 
@@ -50,6 +49,6 @@
                    [visibility]="isLoading ? 'visible' : 'collapse'"
                    horizontalAlignment="center"
                    verticalAlignment="center"
-                    class="activity-indicator"></ActivityIndicator>
+                   class="activity-indicator"></ActivityIndicator>
 
 

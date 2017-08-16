@@ -55,9 +55,10 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         localStorage.removeItem("token");
 
         this.user = new User();
+        this.page.actionBarHidden = true;
         //HardCode
-        this.user.signal = "11589";
-        this.user.password = "297876";
+        this.user.signal = "99999";
+        this.user.password = "999999";
     }
 
     submit() {
@@ -79,7 +80,6 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
     }
 
     signUp(){
-        // hardCode
         let data = {user: this.user, autopark: this.autopark};
 
         this.authService.auth(data)
@@ -118,7 +118,6 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
     }
 
     ngOnInit(){
-        this.page.actionBarHidden = true;
         this.page.androidStatusBarBackground = Config.DefaultActionBarColor;
 
         this.layout = <Layout>this.container.nativeElement;

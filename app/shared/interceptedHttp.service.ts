@@ -36,7 +36,8 @@ export class InterceptedHttp extends Http {
     }
 
     private updateUrl(req: string) {
-        return  Config.APIURL + req;
+
+        return Config.APIURL + req ;
     }
 
     private getRequestOptionArgs(options?: RequestOptionsArgs) : RequestOptionsArgs {

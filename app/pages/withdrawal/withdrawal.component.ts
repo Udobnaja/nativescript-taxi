@@ -48,6 +48,7 @@ export class WithdrawalComponent implements OnInit {
         let day = new Date(val).getDay();
 
         this.reason = Config.messages.schedule[this.schedule] || Config.messages.schedule.default;
+        console.log(this.schedule);
 
         switch (this.scheduleEnum[this.schedule]){
             case this.scheduleEnum["1-5"]:
@@ -57,6 +58,7 @@ export class WithdrawalComponent implements OnInit {
                 this.available = (date >= 1 || date <= 5 || date >=15 || date <= 20);
                 break;
             case this.scheduleEnum["daily"]:
+            case this.scheduleEnum["immediately"]:
                 this.available = true;
                 break;
             case this.scheduleEnum["every_fri"]:
@@ -68,15 +70,10 @@ export class WithdrawalComponent implements OnInit {
             case this.scheduleEnum["every_thu"]:
                 this.available = (day === 4);
                 break;
-            case this.scheduleEnum["immediately"]:
-                this.available = true;
+            case this.scheduleEnum["weekly"]:
+                this.available = (day === 1);
                 break;
             case this.scheduleEnum["no_payment"]:
-                this.available = false;
-                break;
-            case this.scheduleEnum["weekly"]:
-                this.available = (day === 0);
-                break;
             default:
                 this.available = false;
                 break;
