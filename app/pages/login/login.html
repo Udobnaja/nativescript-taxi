@@ -18,15 +18,17 @@
                        autocapitalizationType="none"
                        (tap)="onTap($event)"
                        [(ngModel)]="user.signal"
+                       class="input"
                        #signal></TextField>
             <Label row="3"
                    text="Пароль"
                    textWrap="true"
-                   class="hint"></Label>
+                   class="input-hint"></Label>
             <TextField secure="true"
                        row="3"
                        [(ngModel)]="user.password"
                        (tap)="onTap($event)"
+                       class="input"
                        #password></TextField>
         </GridLayout>
 

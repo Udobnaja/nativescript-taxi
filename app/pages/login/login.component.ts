@@ -20,6 +20,7 @@ import {IUser} from "../../shared/user/user.model";
 import {IAutopark} from "../../shared/autopark/autopark.model";
 import {AuthService} from "../../shared/auth.service";
 import * as dialogs from "ui/dialogs";
+import {FloatLabelsUtil} from "../../utils/float-labels-util";
 
 
 @Component({
@@ -42,6 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
     public isLoading: boolean = true;
 
     layout;
+    FloatLabels;
 
     constructor(private router: Router,
                 private authService: AuthService,
@@ -58,54 +60,14 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         this.user.password = "297876";
     }
 
-    private setLabel(textField:TextField):Label{
-        return this.layout.getChildAt(this.layout.getChildIndex(textField) - 1);
-    }
-
-    private animateLabel(label:Label, state:LabelState){
-        label.animate({
-            translate: { x: 0, y: Config.getLabelsSettings(state).translateY},
-            duration: 200,
-            curve: AnimationCurve.cubicBezier(0.1, 0.1, 0.1, 1)
-        });
-    }
-
-    private initFloatingLabels(textField:TextField){
-        let label = this.setLabel(textField);
-        let state = (!textField.text.length) ? LabelState.blur : LabelState.focus;
-
-        label.fontSize = Config.getLabelsSettings(state).fontSize;
-
-        this.animateLabel(label, state);
-    }
-
-    private setFloatingLabels(textField:TextField, state:LabelState){
-        let label = this.setLabel(textField);
-
-        textField.borderBottomColor = Config.getLabelsSettings(state).color;
-
-        if (state === LabelState.error){
-            textField.text = '';
-            label.color = Config.getLabelsSettings(state).color;
-        } else {
-            label.color = Config.getLabelsSettings(LabelState.default).color;
-        }
-
-        if(!textField.text.length){
-            label.fontSize = Config.getLabelsSettings(state).fontSize;
-            this.animateLabel(label, state);
-        }
-    }
-
-
     submit() {
         if (!this.user.signal.trim()) {
-            this.setFloatingLabels( <TextField>this.signal.nativeElement, LabelState.error);
+            this.FloatLabels.setFloatingLabels( <TextField>this.signal.nativeElement, LabelState.error);
             return;
         }
 
         if (!this.user.password.trim()) {
-            this.setFloatingLabels( <TextField>this.password.nativeElement, LabelState.error);
+            this.FloatLabels.setFloatingLabels( <TextField>this.password.nativeElement, LabelState.error);
             return;
         }
 
@@ -113,7 +75,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
     }
 
     onTap(args){
-        this.setFloatingLabels(<TextField>args.object, LabelState.focus);
+        this.FloatLabels.setFloatingLabels(<TextField>args.object, LabelState.focus);
     }
 
     signUp(){
@@ -173,17 +135,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
     }
 
     ngAfterViewChecked(){
-        let cLength = this.layout.getChildrenCount();
-
-        for(let i = 0; i < cLength; i++){
-            let child = this.layout.getChildAt(i);
-            if (child instanceof TextField){
-                this.initFloatingLabels(child);
-                child.on(textFieldModule.TextField.blurEvent, () => {
-                    this.setFloatingLabels(child, LabelState.blur);
-                });
-            }
-        }
-
+        this.FloatLabels = new FloatLabelsUtil(this.layout);
+        this.FloatLabels.initTextFields();
     }
 }

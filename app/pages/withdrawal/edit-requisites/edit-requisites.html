@@ -8,26 +8,31 @@
             <Label row="1"
                    text="Бик"
                    textWrap="true"
-                   class="hint"></Label>
+                   class="input-hint"></Label>
             <TextField row="1"
                        autocorrect="false"
-                       autocapitalizationType="none" [(ngModel)]="user.account.bic"></TextField>
+                       autocapitalizationType="none" class="input"
+                       (tap)="onTap($event)"
+                       [(ngModel)]="user.account.bic"></TextField>
             <Label row="3"
                    text="Номер счёта"
                    textWrap="true"
-                   class="hint"></Label>
+                   class="input-hint"></Label>
             <TextField autocorrect="false"
                        autocapitalizationType="none"
                        row="3"
+                       class="input"
+                       (tap)="onTap($event)"
                        [(ngModel)]="user.account.bnk_corr"
             ></TextField>
             <Label row="5"
                    text="ФИО"
                    textWrap="true"
-                   class="hint"></Label>
+                   class="input-hint"></Label>
             <TextField autocorrect="false"
                        autocapitalizationType="none"
-                       row="5" [(ngModel)]="user.account.fio"></TextField>
+                       (tap)="onTap($event)"
+                       row="5" [(ngModel)]="user.account.fio" class="input"></TextField>
         </GridLayout>
         <Button text="ГОТОВО" class="btn btn-primary" marginTop="36" marginLeft="0" marginRight="0" (tap)="save()"></Button>
     </StackLayout>

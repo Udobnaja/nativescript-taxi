@@ -101,4 +101,16 @@ Page {
     font-family: 'Roboto Medium';
 }
 
+.input{
+    padding: 20 0 8;
+    border-width: 0 0 2 0;
+    border-color: #1e000000;
+    color: #de000000;
+}
+
+.input-hint{
+    color: #61000000;
+    padding-top: 20;
+}
+
 
