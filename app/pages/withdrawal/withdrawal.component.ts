@@ -92,8 +92,6 @@ export class WithdrawalComponent implements OnInit {
     }
 
     onPickerLoaded(args){
-       /* this.isLoading = true;*/
-
         let datePicker = <DatePicker>args.object;
 
         let today = new Date();
@@ -115,7 +113,9 @@ export class WithdrawalComponent implements OnInit {
     }
 
     saveNewDate(){
-        this.userService.saveDate('17 июня 20017');
+        this.router.navigate(["card-info"]);
+        // post date to Server
+        // this.userService.saveDate('17 июня 20017');
     }
 
     ngOnInit(){

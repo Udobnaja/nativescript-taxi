@@ -5,11 +5,13 @@
         <Label class="text-center title" text="Политика Конфиденциальности"></Label>
     </StackLayout>
 </ActionBar>
-<GridLayout rows="auto *">
-    <WebView #webview [src]="url" row="0"></WebView>
-    <ActivityIndicator [busy]="isLoading" row="1"
-                       [visibility]="isLoading ? 'visible' : 'collapse'"
-                       horizontalAlignment="center"
-                       verticalAlignment="center"
-                       class="activity-indicator"></ActivityIndicator></GridLayout>
-
+<ScrollView>
+    <GridLayout rows="auto *">
+        <WebView #webview [src]="url" row="0"></WebView>
+        <ActivityIndicator [busy]="isLoading" row="1"
+                           [visibility]="isLoading ? 'visible' : 'collapse'"
+                           horizontalAlignment="center"
+                           verticalAlignment="center"
+                           class="activity-indicator"></ActivityIndicator>
+    </GridLayout>
+</ScrollView>

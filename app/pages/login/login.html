@@ -1,47 +1,49 @@
-<StackLayout class="container"
-             [class.visible]="!isLoading"
-             verticalAlignment="top">
-    <Image src="res://ic_directions_car"
-           stretch="none"
-           horizontalAlignment="center"
-           class="logo"></Image>
-    <Label text="ДОСТУПНЫЙ ГОРОД"
-           class="headline text-center"></Label>
-    <GridLayout rows="17 54 17 54" #container>
-        <Label row="1"
-               text="Позывной"
-               textWrap="true"
-               class="hint"></Label>
-        <TextField row="1"
-                   autocorrect="false"
-                   autocapitalizationType="none"
-                   (tap)="onTap($event)"
-                   [(ngModel)]="user.signal"
-                   #signal></TextField>
-        <Label row="3"
-               text="Пароль"
-               textWrap="true"
-               class="hint"></Label>
-        <TextField secure="true"
-                   row="3"
-                   [(ngModel)]="user.password"
-                   (tap)="onTap($event)"
-                   #password></TextField>
-    </GridLayout>
+<ScrollView>
+    <StackLayout class="container"
+                 [class.visible]="!isLoading"
+                 verticalAlignment="top">
+        <Image src="res://ic_directions_car"
+               stretch="none"
+               horizontalAlignment="center"
+               class="logo"></Image>
+        <Label text="ДОСТУПНЫЙ ГОРОД"
+               class="headline text-center"></Label>
+        <GridLayout rows="17 54 17 54" #container>
+            <Label row="1"
+                   text="Позывной"
+                   textWrap="true"
+                   class="hint"></Label>
+            <TextField row="1"
+                       autocorrect="false"
+                       autocapitalizationType="none"
+                       (tap)="onTap($event)"
+                       [(ngModel)]="user.signal"
+                       #signal></TextField>
+            <Label row="3"
+                   text="Пароль"
+                   textWrap="true"
+                   class="hint"></Label>
+            <TextField secure="true"
+                       row="3"
+                       [(ngModel)]="user.password"
+                       (tap)="onTap($event)"
+                       #password></TextField>
+        </GridLayout>
 
-    <Label text="Таксопарк" marginTop="32"></Label>
-    <Label [text]="autopark ? autopark.title : 'Не выбран'"
-           (tap)="show()"
-            class="choose-autopark"></Label>
-    <Button text="Войти"
-            (tap)="submit()"
-            marginRight="0"
-            marginLeft="0"
-            marginTop="32"
-            isEnabled="{{(user.signal && user.password && autopark) ? true : false}}"
-            class="btn btn-primary"></Button>
+        <Label text="Таксопарк" marginTop="32"></Label>
+        <Label [text]="autopark ? autopark.title : 'Не выбран'"
+               (tap)="show()"
+                class="choose-autopark"></Label>
+        <Button text="Войти"
+                (tap)="submit()"
+                marginRight="0"
+                marginLeft="0"
+                marginTop="32"
+                isEnabled="{{(user.signal && user.password && autopark) ? true : false}}"
+                class="btn btn-primary"></Button>
 
-</StackLayout>
+    </StackLayout>
+</ScrollView>
 <ActivityIndicator [busy]="isLoading"
                    [visibility]="isLoading ? 'visible' : 'collapse'"
                    horizontalAlignment="center"

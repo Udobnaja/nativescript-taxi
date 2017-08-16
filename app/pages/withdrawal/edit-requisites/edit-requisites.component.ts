@@ -1,5 +1,8 @@
 import {Component, OnInit} from "@angular/core";
 import {RouterExtensions} from "nativescript-angular";
+import {Store} from "@ngrx/store";
+import {IAppState} from "../../../modules/ngrx/index";
+import {IUser} from "../../../shared/user/user.model";
 
 @Component({
     selector: "edit-requisites",
@@ -8,8 +11,11 @@ import {RouterExtensions} from "nativescript-angular";
 
 export class EditRequisitesComponent implements OnInit {
 
-    constructor(private router: RouterExtensions){
-
+    user: IUser;
+    constructor(private router: RouterExtensions,  private store: Store<IAppState>){
+        this.store.select("user").subscribe(u => {
+            // if (u) this.account = u.account;
+        });
     }
 
     ngOnInit(){

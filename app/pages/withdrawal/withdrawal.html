@@ -4,41 +4,43 @@
                 <!--icon="res://ic_action_more_vert">-->
     <!--</ActionItem>-->
 </ActionBar>
-<GridLayout rows="auto *">
-    <CardView class="card" elevation="5" radius="2"  row="0" >
-        <DatePicker (loaded)="onPickerLoaded($event)" (dateChange)="onDateChanged($event)"></DatePicker>
-    </CardView>
-    <StackLayout class="container" *ngIf="!available && !isLoading" row="1" verticalAlignment="center" horizontalAlignment="center">
-        <Image src="res://ic_action_warning" marginBottom="30" width="44"></Image>
-        <Label [text]="reason"
-               class="text text-center"
-               textWrap="true"></Label>
-    </StackLayout>
-    <GridLayout rows="155 175"  row="1" marginTop="24" *ngIf="available && !isLoading">
-        <StackLayout row="0" class="container">
-            <Label text="Доступно к выводу"></Label>
-            <Label text="1296,49 р." class="price"></Label>
-            <GridLayout columns="20 11 *" marginTop="8" verticalAlignment="center">
-                <Image src="res://ic_action_info" col="0"></Image>
-                <Label class="text"
-                       text="Тариф «Срочный вывод» - 5% от общего оборота за день"
-                       col="2" textWrap="true"></Label>
-            </GridLayout>
+<ScrollView>
+    <GridLayout rows="auto *">
+        <CardView class="card" elevation="5" radius="2"  row="0" >
+            <DatePicker (loaded)="onPickerLoaded($event)" (dateChange)="onDateChanged($event)"></DatePicker>
+        </CardView>
+        <StackLayout class="container" *ngIf="!available && !isLoading" row="1" verticalAlignment="center" horizontalAlignment="center">
+            <Image src="res://ic_action_warning" marginBottom="30" width="44"></Image>
+            <Label [text]="reason"
+                   class="text text-center"
+                   textWrap="true"></Label>
         </StackLayout>
-        <StackLayout row="1">
-            <Label text="Реквизиты" class="container"></Label>
-            <GridLayout columns="* 18" rows="auto auto auto" class="container" verticalAlignment="center">
-                <Label row="0" text="{{'БИК: ' + ((account?.bic) ? account.bic : 'неизвестно')}}" col="0" class="text"></Label>
-                <Label row="1" text="{{'Номер счёта: ' + ((account?.bnk_corr) ? account.bnk_corr : 'неизвестно' )}}" col="0" class="text"></Label>
-                <Label row="2" text="{{'ФИО: ' + ((account?.fio) ? account.fio : 'неизвестно')}}" col="0" class="text"></Label>
-                <Image src="res://ic_action_mode_edit" col="1" rowspan="3" (tap)="edit()"></Image>
-            </GridLayout>
-            <Button text="ГОТОВО" class="btn btn-primary" (tap)="saveNewDate()" marginTop="36"></Button>
-        </StackLayout>
+        <GridLayout rows="155 175"  row="1" marginTop="24" *ngIf="available && !isLoading">
+            <StackLayout row="0" class="container">
+                <Label text="Доступно к выводу"></Label>
+                <Label text="1296,49 р." class="price"></Label>
+                <GridLayout columns="20 11 *" marginTop="8" verticalAlignment="center">
+                    <Image src="res://ic_action_info" col="0"></Image>
+                    <Label class="text"
+                           text="Тариф «Срочный вывод» - 5% от общего оборота за день"
+                           col="2" textWrap="true"></Label>
+                </GridLayout>
+            </StackLayout>
+            <StackLayout row="1">
+                <Label text="Реквизиты" class="container"></Label>
+                <GridLayout columns="* 18" rows="auto auto auto" class="container" verticalAlignment="center">
+                    <Label row="0" text="{{'БИК: ' + ((account?.bic) ? account.bic : 'неизвестно')}}" col="0" class="text"></Label>
+                    <Label row="1" text="{{'Номер счёта: ' + ((account?.bnk_corr) ? account.bnk_corr : 'неизвестно' )}}" col="0" class="text"></Label>
+                    <Label row="2" text="{{'ФИО: ' + ((account?.fio) ? account.fio : 'неизвестно')}}" col="0" class="text"></Label>
+                    <Image src="res://ic_action_mode_edit" col="1" rowspan="3" (tap)="edit()"></Image>
+                </GridLayout>
+                <Button text="ГОТОВО" class="btn btn-primary" (tap)="saveNewDate()" marginTop="36"></Button>
+            </StackLayout>
+        </GridLayout>
+        <ActivityIndicator [busy]="isLoading" row="1"
+                           [visibility]="isLoading ? 'visible' : 'collapse'"
+                           horizontalAlignment="center"
+                           verticalAlignment="center"
+                           class="activity-indicator"></ActivityIndicator>
     </GridLayout>
-    <ActivityIndicator [busy]="isLoading" row="1"
-                       [visibility]="isLoading ? 'visible' : 'collapse'"
-                       horizontalAlignment="center"
-                       verticalAlignment="center"
-                       class="activity-indicator"></ActivityIndicator>
-</GridLayout>
+</ScrollView>

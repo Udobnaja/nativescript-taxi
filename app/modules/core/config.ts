@@ -37,7 +37,7 @@ export class Config {
 
   static maxNextMonth:number = 3;
 
-  static getLabelsSettings(type:LabelState):Object{
+  static getLabelsSettings(type:LabelState){
     let state;
     switch (type) {
       case  LabelState.focus:

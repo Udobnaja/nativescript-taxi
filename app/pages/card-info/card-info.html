@@ -8,31 +8,33 @@
         <Label class="text-center title" text="Мой баланс"></Label>
     </StackLayout>
 </ActionBar>
-<StackLayout [class.visible]="!isLoading" class="card-info">
-    <CardView class="card" elevation="5" radius="2" margin="8 8 0">
-        <GridLayout class="card-body" rows="auto auto auto" horizontalAlignment="left">
-            <StackLayout row="0">
-                <Label text="Текущий баланс" class="text"></Label>
-                <Label text="{{((user?.balance) ? user.balance : '--.--' ) + ' р.'}}" class="price" textwrap="true"></Label>
-            </StackLayout>
-            <StackLayout row="1" marginTop="22" *ngIf="user.date">
-                <Label text="Дата ближайшей выплаты" class="text" ></Label>
-                <Label [text]="user.date"></Label>
-            </StackLayout>
-            <Button text="ВЫВЕСТИ ДЕНЬГИ"
-                    class="btn btn-primary btn-get-money"
-                    (tap)="goToWithdrawal()"
-                    horizontalAlignment="left"
-                    row="3"></Button>
-        </GridLayout>
-    </CardView>
-    <StackLayout class="personal-info container">
-        <Label  text="ФИО" class="headline"></Label>
-        <Label [text]="user.name" class="text"></Label>
-        <Label text="Позывной" class="headline"></Label>
-        <Label [text]="user.signal" class="text"></Label>
+<ScrollView>
+    <StackLayout [class.visible]="!isLoading" class="card-info">
+        <CardView class="card" elevation="5" radius="2" margin="8 8 0">
+            <GridLayout class="card-body" rows="auto auto auto" horizontalAlignment="left">
+                <StackLayout row="0">
+                    <Label text="Текущий баланс" class="text"></Label>
+                    <Label text="{{((user?.balance) ? user.balance : '--.--' ) + ' р.'}}" class="price" textwrap="true"></Label>
+                </StackLayout>
+                <StackLayout row="1" marginTop="22" *ngIf="user.date">
+                    <Label text="Дата ближайшей выплаты" class="text" ></Label>
+                    <Label [text]="user.date"></Label>
+                </StackLayout>
+                <Button text="ВЫВЕСТИ ДЕНЬГИ"
+                        class="btn btn-primary btn-get-money"
+                        (tap)="goToWithdrawal()"
+                        horizontalAlignment="left"
+                        row="3"></Button>
+            </GridLayout>
+        </CardView>
+        <StackLayout class="personal-info container">
+            <Label  text="ФИО" class="headline"></Label>
+            <Label [text]="user.name" class="text"></Label>
+            <Label text="Позывной" class="headline"></Label>
+            <Label [text]="user.signal" class="text"></Label>
+        </StackLayout>
     </StackLayout>
-</StackLayout>
+</ScrollView>
 <ActivityIndicator [busy]="isLoading"
                    [visibility]="isLoading ? 'visible' : 'collapse'"
                    horizontalAlignment="center"
