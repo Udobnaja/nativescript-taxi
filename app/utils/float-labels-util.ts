@@ -50,7 +50,7 @@ export class FloatLabelsUtil{
         textField.borderBottomColor = Config.getLabelsSettings(state).color;
 
         if (state === LabelState.error){
-            textField.text = '';
+            // textField.text = '';
             label.color = Config.getLabelsSettings(state).color;
         } else {
             label.color = Config.getLabelsSettings(LabelState.default).color;

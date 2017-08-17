@@ -11,6 +11,9 @@ export class Config {
   static TermOfUseLInk:string = "https://dgorod.com/terms-of-use.html";
   static PrivacyPolicyLink:string = "https://dgorod.com/privacy-policy.html";
 
+  static bicLength:number = 9;
+  static bnkCorrLength:number = 20;
+
   static messages = {
     "schedule": {
       "1-5": "Вывод денег осуществляется с 1 по 5 число месяца, попробуйте изменить дату.",
@@ -27,7 +30,13 @@ export class Config {
       "title": "Ошибка",
       "body": {
         "restart": "Попробуйте перезапустить приложение.",
-        "user-not-found": "Такого пользователя не существует."
+        "user-not-found": "Такого пользователя не существует.",
+        "bic-length": `Длина БИК должна быть равна ${Config.bicLength} символам`,
+        "bic-type": "Поле Бик может содержать только цифры",
+        "bnk-corr-length": `Длина Номер счёта должна быть равна ${Config.bnkCorrLength} символам`,
+        "bnk-corr-type": "Поле Номер счёта может содержать только цифры",
+        "fio-type": "Поле должно содержать только буквы",
+        "fio-length": "Поле обязательно к заполнению"
       }
     },
     "button":{

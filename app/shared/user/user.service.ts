@@ -17,10 +17,8 @@ export class UserService {
             .map(res => res.json().driver).catch(this.handleErrors)
     }
 
-    checkBik(biс){
-        return this.http.get("validate_bic", {params: {
-            bic: biс
-        }}).map(res => res.json()).catch(this.handleErrors)
+    checkBik(bic){
+        return this.http.get(`validate_bic/${bic}`).map(res => res.json()).catch(this.handleErrors)
     }
 
     getDate():string{

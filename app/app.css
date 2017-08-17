@@ -113,4 +113,10 @@ Page {
     padding-top: 20;
 }
 
+.input-error{
+    color: #fe335b;
+    text-align: right;
+    font-size: 12;
+}
+
 
