@@ -9,6 +9,7 @@ import {IAccount} from "../../shared/account/account.model";
 import {ConfigBackend} from "../../shared/config.service";
 import {ScheduleService} from "../../shared/schedule/schedule.service";
 import {Config} from "../../modules/core/config";
+import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "withdrawal",
@@ -122,9 +123,13 @@ export class WithdrawalComponent implements OnInit {
             this.schedule = s;
             this.checkDates(this.currentDate);
             this.isLoading = false;
-        }, () => {
-            alert(Config.messages.error.body.restart);
-        });
+        }, () =>
+            dialogs.alert({
+                title: Config.messages.error.title,
+                message: Config.messages.error.body.restart,
+                okButtonText: Config.messages.button.ok
+            })
+        );
 
     }
 }

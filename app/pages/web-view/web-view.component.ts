@@ -3,6 +3,7 @@ import {RouterExtensions, PageRoute} from "nativescript-angular";
 import {WebView, LoadEventData} from "tns-core-modules/ui/web-view";
 import "rxjs/add/operator/switchMap";
 import {Config} from "../../modules/core/config";
+import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "wV",
@@ -41,7 +42,11 @@ export class WebViewComponent implements AfterViewInit{
             });
 
             if (args.error) {
-                alert(Config.messages.error.body.restart);
+                dialogs.alert({
+                    title: Config.messages.error.title,
+                    message: Config.messages.error.body.restart,
+                    okButtonText: Config.messages.button.ok
+                });
             }
         })
     }

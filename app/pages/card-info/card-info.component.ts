@@ -38,7 +38,7 @@ export class CardInfoComponent implements OnInit {
                  this.user.signal = e.signal;
                  this.user.name = e.name;
              }
-         }, e => dialogs.alert(e.message));
+         }, e =>  dialogs.alert({title: Config.messages.error.title, message: e.message, okButtonText: Config.messages.button.ok}));
     }
 
     goToSettings(){

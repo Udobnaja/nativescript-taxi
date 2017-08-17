@@ -84,7 +84,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
 
         this.authService.auth(data)
             .subscribe(
-                (res) => {
+                res => {
                     if (res.json().driver.info.mob_license_accepted){
                         localStorage.setItem('agreement', res.json().driver.info.mob_license_accepted);
                         this.router.navigate(["card-info"])
@@ -117,15 +117,20 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         });
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.page.androidStatusBarBackground = Config.DefaultActionBarColor;
 
         this.layout = <Layout>this.container.nativeElement;
 
         this.autoparkListService.load().subscribe(loadedAutoparks => {
-            this.autoparkList = loadedAutoparks;
-            this.isLoading = false;
-        }, () => alert(Config.messages.error.body.restart))
+                this.autoparkList = loadedAutoparks;
+                this.isLoading = false;
+            }, () => dialogs.alert({
+                title: Config.messages.error.title,
+                message: Config.messages.error.body.restart,
+                okButtonText: Config.messages.button.ok
+            })
+        );
     }
 
     ngOnDestroy(){

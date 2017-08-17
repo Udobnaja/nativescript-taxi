@@ -4,6 +4,7 @@ import { Page } from "ui/page";
 import {Config} from "../../modules/core/config";
 import {WebView, LoadEventData} from "tns-core-modules/ui/web-view";
 import {AuthService} from "../../shared/auth.service";
+import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "agreement-content",
@@ -33,13 +34,14 @@ export class AgreementComponent implements OnInit, AfterViewInit{
     }
 
     goNext(){
-        /* in this place post accept to server for this user */
         this.authService.acceptUser().subscribe(() => {
             localStorage.setItem('agreement', "1");
             this.router.navigate(["card-info"]);
-        }, () => {
-            alert("error");
-        })
+        }, () => dialogs.alert({
+            title: Config.messages.error.title,
+            message: Config.messages.error.body.restart,
+            okButtonText: Config.messages.button.ok
+        }))
     }
 
     ngAfterViewInit() {
@@ -51,7 +53,11 @@ export class AgreementComponent implements OnInit, AfterViewInit{
             });
 
             if (args.error) {
-                alert(Config.messages.error.body.restart);
+                dialogs.alert({
+                    title: Config.messages.error.title,
+                    message: Config.messages.error.body.restart,
+                    okButtonText: Config.messages.button.ok
+                })
             }
         })
     }
