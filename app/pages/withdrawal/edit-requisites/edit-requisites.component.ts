@@ -57,7 +57,7 @@ export class EditRequisitesComponent implements OnInit, AfterViewChecked {
         if (this.errors[key] !== null) this.errors[key] = null;
     }
 
-    save(){
+    async save(){
 
         this.clearErrors();
 
@@ -77,9 +77,10 @@ export class EditRequisitesComponent implements OnInit, AfterViewChecked {
             return;
         }
 
-        // await this.userService.checkBik(this.user.account.bic).subscribe( e => {
-        //     result = true;
-        // }, e => {});
+        await this.userService.checkBik(this.user.account.bic).subscribe( () => {}, e => {
+            this.FloatLabels.setFloatingLabels( <TextField>this.bic.nativeElement, LabelState.error);
+            this.errors["bic"] = Config.messages.error.body["bic-not-found"];
+        });
 
 
         /* send data on server for update if ok return ? o mb state here*/
