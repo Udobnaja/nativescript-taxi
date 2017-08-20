@@ -9,6 +9,8 @@ import { NUser } from '../actions/';
 import {UserService} from "../../../shared/user/user.service";
 import {IUser} from "../../../shared/user/user.model";
 import {AccountService} from "../../../shared/account/account.service";
+import {IAccount} from "../../../shared/account/account.model";
+import {RouterExtensions} from "nativescript-angular";
 
 @Injectable()
 export class UserEffects {
@@ -17,7 +19,8 @@ export class UserEffects {
         private store: Store<any>,
         private actions$:Actions,
         private userService: UserService,
-        private accountService: AccountService
+        private accountService: AccountService,
+        private router: RouterExtensions
     ) { }
 
     @Effect() load$: Observable<Action> = this.actions$
@@ -28,9 +31,15 @@ export class UserEffects {
 
     @Effect() loadAccount$: Observable<Action> = this.actions$
         .ofType(NUser.ActionTypes.LOAD_ACCOUNT)
-        .switchMap(() =>   this.accountService.getAccount())
+        .switchMap(() => this.accountService.getAccount())
         .map((account) => new NUser.AccountLoadedAction(account))
         .catch(() => Observable.of(new NUser.LoadFailedAction()));
+
+    @Effect() updateAccount$: Observable<Action> = this.actions$
+        .ofType(NUser.ActionTypes.UPDATE)
+        .switchMap(action => this.accountService.updateAccount(action["payload"])
+            .map((account:IAccount) => {this.router.back(); return new NUser.UpdatedAction(account)})
+            .catch((e) => Observable.of(new NUser.UpdateFailedAction(e.status || e.statusText))));
 
 
 

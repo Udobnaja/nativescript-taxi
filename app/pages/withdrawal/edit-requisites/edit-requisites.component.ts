@@ -12,6 +12,8 @@ import {UserService} from "../../../shared/user/user.service";
 import {Config} from "../../../modules/core/config";
 import {IAccount} from "../../../shared/account/account.model";
 import {Account} from "../../../shared/account/account.class";
+import {NUser} from "../../../modules/state-managment/actions/user.action";
+import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "edit-requisites",
@@ -37,6 +39,13 @@ export class EditRequisitesComponent implements OnInit, AfterViewChecked {
 
         this.store.select("user").subscribe(u => {
             if (u)
+                if (u.error)  {
+                    dialogs.alert({
+                        title: Config.messages.error.title,
+                        message: Config.messages.error.body["requisites-error"],
+                        okButtonText: Config.messages.button.ok
+                    });
+                }
                 if (u.account)
                     this.user.account = u.account;
         });
@@ -82,12 +91,9 @@ export class EditRequisitesComponent implements OnInit, AfterViewChecked {
             this.errors["bic"] = Config.messages.error.body["bic-not-found"];
         });
 
+        if (this.errors["bic"]) return;
 
-        /* send data on server for update if ok return ? o mb state here*/
-
-        // this.router.navigate(['card-info']);
-
-
+        this.store.dispatch(new NUser.UpdateAction(this.user.account));
     }
 
     isNumeric(n:string){

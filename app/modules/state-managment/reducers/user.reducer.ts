@@ -8,11 +8,16 @@ export function reducer(
 ): IUserState {
     switch (action.type) {
         case NUser.ActionTypes.LOADED:
-            return (<any>Object).assign({}, state, action.payload);
+            return (<any>Object).assign({}, state, action.payload, {error: null});
 
         case NUser.ActionTypes.ACCOUNT_LOADED:
-            return  (<any>Object).assign({}, state, {account: action.payload});
+            return  (<any>Object).assign({}, state, {account: action.payload, error: null});
 
+        case NUser.ActionTypes.UPDATED:
+            return  (<any>Object).assign({}, state, {account: action.payload, error: null});
+
+        case NUser.ActionTypes.UPDATE_FAILED:
+            return (<any>Object).assign({}, state, {error: action.payload});
         default:
             return state;
     }

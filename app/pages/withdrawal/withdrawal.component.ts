@@ -49,7 +49,6 @@ export class WithdrawalComponent implements OnInit {
         let day = new Date(val).getDay();
 
         this.reason = Config.messages.schedule[this.schedule] || Config.messages.schedule.default;
-        console.log(this.schedule);
 
         switch (this.scheduleEnum[this.schedule]){
             case this.scheduleEnum["1-5"]:

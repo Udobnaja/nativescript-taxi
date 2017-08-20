@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { type } from '../../core/';
 import {IUser} from "../../../shared/user/user.model";
+import {IAccount} from "../../../shared/account/account.model";
 
 export namespace NUser {
     export const CATEGORY: string = 'User';
@@ -12,6 +13,9 @@ export namespace NUser {
         LOAD_ACCOUNT: string;
         ACCOUNT_LOADED: string;
         ACCOUNT_FAILED: string;
+        UPDATE: string;
+        UPDATED: string;
+        UPDATE_FAILED: string;
     }
 
     export const ActionTypes: IUserActions = {
@@ -21,6 +25,9 @@ export namespace NUser {
         LOAD_ACCOUNT: type(`${CATEGORY} Load Account`),
         ACCOUNT_LOADED: type(`${CATEGORY} Account Loaded successful`),
         ACCOUNT_FAILED: type(`${CATEGORY} Account Load Failed`),
+        UPDATE: type(`${CATEGORY} Update Account`),
+        UPDATED: type(`${CATEGORY} Account Updated successful`),
+        UPDATE_FAILED: type(`${CATEGORY} Account Update Failed`),
     };
 
     export class LoadAction implements Action {
@@ -55,9 +62,26 @@ export namespace NUser {
         payload: string = null;
     }
 
+    export class UpdateAction implements Action {
+        type = ActionTypes.UPDATE;
+
+        constructor(public payload: IAccount) {}
+    }
+
+    export class UpdatedAction implements Action {
+        type = ActionTypes.UPDATED;
+
+        constructor(public payload: IAccount) {}
+    }
+
+    export class UpdateFailedAction implements Action {
+        type = ActionTypes.UPDATE_FAILED;
+        constructor(public payload: any) {}
+    }
+
     export type Actions
         = LoadAction
         | LoadedAction
         | LoadFailedAction
-        | LoadAccountAction | AccountLoadedAction | AccountLoadFailedAction;
+        | LoadAccountAction | AccountLoadedAction | AccountLoadFailedAction | UpdateAction | UpdatedAction | UpdateFailedAction;
 }
