@@ -39,10 +39,10 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
 @NgModule({
   imports: [
       NativeScriptModule,
-      NativeScriptFormsModule,
-      NativeScriptHttpModule,
       NativeScriptRouterModule,
       NativeScriptRouterModule.forRoot(routes),
+      NativeScriptFormsModule,
+      NativeScriptHttpModule,
       StoreModule.forRoot(reducers, {
           initialState: {
               user: null

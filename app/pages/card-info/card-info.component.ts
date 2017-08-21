@@ -42,11 +42,11 @@ export class CardInfoComponent implements OnInit {
     }
 
     goToSettings(){
-        this.router.navigate(["/settings"]);
+        this.router.navigate(["settings"]);
     }
 
     goToWithdrawal(){
-        this.router.navigate(["/withdrawal"]);
+        this.router.navigate(["withdrawal"]);
     }
 
     ngOnInit(){

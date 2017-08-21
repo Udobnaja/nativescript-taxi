@@ -5,11 +5,8 @@ import {Component, OnInit} from "@angular/core";
     template: "<page-router-outlet></page-router-outlet>"
 })
 export class AppComponent implements OnInit{
-    constructor(){
+    constructor(){}
 
-    }
-
-    ngOnInit(){
-    }
+    ngOnInit(){}
 
 }

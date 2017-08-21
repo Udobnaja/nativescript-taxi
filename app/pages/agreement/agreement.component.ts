@@ -26,7 +26,6 @@ export class AgreementComponent implements OnInit, AfterViewInit{
 
     ngOnInit(){
         this.page.androidStatusBarBackground = Config.ActionBarColor;
-
     }
 
     close(){

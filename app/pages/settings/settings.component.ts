@@ -17,7 +17,7 @@ export class SettingsComponent implements OnInit {
     constructor(private router: RouterExtensions){}
 
     logout(){
-        this.router.navigate(["/login"], { clearHistory: true });
+        this.router.navigate(["login"], { clearHistory: true });
     }
 
     goBack():void{
@@ -25,7 +25,7 @@ export class SettingsComponent implements OnInit {
     }
 
     goToWebView(title: string, link:string):void{
-        this.router.navigate(["/webview"], {
+        this.router.navigate(["webview"], {
             queryParams: {
                 title: title,
                 link:  link
