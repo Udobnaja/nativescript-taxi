@@ -14,7 +14,7 @@
                        (tap)="onTap($event)"
                        (textChange)="clearError('bic')"
                        keyboardType="number"
-                       [(ngModel)]="user.account.bic" #bic></TextField>
+                       [ngModel]="user.account.bic" #bic></TextField>
             <Label class="input-error" [text]="errors.bic" row="2"></Label>
             <Label row="3"
                    text="Номер счёта"
@@ -27,7 +27,7 @@
                        (tap)="onTap($event)"
                        keyboardType="number"
                        (textChange)="clearError('bnk_corr')"
-                       [(ngModel)]="user.account.bnk_corr" #bnk_corr></TextField>
+                       [ngModel]="user.account.bnk_corr" #bnk_corr></TextField>
             <Label class="input-error" [text]="errors.bnk_corr" row="4"></Label>
             <Label row="5"
                    text="ФИО"
@@ -36,7 +36,7 @@
             <TextField autocorrect="false"
                        autocapitalizationType="none"
                        (tap)="onTap($event)"
-                       row="5" [(ngModel)]="user.account.fio" class="input-control"  (textChange)="clearError('fio')" #fio></TextField>
+                       row="5" [ngModel]="user.account.fio" class="input-control"  (textChange)="clearError('fio')" #fio></TextField>
             <Label class="input-error" [text]="errors.fio" row="6"></Label>
         </GridLayout>
         <Button text="ГОТОВО" class="btn btn-primary" marginTop="36" marginLeft="0" marginRight="0" (tap)="save()"></Button>
