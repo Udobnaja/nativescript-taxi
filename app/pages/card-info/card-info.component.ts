@@ -1,10 +1,10 @@
 import {Component, OnInit} from "@angular/core";
 import { Page } from "ui/page";
 import {Config} from "../../modules/core/config";
-import {User} from "../../shared/user/user.class";
+import {User} from "../../shared/models/user/user.class";
 import {Router} from "@angular/router";
-import {UserService} from "../../shared/user/user.service";
-import {IUser} from "../../shared/user/user.model";
+import {UserService} from "../../shared/services/user/user.service";
+import {IUser} from "../../shared/models/user/user.model";
 import {NUser} from "../../modules/state-managment/actions/user.action";
 import {Store} from "@ngrx/store";
 import {IAppState} from "../../modules/ngrx/index";

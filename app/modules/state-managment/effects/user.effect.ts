@@ -6,10 +6,10 @@ import {Effect, Actions} from '@ngrx/effects';
 import { Observable } from 'rxjs/Observable';
 
 import { NUser } from '../actions/';
-import {UserService} from "../../../shared/user/user.service";
-import {IUser} from "../../../shared/user/user.model";
-import {AccountService} from "../../../shared/account/account.service";
-import {IAccount} from "../../../shared/account/account.model";
+import {UserService} from "../../../shared/services/user/user.service";
+import {IUser} from "../../../shared/models/user/user.model";
+import {AccountService} from "../../../shared/services/account/account.service";
+import {IAccount} from "../../../shared/models/account/account.model";
 import {RouterExtensions} from "nativescript-angular";
 
 @Injectable()

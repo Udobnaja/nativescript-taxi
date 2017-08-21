@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { Http, Headers, Response } from "@angular/http";
 import { Observable } from "rxjs/Rx";
 
-import {Autopark} from "./autopark.class";
-import {IAutopark} from "./autopark.model";
+import {Autopark} from "../../models/autopark/autopark.class";
+import {IAutopark} from "../../models/autopark/autopark.model";
 
 @Injectable()
 export class AutoparkListService {

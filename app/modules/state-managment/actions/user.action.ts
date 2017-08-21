@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 import { type } from '../../core/';
-import {IUser} from "../../../shared/user/user.model";
-import {IAccount} from "../../../shared/account/account.model";
+import {IUser} from "../../../shared/models/user/user.model";
+import {IAccount} from "../../../shared/models/account/account.model";
 
 export namespace NUser {
     export const CATEGORY: string = 'User';

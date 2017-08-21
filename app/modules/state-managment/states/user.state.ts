@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import {IUser} from "../../../shared/user/user.model";
+import {IUser} from "../../../shared/models/user/user.model";
 
 
 export interface IUserState extends IUser{

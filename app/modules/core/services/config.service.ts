@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import {ScheduleService} from "./schedule/schedule.service";
+import {ScheduleService} from "../../../shared/services/schedule/schedule.service";
 
 @Injectable()
 export class ConfigBackend {

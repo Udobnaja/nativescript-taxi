@@ -3,7 +3,7 @@ import {Http, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Re
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {Config} from "../modules/core/config";
+import {Config} from "../config";
 
 @Injectable()
 export class InterceptedHttp extends Http {

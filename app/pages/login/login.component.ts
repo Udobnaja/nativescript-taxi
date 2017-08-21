@@ -1,5 +1,5 @@
 import { Component,  ElementRef, OnInit, OnDestroy, ViewChild, ViewContainerRef, AfterViewChecked} from "@angular/core";
-import { User } from "../../shared/user/user.class";
+import { User } from "../../shared/models/user/user.class";
 import { Router } from "@angular/router";
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 
@@ -9,16 +9,16 @@ import { Page } from "ui/page";
 import {Label} from "ui/label";
 import { TextField } from "ui/text-field";
 
-import {Autopark} from "../../shared/autopark/autopark.class";
-import {AutoparkListService} from "../../shared/autopark/autopark-list.service";
+import {Autopark} from "../../shared/models/autopark/autopark.class";
+import {AutoparkListService} from "../../shared/services/autopark/autopark-list.service";
 import {DialogContent} from "./dialog/choose-autopark.component";
 import {AnimationCurve} from "ui/enums";
 import {Layout} from "tns-core-modules/ui/layouts/layout";
 import {Config} from "../../modules/core/config";
 import {LabelState} from "../../shared/enums/floatLabel.enum";
-import {IUser} from "../../shared/user/user.model";
-import {IAutopark} from "../../shared/autopark/autopark.model";
-import {AuthService} from "../../shared/auth.service";
+import {IUser} from "../../shared/models/user/user.model";
+import {IAutopark} from "../../shared/models/autopark/autopark.model";
+import {AuthService} from "../../shared/services/auth/auth.service";
 import * as dialogs from "ui/dialogs";
 import {FloatLabelsUtil} from "../../utils/float-labels-util";
 

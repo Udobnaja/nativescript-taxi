@@ -1,13 +1,13 @@
 import {Component, OnInit} from "@angular/core";
 import {DatePicker} from "tns-core-modules/ui/date-picker";
 import {RouterExtensions} from "nativescript-angular";
-import {UserService} from "../../shared/user/user.service";
+import {UserService} from "../../shared/services/user/user.service";
 import {Store} from "@ngrx/store";
 import {IAppState} from "../../modules/ngrx/index";
 import {NUser} from "../../modules/state-managment/actions/user.action";
-import {IAccount} from "../../shared/account/account.model";
-import {ConfigBackend} from "../../shared/config.service";
-import {ScheduleService} from "../../shared/schedule/schedule.service";
+import {IAccount} from "../../shared/models/account/account.model";
+import {ConfigBackend} from "../../modules/core/services/config.service";
+import {ScheduleService} from "../../shared/services/schedule/schedule.service";
 import {Config} from "../../modules/core/config";
 import * as dialogs from "ui/dialogs";
 

@@ -1,7 +1,7 @@
 import {Component, ChangeDetectionStrategy, OnInit,ViewChild, ElementRef} from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 import { SetupItemViewArgs } from "nativescript-angular/directives";
-import {Autopark} from "../../../shared/autopark/autopark.class";
+import {Autopark} from "../../../shared/models/autopark/autopark.class";
 
 @Component({
     selector: "modal-content",

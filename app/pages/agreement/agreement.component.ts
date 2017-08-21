@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import { Page } from "ui/page";
 import {Config} from "../../modules/core/config";
 import {WebView, LoadEventData} from "tns-core-modules/ui/web-view";
-import {AuthService} from "../../shared/auth.service";
+import {AuthService} from "../../shared/services/auth/auth.service";
 import * as dialogs from "ui/dialogs";
 
 @Component({

@@ -10,7 +10,7 @@ import {DialogContent} from "./pages/login/dialog/choose-autopark.component";
 
 import * as elementRegistryModule from 'nativescript-angular/element-registry';
 import {AuthGuard} from "./shared/guards/auth.guard";
-import {InterceptedHttp} from "./shared/interceptedHttp.service";
+import {InterceptedHttp} from "./modules/core/services/http.service";
 
 var localStorage = require('nativescript-localstorage');
 
@@ -23,12 +23,12 @@ import {reducers} from "./modules/ngrx/index";
 import {UserInitialState} from "./modules/state-managment/states/user.state";
 import {EffectsModule} from "@ngrx/effects";
 import {UserEffects} from "./modules/state-managment/effects/user.effect";
-import {UserService} from "./shared/user/user.service";
-import {AccountService} from "./shared/account/account.service";
+import {UserService} from "./shared/services/user/user.service";
+import {AccountService} from "./shared/services/account/account.service";
 
 import { APP_INITIALIZER } from '@angular/core';
-import {ConfigBackend} from "./shared/config.service";
-import {ScheduleService} from "./shared/schedule/schedule.service";
+import {ConfigBackend} from "./modules/core/services/config.service";
+import {ScheduleService} from "./shared/services/schedule/schedule.service";
 import {AcceptedGuard} from "./shared/guards/accept.guard";
 
 function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
