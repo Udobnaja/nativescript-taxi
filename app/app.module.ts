@@ -45,7 +45,7 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
       NativeScriptHttpModule,
       StoreModule.forRoot(reducers, {
           initialState: {
-              user: null
+              user: UserInitialState
           }
       }),
       EffectsModule.forRoot([

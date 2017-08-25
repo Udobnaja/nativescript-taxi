@@ -57,8 +57,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         this.user = new User();
         this.page.actionBarHidden = true;
         //HardCode
-        this.user.signal = "99999";
-        this.user.password = "999999";
+        // this.user.signal = "99999";
+        // this.user.password = "999999";
     }
 
     submit() {
