@@ -38,7 +38,7 @@ export class UserEffects {
     @Effect() updateAccount$: Observable<Action> = this.actions$
         .ofType(NUser.ActionTypes.UPDATE)
         .switchMap(action => this.accountService.updateAccount(action["payload"])
-            .map((account:IAccount) => {this.router.back(); return new NUser.UpdatedAction(account)})
+            .map((account:IAccount) => { console.dir(account);this.router.back(); return new NUser.UpdatedAction(account)})
             .catch((e) => Observable.of(new NUser.UpdateFailedAction(e.status || e.statusText))));
 
 

@@ -87,14 +87,22 @@ export class EditRequisitesComponent implements OnInit, AfterViewChecked {
             return;
         }
 
-        await this.userService.checkBik(this.user.account.bic).subscribe( () => {}, e => {
+       let bic = <TextField>this.bic.nativeElement;
+        let bnk_corr = <TextField>this.bnk_corr.nativeElement;
+        let fio = <TextField>this.fio.nativeElement;
+        let account = new Account();
+        account.bic = bic.text;
+        account.fio = fio.text;
+        account.bnk_corr = bnk_corr.text;
+
+        await this.userService.checkBik(bic.text).subscribe( () => {}, e => {
             this.FloatLabels.setFloatingLabels( <TextField>this.bic.nativeElement, LabelState.error);
             this.errors["bic"] = Config.messages.error.body["bic-not-found"];
         });
 
         if (this.errors["bic"]) return;
 
-        this.store.dispatch(new NUser.UpdateAction(this.user.account));
+        this.store.dispatch(new NUser.UpdateAction(account));
     }
 
     isNumeric(n:string){
