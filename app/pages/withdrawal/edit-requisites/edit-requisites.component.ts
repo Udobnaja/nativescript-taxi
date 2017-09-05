@@ -71,29 +71,29 @@ export class EditRequisitesComponent implements OnInit, AfterViewChecked {
 
         this.clearErrors();
 
-        if (!this.checkBik() || !this.checkBnkCorr() || !this.checkFio()){
-            if (!this.checkBik()){
-                this.FloatLabels.setFloatingLabels( <TextField>this.bic.nativeElement, LabelState.error);
-            }
-
-            if (!this.checkBnkCorr()){
-                this.FloatLabels.setFloatingLabels( <TextField>this.bnk_corr.nativeElement, LabelState.error);
-            }
-
-            if (!this.checkFio()){
-                this.FloatLabels.setFloatingLabels( <TextField>this.fio.nativeElement, LabelState.error);
-            }
-
-            return;
-        }
-
-       let bic = <TextField>this.bic.nativeElement;
+        let bic = <TextField>this.bic.nativeElement;
         let bnk_corr = <TextField>this.bnk_corr.nativeElement;
         let fio = <TextField>this.fio.nativeElement;
         let account = new Account();
         account.bic = bic.text;
         account.fio = fio.text;
         account.bnk_corr = bnk_corr.text;
+
+        if (!this.checkBik(account.bic) || !this.checkBnkCorr(account.bnk_corr) || !this.checkFio(account.fio)){
+            if (!this.checkBik(account.bic)){
+                this.FloatLabels.setFloatingLabels( <TextField>this.bic.nativeElement, LabelState.error);
+            }
+
+            if (!this.checkBnkCorr(account.bnk_corr)){
+                this.FloatLabels.setFloatingLabels( <TextField>this.bnk_corr.nativeElement, LabelState.error);
+            }
+
+            if (!this.checkFio(account.fio)){
+                this.FloatLabels.setFloatingLabels( <TextField>this.fio.nativeElement, LabelState.error);
+            }
+
+            return;
+        }
 
         await this.userService.checkBik(bic.text).subscribe( () => {}, e => {
             this.FloatLabels.setFloatingLabels( <TextField>this.bic.nativeElement, LabelState.error);
@@ -109,43 +109,40 @@ export class EditRequisitesComponent implements OnInit, AfterViewChecked {
         return !isNaN(parseFloat(n)) && isFinite(+n)
     }
 
-     checkBik():boolean{
-       let bic = <TextField>this.bic.nativeElement;
+     checkBik(bic):boolean{
 
-       if (bic.text.length !== Config.bicLength) {
+       if (bic.length !== Config.bicLength) {
            this.errors["bic"] = Config.messages.error.body["bic-length"];
            return false;
        }
-       if (!this.isNumeric(bic.text)){
+       if (!this.isNumeric(bic)){
            this.errors["bic"] = Config.messages.error.body["bic-type"];
            return false;
        }
        return true;
     }
 
-    checkBnkCorr():boolean{
-        let bncCorr = <TextField>this.bnk_corr.nativeElement;
+    checkBnkCorr(bncCorr):boolean{
 
-        if (bncCorr.text.length !== Config.bnkCorrLength) {
+        if (bncCorr.length !== Config.bnkCorrLength) {
             this.errors["bnk_corr"] = Config.messages.error.body["bnk-corr-length"];
             return false;
         }
-        if (!this.isNumeric(bncCorr.text)){
+        if (!this.isNumeric(bncCorr)){
             this.errors["bnk_corr"] = Config.messages.error.body["bnk-corr-type"];
             return false;
         }
         return true;
     }
 
-    checkFio():boolean{
-        let fio = <TextField>this.fio.nativeElement;
+    checkFio(fio):boolean{
 
-        if (!fio.text.trim()) {
+        if (!fio.trim()) {
             this.errors["fio"] = Config.messages.error.body["fio-length"];
             return false;
         }
 
-        if (~(fio.text.search(/[0-9]/i))){
+        if (~(fio.search(/[0-9]/i))){
             this.errors["fio"] = Config.messages.error.body["fio-type"];
             return false;
         }
