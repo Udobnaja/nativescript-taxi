@@ -18,13 +18,6 @@ export class DialogContent implements OnInit{
 
     constructor(private params: ModalDialogParams) {
         this.autoparks = params.context.autoparkList;
-
-        this.autoparks.sort((a, b) => {
-           let cityA = a.title.toLowerCase();
-           let cityB = b.title.toLowerCase();
-
-           return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;
-        });
     }
 
     public close() {
@@ -33,7 +26,7 @@ export class DialogContent implements OnInit{
 
     public onItemTap(args) {
         this.selectedIndex = args.index;
-        this.params.closeCallback(args.index);
+        this.params.closeCallback(+this.selectedIndex);
     }
 
     onSetupItemView(args: SetupItemViewArgs) {

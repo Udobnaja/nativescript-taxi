@@ -112,8 +112,8 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
             viewContainerRef: this.viewContainerRef
         };
 
-        this.modalService.showModal(DialogContent, options).then((index: string) => {
-            if (index) this.autopark = this.autoparkList[index];
+        this.modalService.showModal(DialogContent, options).then((index: number) => {
+            if (index >= 0) this.autopark = this.autoparkList[index];
         });
     }
 
@@ -123,7 +123,12 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{
         this.layout = <Layout>this.container.nativeElement;
 
         this.autoparkListService.load().subscribe(loadedAutoparks => {
-                this.autoparkList = loadedAutoparks;
+                this.autoparkList = loadedAutoparks.sort((a, b) => {
+                    let cityA = a.title.toLowerCase();
+                    let cityB = b.title.toLowerCase();
+
+                    return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;
+                });
                 this.isLoading = false;
             }, () => dialogs.alert({
                 title: Config.messages.error.title,
