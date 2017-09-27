@@ -29,13 +29,14 @@
             </StackLayout>
             <StackLayout row="1">
                 <Label text="Реквизиты" class="container"></Label>
-                <GridLayout columns="* 18" rows="auto auto auto" class="container" verticalAlignment="center">
+                <GridLayout  *ngIf="account?.bic && account?.bnk_corr && account?.fio" columns="* 18" rows="auto auto auto" class="container" verticalAlignment="center">
                     <Label row="0" text="{{'БИК: ' + ((account?.bic) ? account.bic : 'неизвестно')}}" col="0" class="text"></Label>
                     <Label row="1" text="{{'Номер счёта: ' + ((account?.bnk_corr) ? account.bnk_corr : 'неизвестно' )}}" col="0" class="text"></Label>
                     <Label row="2" text="{{'ФИО: ' + ((account?.fio) ? account.fio : 'неизвестно')}}" col="0" class="text"></Label>
                     <Image src="res://ic_action_mode_edit" col="1" rowspan="3" (tap)="edit()"></Image>
                 </GridLayout>
-                <Button text="ГОТОВО" class="btn btn-primary" (tap)="saveNewDate()" marginTop="36"></Button>
+                <Button text="ГОТОВО" *ngIf="account?.bic && account?.bnk_corr && account?.fio" class="btn btn-primary" (tap)="saveNewDate()" marginTop="36"></Button>
+                <Label  *ngIf="!account?.bic || !account?.bnk_corr || !account?.fio" text="Обратитесь в службу поодержки для заполнения данных" class="container" textWrap="true" marginTop="18"></Label>
             </StackLayout>
         </GridLayout>
         <ActivityIndicator [busy]="isLoading" row="1"
