@@ -20,7 +20,7 @@ import * as dialogs from "ui/dialogs";
 
 export class WithdrawalComponent implements OnInit {
     isLoading:boolean;
-    date: string;
+    date: Date;
     available: boolean;
     account: IAccount;
     scheduleEnum = {};
@@ -36,7 +36,7 @@ export class WithdrawalComponent implements OnInit {
         this.isLoading = true;
         this.available = false;
 
-        this.date = this.userService.getDate();
+        // this.date = this.userService.getDate();
         this.reason = Config.messages.schedule.default;
 
         this.store.select("user").subscribe(u => {
@@ -89,30 +89,40 @@ export class WithdrawalComponent implements OnInit {
     }
 
     onPickerLoaded(args){
+        // if (this.currentDate) return;
+
         let datePicker = <DatePicker>args.object;
 
         let today = new Date();
 
-        this.currentDate = (!this.date) ? new Date() : new Date() /* replace hear on date from Date this.date */;
+        this.currentDate = (!this.date) ? new Date() : this.date /* replace hear on date from Date this.date */;
 
         datePicker.year = this.currentDate.getFullYear();
         datePicker.month = this.currentDate.getMonth();
         datePicker.day = this.currentDate.getDate();
-        datePicker.minDate = today;
+        datePicker.minDate = new Date();
 
-        let maxDate = today.setMonth(today.getMonth() + Config.maxNextMonth);
+        let maxDate = new Date();
 
-        datePicker.maxDate = new Date(maxDate);
+        datePicker.maxDate = new Date(maxDate.setMonth(today.getMonth() + Config.maxNextMonth));
     }
 
     onDateChanged(args){
         this.checkDates(args.value);
+        this.date = new Date(args.value);
     }
 
     saveNewDate(){
-        this.router.navigate(["card-info"]);
+        /* if success*/
+        dialogs.confirm({
+            title: Config.messages.success.title,
+            message: Config.messages.success.body.withdrawal,
+            okButtonText: Config.messages.button.ok
+        }).then(() => {
+            this.router.navigate(["card-info"]);
+        });
         // post date to Server
-        // this.userService.saveDate('17 июня 20017');
+
     }
 
     ngOnInit(){
