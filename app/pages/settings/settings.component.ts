@@ -1,8 +1,13 @@
-import {Component, OnInit} from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
-import {Config} from "../../modules/core/config";
+import { Config } from "../../modules/core/config";
 import * as appversion from "nativescript-appversion";
-import {RouterExtensions} from "nativescript-angular";
+import { RouterExtensions } from "nativescript-angular";
+import { isEnabled, enableLocationRequest } from "nativescript-geolocation";
+import * as app from "tns-core-modules/application";
+
+declare var android: any;
+
 
 @Component({
     selector: "settings",
@@ -12,7 +17,7 @@ import {RouterExtensions} from "nativescript-angular";
 
 export class SettingsComponent implements OnInit {
     public ver:string;
-    // public isMessageEnabled:boolean = Config.messagePermissons;
+    public islocationEnabled:boolean = isEnabled();
 
     constructor(private router: RouterExtensions){}
 
@@ -41,9 +46,19 @@ export class SettingsComponent implements OnInit {
         this.goToWebView(args.object.text, Config.TermOfUseLInk);
     }
 
-    // toggleMessagePermissions(){ /* mb create observable on isMessageEnabled*/
-    //     Config.messagePermissons = !this.isMessageEnabled;
-    // }
+    toggleLocationPermissions(){
+        if (!isEnabled()) {
+
+            enableLocationRequest().then(()=> {
+                console.log('everything fun');
+            }).catch(e => console.dir(e));
+        } else {
+            if (app.android) {
+                let intent = new android.content.Intent(android.provider.Settings.ACTION_SETTINGS);
+                app.android.context.startActivity(intent); /* android.settings.SETTINGS */
+            }
+        }
+    }
 
     ngOnInit(){
         appversion.getVersionName().then(v => this.ver = v);

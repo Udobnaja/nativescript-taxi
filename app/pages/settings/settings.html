@@ -5,12 +5,12 @@
     </StackLayout>
 </ActionBar>
 <StackLayout>
-    <!--<GridLayout rows="auto" columns="* auto" class="container">-->
-        <!--<Label  text="Не оповещать о сообщениях" class="row" row></Label>-->
-        <!--<Switch checked="{{isMessageEnabled}}"-->
-                <!--(tap)="toggleMessagePermissions()"-->
-                <!--class="switch text-right"></Switch>-->
-    <!--</GridLayout>-->
+    <GridLayout rows="auto" columns="* auto" class="container">
+        <Label  text="Отправлять геопозицию" class="row"></Label>
+        <Switch checked="{{islocationEnabled}}"
+                (tap)="toggleLocationPermissions()"
+                class="switch text-right"></Switch>
+    </GridLayout>
     <StackLayout class="hr-light"></StackLayout>
     <Button  text="Политика конфиденциальности" (tap)="goToPrivacyPolicy($event)" class="row container btn "></Button>
     <Button  text="Условия использования" (tap)="goToTermOfUse($event)" class="row container btn"></Button>

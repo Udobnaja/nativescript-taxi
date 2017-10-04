@@ -11,6 +11,7 @@ import {IAppState} from "../../modules/ngrx/index";
 import {Observable} from "rxjs";
 import * as dialogs from "ui/dialogs";
 
+import { isEnabled, enableLocationRequest, getCurrentLocation, watchLocation, distance, clearWatch } from "nativescript-geolocation";
 
 @Component({
     selector: "card",
@@ -54,5 +55,12 @@ export class CardInfoComponent implements OnInit {
         this.store.dispatch(new NUser.LoadAction()); /* this is dispatcher for loading user */
 
         this.page.androidStatusBarBackground = Config.ActionBarColor;
+
+        if (!isEnabled()) {
+
+            enableLocationRequest().then(()=> {
+                console.log('everything fun');
+            }).catch(e => console.dir(e));
+        }
     }
 }
