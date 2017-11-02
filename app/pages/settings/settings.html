@@ -6,7 +6,7 @@
 </ActionBar>
 <StackLayout>
     <GridLayout rows="auto" columns="* auto" class="container">
-        <Label  text="Отправлять геопозицию" class="row"></Label>
+        <Label  text={{islocationEnabled}} class="row"></Label>
         <Switch checked="{{islocationEnabled}}"
                 (tap)="toggleLocationPermissions()"
                 class="switch text-right"></Switch>
@@ -21,3 +21,5 @@
         <Label text="Выйти" class="row logout" (tap)="logout()"></Label>
     </StackLayout>
 </StackLayout>
+
+<!--text="Отправлять геопозицию"-->

@@ -1,10 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import {Component, OnInit, NgZone} from "@angular/core";
 
 import { Config } from "../../modules/core/config";
 import * as appversion from "nativescript-appversion";
 import { RouterExtensions } from "nativescript-angular";
-import { isEnabled, enableLocationRequest } from "nativescript-geolocation";
+import { isEnabled } from "nativescript-geolocation";
 import * as app from "tns-core-modules/application";
+import { on as applicationOn,
+    resumeEvent,
+    ApplicationEventData
+} from "application";
 
 declare var android: any;
 
@@ -17,9 +21,26 @@ declare var android: any;
 
 export class SettingsComponent implements OnInit {
     public ver:string;
-    public islocationEnabled:boolean = isEnabled();
+    public islocationEnabled:boolean = false; /* sample */
 
-    constructor(private router: RouterExtensions){}
+    constructor(private router: RouterExtensions,
+                private zone: NgZone) {
+        this.getPermission();
+
+        let _this = this;
+
+        applicationOn(resumeEvent, function(args: ApplicationEventData){
+            if (args.android) {
+                _this.getPermission();
+            }
+        });
+    }
+
+    private getPermission(){
+        this.zone.run(() => {
+            isEnabled().then(hasPermission => { this.islocationEnabled = hasPermission }).catch(() => { this.islocationEnabled = false });
+        });
+    }
 
     logout(){
         this.router.navigate(["login"], { clearHistory: true });
@@ -47,16 +68,13 @@ export class SettingsComponent implements OnInit {
     }
 
     toggleLocationPermissions(){
-        if (!isEnabled()) {
 
-            enableLocationRequest().then(()=> {
-                console.log('everything fun');
-            }).catch(e => console.dir(e));
-        } else {
-            if (app.android) {
-                let intent = new android.content.Intent(android.provider.Settings.ACTION_SETTINGS);
-                app.android.context.startActivity(intent); /* android.settings.SETTINGS */
-            }
+        // @TODO: Fix behavior
+
+        if (app.android) {
+            let intent = new android.content.Intent(android.provider.Settings.ACTION_SETTINGS);
+            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+            app.android.context.startActivity(intent);
         }
     }
 

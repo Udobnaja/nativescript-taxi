@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import { Page } from "ui/page";
-import {Config} from "../../modules/core/config";
+import { Component, OnInit } from '@angular/core';
+import { Page } from 'ui/page';
+import { Config } from '../../modules/core/config';
 import {User} from "../../shared/models/user/user.class";
 import {Router} from "@angular/router";
 import {UserService} from "../../shared/services/user/user.service";
@@ -10,8 +10,10 @@ import {Store} from "@ngrx/store";
 import {IAppState} from "../../modules/ngrx/index";
 import {Observable} from "rxjs";
 import * as dialogs from "ui/dialogs";
+declare var android: any;
+import * as application from "tns-core-modules/application";
 
-import { isEnabled, enableLocationRequest, getCurrentLocation, watchLocation, distance, clearWatch } from "nativescript-geolocation";
+import { isEnabled, enableLocationRequest } from 'nativescript-geolocation';
 
 @Component({
     selector: "card",
@@ -23,6 +25,7 @@ import { isEnabled, enableLocationRequest, getCurrentLocation, watchLocation, di
 export class CardInfoComponent implements OnInit {
     user:IUser;
     user$:Observable<any>;
+    permission$: Observable<boolean>;
     public isLoading: boolean = true;
 
     constructor(private page: Page,
@@ -56,11 +59,29 @@ export class CardInfoComponent implements OnInit {
 
         this.page.androidStatusBarBackground = Config.ActionBarColor;
 
-        if (!isEnabled()) {
-
-            enableLocationRequest().then(()=> {
-                console.log('everything fun');
-            }).catch(e => console.dir(e));
+        function startBackgroundService() {
+            let context = application.android.context;
+            let intent = new android.content.Intent();
+            intent.setClassName(context, 'com.tns.GeoService');
+            context.startService(intent);
         }
+
+        isEnabled()
+            .then(hasAccess => {
+                if (!hasAccess) {
+                    enableLocationRequest()
+                        .then(()=>{
+                            startBackgroundService();
+                        }, (e) => {
+                            startBackgroundService();
+                            console.log("Error: " + (e.message || e))
+                        });
+                } else {
+                    startBackgroundService();
+                }
+            }, (e) => {
+                console.log("Error: " + (e.message || e));
+            });
+
     }
 }

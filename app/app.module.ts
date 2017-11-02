@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import {NgModule, Injector} from "@angular/core";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
@@ -30,6 +30,7 @@ import { APP_INITIALIZER } from '@angular/core';
 import {ConfigBackend} from "./modules/core/services/config.service";
 import {ScheduleService} from "./shared/services/schedule/schedule.service";
 import {AcceptedGuard} from "./shared/guards/accept.guard";
+import {GPSService} from "./shared/services/gps/gps.service";
 
 function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
     return new InterceptedHttp(xhrBackend, requestOptions);
@@ -66,6 +67,12 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
       },
       ConfigBackend,
       { provide: APP_INITIALIZER, useFactory: (config: ConfigBackend) => () => config.load(), deps: [ConfigBackend], multi: true },
-      AuthGuard, AcceptedGuard, UserService, AccountService, ScheduleService]
+      AuthGuard, AcceptedGuard, UserService, AccountService, ScheduleService, GPSService]
 })
-export class AppModule {}
+export class AppModule {
+    static injector: Injector;
+
+    constructor(injector: Injector) {
+        AppModule.injector = injector;
+    }
+}
