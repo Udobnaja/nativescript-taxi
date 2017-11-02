@@ -37,8 +37,10 @@ export class SettingsComponent implements OnInit {
     }
 
     private getPermission(){
-        this.zone.run(() => {
-            isEnabled().then(hasPermission => { this.islocationEnabled = hasPermission }).catch(() => { this.islocationEnabled = false });
+        isEnabled().then(hasPermission => {
+            this.zone.run(() => { this.islocationEnabled = hasPermission })
+        }).catch(() => {
+            this.zone.run(() => { this.islocationEnabled = false })
         });
     }
 
@@ -67,14 +69,20 @@ export class SettingsComponent implements OnInit {
         this.goToWebView(args.object.text, Config.TermOfUseLInk);
     }
 
+    private startAction(action){
+        let intent = new android.content.Intent(action);
+        intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        app.android.context.startActivity(intent);
+    }
+
     toggleLocationPermissions(){
 
-        // @TODO: Fix behavior
-
         if (app.android) {
-            let intent = new android.content.Intent(android.provider.Settings.ACTION_SETTINGS);
-            intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK | android.content.Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
-            app.android.context.startActivity(intent);
+            try {
+                this.startAction(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            } catch(e){
+                this.startAction(android.provider.Settings.ACTION_SETTINGS);
+            }
         }
     }
 

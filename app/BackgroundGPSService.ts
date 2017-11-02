@@ -3,10 +3,11 @@ declare var com: any;
 declare var android: any;
 
 import { Accuracy } from 'tns-core-modules/ui/enums';
-import { watchLocation, distance, clearWatch } from 'nativescript-geolocation';
+import { watchLocation, clearWatch, isEnabled } from 'nativescript-geolocation';
 
 import { LatLng } from './shared/models/latLng/latLng.class';
-import {ReflectiveInjector} from '@angular/core';
+import { ReflectiveInjector } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { on as applicationOn,
     exitEvent,
@@ -18,6 +19,7 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
 
     private watchId;
     private gpsService;
+    public permission$: Observable<boolean>;
 
     private injectGPSService(){
 
@@ -47,8 +49,6 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
         this.watchId = watchLocation(response => {
             if (response) {
 
-                // @TODO: try get distance
-
                 let { latitude, longitude } = response;
                 let location = new LatLng(latitude, longitude);
 
@@ -65,6 +65,7 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
         }, OPTIONS);
     }
 
+
     public StopWatchingLocation(){
         if(this.watchId) {
             clearWatch(this.watchId);
@@ -74,20 +75,32 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
 
     protected onHandleIntent(intent): void {
 
+        const INTERVAL = 5000;
+        let __this = this;
+
         this.injectGPSService();
 
-        this.startWatchingLocation();
+        this.permission$ = Observable.interval(INTERVAL).flatMap(() => Observable.fromPromise(isEnabled()));
 
-        // Please use Observable from promise and interval if need delete watching id or recreate it
-
-        let _this = this;
-        applicationOn(exitEvent, function (args: ApplicationEventData) {
-            if (args.android) {
-                _this.StopWatchingLocation();
+        this.permission$.subscribe(hasPermission => {
+            if (hasPermission === true) {
+                this.startWatchingLocation();
+            } else {
+                this.StopWatchingLocation();
             }
+        }, (e) => {
+            console.log("Error subscribe: " + (e.message || e));
+            this.StopWatchingLocation();
+        }, () => {
+            console.log('Complete Permission Subscribe');
+            this.StopWatchingLocation();
         });
 
-
+        applicationOn(exitEvent, function (args: ApplicationEventData) {
+            if (args.android) {
+                __this.StopWatchingLocation();
+            }
+        });
     }
 
 }

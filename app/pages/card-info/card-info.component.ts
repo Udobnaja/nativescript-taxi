@@ -73,13 +73,13 @@ export class CardInfoComponent implements OnInit {
                             this.startBackgroundService();
                         }, (e) => {
                             this.startBackgroundService();
-                            console.log("Error: " + (e.message || e))
+                            console.log("Error Decline Request: " + (e.message || e))
                         });
                 } else {
                     this.startBackgroundService();
                 }
             }, (e) => {
-                console.log("Error: " + (e.message || e));
+                console.log("Error is Enabled: " + (e.message || e));
             });
 
     }
