@@ -25,7 +25,6 @@ import { isEnabled, enableLocationRequest } from 'nativescript-geolocation';
 export class CardInfoComponent implements OnInit {
     user:IUser;
     user$:Observable<any>;
-    permission$: Observable<boolean>;
     public isLoading: boolean = true;
 
     constructor(private page: Page,
@@ -53,31 +52,31 @@ export class CardInfoComponent implements OnInit {
         this.router.navigate(["withdrawal"]);
     }
 
+    private startBackgroundService(){
+        let context = application.android.context;
+        let intent = new android.content.Intent();
+        intent.setClassName(context, 'com.tns.BackgroundGPSService');
+        context.startService(intent);
+    }
+
     ngOnInit(){
 
         this.store.dispatch(new NUser.LoadAction()); /* this is dispatcher for loading user */
 
         this.page.androidStatusBarBackground = Config.ActionBarColor;
 
-        function startBackgroundService() {
-            let context = application.android.context;
-            let intent = new android.content.Intent();
-            intent.setClassName(context, 'com.tns.GeoService');
-            context.startService(intent);
-        }
-
         isEnabled()
             .then(hasAccess => {
                 if (!hasAccess) {
                     enableLocationRequest()
                         .then(()=>{
-                            startBackgroundService();
+                            this.startBackgroundService();
                         }, (e) => {
-                            startBackgroundService();
+                            this.startBackgroundService();
                             console.log("Error: " + (e.message || e))
                         });
                 } else {
-                    startBackgroundService();
+                    this.startBackgroundService();
                 }
             }, (e) => {
                 console.log("Error: " + (e.message || e));

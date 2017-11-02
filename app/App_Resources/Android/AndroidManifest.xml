@@ -36,6 +36,6 @@
 			</intent-filter>
 		</activity>
 		<activity android:name="com.tns.ErrorReportActivity"/>
-		<service android:name="com.tns.GeoService" android:exported="false"/>
+		<service android:name="com.tns.BackgroundGPSService" android:exported="false"/>
 	</application>
 </manifest>
