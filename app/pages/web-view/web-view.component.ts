@@ -7,7 +7,7 @@ import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "wV",
-    templateUrl: "pages/web-view/web-view.html"
+    templateUrl: "./web-view.html"
 })
 
 export class WebViewComponent implements AfterViewInit{

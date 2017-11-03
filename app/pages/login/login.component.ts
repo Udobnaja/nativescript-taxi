@@ -6,13 +6,13 @@ import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/mod
 const textFieldModule = require("ui/text-field");
 
 import { Page } from "ui/page";
-import {Label} from "ui/label";
+
 import { TextField } from "ui/text-field";
 
 import {Autopark} from "../../shared/models/autopark/autopark.class";
 import {AutoparkListService} from "../../shared/services/autopark/autopark-list.service";
-import {DialogContent} from "./dialog/choose-autopark.component";
-import {AnimationCurve} from "ui/enums";
+import { DialogContent } from "./dialog/choose-autopark.component";
+
 import {Layout} from "tns-core-modules/ui/layouts/layout";
 import {Config} from "../../modules/core/config";
 import {LabelState} from "../../shared/enums/floatLabel.enum";
@@ -26,8 +26,8 @@ import {FloatLabelsUtil} from "../../utils/float-labels-util";
 @Component({
     selector: "my-app",
     providers: [AuthService, AutoparkListService],
-    templateUrl: "pages/login/login.html",
-    styleUrls: ["pages/login/login-common.css", "pages/login/login.css"]
+    templateUrl: "./login.html",
+    styleUrls: ["./login-common.css", "./login.css"]
 })
 
 export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked{

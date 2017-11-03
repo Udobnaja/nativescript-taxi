@@ -17,7 +17,7 @@ import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "edit-requisites",
-    templateUrl: "pages/withdrawal/edit-requisites/edit-requisites.html"
+    templateUrl: "./edit-requisites.html"
 })
 
 export class EditRequisitesComponent implements OnInit, AfterViewChecked {

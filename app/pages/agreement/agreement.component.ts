@@ -8,8 +8,8 @@ import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "agreement-content",
-    templateUrl: "pages/agreement/agreement.html",
-    styleUrls: ["pages/agreement/agreement-common.css", "pages/agreement/agreement.css"],
+    templateUrl: "./agreement.html",
+    styleUrls: ["./agreement-common.css", "./agreement.css"],
     providers: [AuthService]
 })
 

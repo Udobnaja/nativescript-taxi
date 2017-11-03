@@ -13,8 +13,8 @@ import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "withdrawal",
-    templateUrl: "pages/withdrawal/withdrawal.html",
-    styleUrls: ["pages/withdrawal/withdrawal-common.css", "pages/withdrawal/withdrawal.css"],
+    templateUrl: "./withdrawal.html",
+    styleUrls: ["./withdrawal-common.css", "./withdrawal.css"],
     providers: [UserService]
 })
 

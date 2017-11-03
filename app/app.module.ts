@@ -1,4 +1,4 @@
-import {NgModule, Injector} from "@angular/core";
+import {NgModule, Injector, NO_ERRORS_SCHEMA} from "@angular/core";
 import { NativeScriptFormsModule } from "nativescript-angular/forms";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
@@ -6,7 +6,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 
 import { AppComponent } from "./app.component";
 import { routes, navigatableComponents } from "./app.routing";
-import {DialogContent} from "./pages/login/dialog/choose-autopark.component";
+import { DialogContent } from "./pages/login/dialog/choose-autopark.component";
 
 import * as elementRegistryModule from 'nativescript-angular/element-registry';
 import {AuthGuard} from "./shared/guards/auth.guard";
@@ -32,8 +32,12 @@ import {ScheduleService} from "./shared/services/schedule/schedule.service";
 import {AcceptedGuard} from "./shared/guards/accept.guard";
 import {GPSService} from "./shared/services/gps/gps.service";
 
-function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
+export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
     return new InterceptedHttp(xhrBackend, requestOptions);
+}
+
+export function configFactory(config: ConfigBackend){
+    return () => config.load();
 }
 
 
@@ -66,8 +70,16 @@ function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Ht
           deps: [XHRBackend, RequestOptions]
       },
       ConfigBackend,
-      { provide: APP_INITIALIZER, useFactory: (config: ConfigBackend) => () => config.load(), deps: [ConfigBackend], multi: true },
-      AuthGuard, AcceptedGuard, UserService, AccountService, ScheduleService, GPSService]
+      {
+          provide: APP_INITIALIZER,
+          useFactory: configFactory,
+          deps: [ConfigBackend],
+          multi: true
+      },
+      AuthGuard, AcceptedGuard, UserService, AccountService, ScheduleService, GPSService
+  ],
+  schemas: [NO_ERRORS_SCHEMA]
+
 })
 export class AppModule {
     static injector: Injector;

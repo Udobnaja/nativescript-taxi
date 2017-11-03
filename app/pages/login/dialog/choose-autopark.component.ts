@@ -5,8 +5,8 @@ import {Autopark} from "../../../shared/models/autopark/autopark.class";
 
 @Component({
     selector: "modal-content",
-    templateUrl: "pages/login/dialog/choose-autopark.html",
-    styleUrls: ["pages/login/dialog/choose-autopark-common.css", "pages/login/dialog/choose-autopark.css"],
+    templateUrl: "./choose-autopark.html",
+    styleUrls: ["./choose-autopark-common.css", "./choose-autopark.css"],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
