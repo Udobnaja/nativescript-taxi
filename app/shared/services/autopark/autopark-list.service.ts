@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
-import { Http, Headers, Response } from "@angular/http";
-import { Observable } from "rxjs/Rx";
+import { Http } from "@angular/http";
 
 import {Autopark} from "../../models/autopark/autopark.class";
 import {IAutopark} from "../../models/autopark/autopark.model";
+import {ErrorService} from "../error/error.service";
 
 @Injectable()
-export class AutoparkListService {
-    constructor(private http: Http) {}
+export class AutoparkListService extends ErrorService {
+    constructor(private http: Http) {
+        super();
+    }
 
     load() {
         return this.http.get("autoparks").map(res => res.json()).map(data => {
@@ -18,10 +20,5 @@ export class AutoparkListService {
             return autoparkList;
         }).catch(this.handleErrors);
 
-    }
-
-    private handleErrors(error: Response) {
-        console.log(JSON.stringify(error.json()));
-        return Observable.throw(error);
     }
 }

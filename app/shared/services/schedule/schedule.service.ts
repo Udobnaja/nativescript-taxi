@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import {Observable} from "rxjs/Rx";
+import { Http } from "@angular/http";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
+import { ErrorService } from "../error/error.service";
 
 @Injectable()
-export class ScheduleService {
+export class ScheduleService extends ErrorService {
 
     constructor(private http: Http){
-
+        super();
     }
 
     getSchedule(){
@@ -19,11 +19,5 @@ export class ScheduleService {
     getPaymentSchedules(){
         return this.http.get("payment_schedules").map(res => res.json().payment_schedules).catch(this.handleErrors);
     }
-
-
-    private handleErrors(error: Response) {
-        return Observable.throw(error);
-    }
-
 
 }

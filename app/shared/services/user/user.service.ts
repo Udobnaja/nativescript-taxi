@@ -1,15 +1,14 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import {Observable} from "rxjs/Rx";
+import { Http } from "@angular/http";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
-
+import { ErrorService } from "../error/error.service";
 
 @Injectable()
-export class UserService {
+export class UserService extends ErrorService{
 
     constructor(private http: Http){
-
+        super();
     }
 
     getProfile(){
@@ -27,10 +26,5 @@ export class UserService {
 
     saveDate(date:string){
 
-    }
-
-
-    private handleErrors(error: Response) {
-        return Observable.throw(error);
     }
 }

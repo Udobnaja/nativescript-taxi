@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
-import {Observable} from "rxjs/Rx";
+import { Http } from "@angular/http";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import {IAccount} from "../../models/account/account.model"
+import { ErrorService } from "../error/error.service";
 
 @Injectable()
-export class AccountService {
+export class AccountService extends ErrorService{
     constructor(private http: Http){
-
+        super();
     }
 
     getAccount(){
@@ -16,12 +16,7 @@ export class AccountService {
             .map(res => res.json().account).catch(this.handleErrors)
     }
 
-
     updateAccount(account:IAccount){
         return this.http.post("driver/account", account).map(res => account).catch(this.handleErrors);
-    }
-
-    private handleErrors(error: Response) {
-        return Observable.throw(error);
     }
 }

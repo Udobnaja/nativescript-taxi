@@ -1,23 +1,18 @@
 import { Injectable } from "@angular/core";
-import { Http, Response } from "@angular/http";
+import { Http } from "@angular/http";
 import { LatLng } from '../../models/latLng/latLng.class';
-import {AppModule} from "../../../app.module";
-import {Observable} from "rxjs";
+import { AppModule } from "../../../app.module";
+import {ErrorService} from "../error/error.service";
 
 @Injectable()
-export class GPSService {
+export class GPSService extends ErrorService {
     private httpService;
-    private gpsService;
     constructor(){
+        super();
         this.httpService = AppModule.injector.get(Http);
-        // this.gpsService = AppModule.injector.get(GPSService);
-    }
-    //
-    sendLocation(latLng: LatLng) {
-        return this.httpService.post("driver/gps", latLng).map(res => res.json()).catch(this.handleErrors);
     }
 
-    private handleErrors(error: Response) {
-        return Observable.throw(error);
+    sendLocation(latLng: LatLng) {
+        return this.httpService.post("driver/gps", latLng).map(res => res.json()).catch(this.handleErrors);
     }
 }

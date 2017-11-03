@@ -1,13 +1,11 @@
-import { Inject, Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
-import {ScheduleService} from "../../../shared/services/schedule/schedule.service";
+import { Injectable } from '@angular/core';
+import { ScheduleService } from "../../../shared/services/schedule/schedule.service";
 
 @Injectable()
 export class ConfigBackend {
     private result: Object = null;
 
-    constructor(private http: Http, private scheduleService: ScheduleService) {
+    constructor(private scheduleService: ScheduleService) {
 
     }
 
