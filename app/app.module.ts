@@ -12,7 +12,7 @@ import * as elementRegistryModule from 'nativescript-angular/element-registry';
 import {AuthGuard} from "./shared/guards/auth.guard";
 import {InterceptedHttp} from "./modules/core/services/http.service";
 
-var localStorage = require('nativescript-localstorage');
+require('nativescript-localstorage');
 
 import {XHRBackend, Http, RequestOptions, HttpModule} from "@angular/http";
 

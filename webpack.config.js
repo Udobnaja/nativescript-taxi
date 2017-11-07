@@ -13,6 +13,7 @@ const { AotPlugin } = require("@ngtools/webpack");
 const ngToolsWebpackOptions = { tsConfigPath: "tsconfig.aot.json" };
 
 const mainSheet = `app.css`;
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = env => {
     const platform = getPlatform(env);
@@ -143,7 +144,6 @@ function getRules() {
                 },
             ]
         },
-
     ];
 }
 
@@ -209,11 +209,20 @@ function getPlugins(platform, env) {
     if (env.uglify) {
         plugins.push(new webpack.LoaderOptionsPlugin({ minimize: true }));
 
-        // Work around an Android issue by setting compress = false
         const compress = platform !== "android";
-        plugins.push(new webpack.optimize.UglifyJsPlugin({
-            mangle: { except: nsWebpack.uglifyMangleExcludes },
-            compress,
+        plugins.push(new UglifyJSPlugin({
+            uglifyOptions: {
+                mangle: {
+                    eval: true,
+                    reserved: [nsWebpack.uglifyMangleExcludes, 'localStorage'],
+                    keep_fnames: true,
+                },
+                compress: true,
+                output: {
+                    comments: false,
+                    beautify: false,
+                }
+            }
         }));
     }
 

@@ -50,6 +50,7 @@
     "raw-loader": "~0.5.1",
     "resolve-url-loader": "~2.1.0",
     "typescript": "~2.3.4",
+    "uglifyjs-webpack-plugin": "^1.0.0",
     "webpack": "~3.2.0",
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-sources": "~1.0.1"
