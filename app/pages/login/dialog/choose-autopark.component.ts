@@ -1,7 +1,7 @@
-import {Component, ChangeDetectionStrategy, OnInit,ViewChild, ElementRef} from "@angular/core";
+import { Component, ChangeDetectionStrategy, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { ModalDialogParams } from "nativescript-angular/modal-dialog";
 import { SetupItemViewArgs } from "nativescript-angular/directives";
-import {Autopark} from "../../../shared/models/autopark/autopark.class";
+import { Autopark } from "../../../shared/models/autopark/autopark.class";
 
 @Component({
     selector: "modal-content",
@@ -10,11 +10,11 @@ import {Autopark} from "../../../shared/models/autopark/autopark.class";
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class DialogContent implements OnInit{
+export class DialogContent implements OnInit {
     public autoparks: Array<Autopark>;
     @ViewChild("list") list: ElementRef;
 
-    public selectedIndex:number = null;
+    public selectedIndex: number = null;
 
     constructor(private params: ModalDialogParams) {
         this.autoparks = params.context.autoparkList;
@@ -33,8 +33,7 @@ export class DialogContent implements OnInit{
         args.view.context.active = (args.index === this.params.context.index);
     }
 
-    ngOnInit(){
+    ngOnInit() {
 
     }
-
 }

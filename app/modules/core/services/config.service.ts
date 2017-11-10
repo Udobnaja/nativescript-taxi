@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { ScheduleService } from "../../../shared/services/schedule/schedule.service";
 
 @Injectable()
@@ -8,10 +8,10 @@ export class ConfigBackend {
     constructor(private scheduleService: ScheduleService) {
 
     }
-
+    /* tslint:disable:no-shadowed-variable */
     public getSchedule() {
 
-       let schedule:any = this.result;
+       let schedule: any = this.result;
         let pseudoEnum;
         (function (pseudoEnum) {
             schedule.forEach(res => {
@@ -20,6 +20,7 @@ export class ConfigBackend {
         })(pseudoEnum || (pseudoEnum = {}));
         return pseudoEnum;
     }
+    /* tslint:enable:no-shadowed-variable */
 
 
     public getResult() {

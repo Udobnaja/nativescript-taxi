@@ -1,18 +1,17 @@
-import {Color} from "tns-core-modules/color";
-import {LabelState} from "../../shared/enums/floatLabel.enum";
-// static token = "";
-// static messagePermissons = false;
+import { Color } from "tns-core-modules/color";
+import { LabelState } from "../../shared/enums/floatLabel.enum";
+
 export class Config {
-  static APIURL:string = "https://dgorod.com/api/v1/";
+  static APIURL: string = "https://dgorod.com/api/v1/";
 
-  static ActionBarColor:Color = new Color("#1e88e5");
-  static DefaultActionBarColor:Color = new Color("#332c2c2c");
+  static actionBarColor: Color = new Color("#1e88e5");
+  static defaultActionBarColor: Color = new Color("#332c2c2c");
 
-  static TermOfUseLInk:string = "https://dgorod.com/terms-of-use.html";
-  static PrivacyPolicyLink:string = "https://dgorod.com/privacy-policy.html";
+  static termOfUseLInk: string = "https://dgorod.com/terms-of-use.html";
+  static privacyPolicyLink: string = "https://dgorod.com/privacy-policy.html";
 
-  static bicLength:number = 9;
-  static bnkCorrLength:number = 20;
+  static bicLength: number = 9;
+  static bnkCorrLength: number = 20;
 
   static messages = {
     "schedule": {
@@ -20,7 +19,8 @@ export class Config {
       "1-5_15-20": "Вывод денег осуществляется с 1 по 5 и с 15 по 20 число месяца, попробуйте изменить дату.",
       "daily": "",
       "every_fri": "Вывод денег осуществляется каждую пятницу месяца, попробуйте изменить дату.",
-      "every_mon_every_thu": "Вывод денег осуществляется каждый понедельник и четверг месяца, попробуйте изменить дату.",
+      "every_mon_every_thu": `Вывод денег осуществляется каждый понедельник и четверг месяца,
+                              попробуйте изменить дату.`,
       "every_thu": "Вывод денег осуществляется каждый четверг месяца, попробуйте изменить дату.",
       "no_payment": "В данный момент мы не осуществляем вывод денег.",
       "weekly": "",
@@ -47,14 +47,14 @@ export class Config {
         "withdrawal": "Дата вывода денег успешно сохранена"
       }
     },
-    "button":{
+    "button": {
       "ok": "OK"
     }
   };
 
-  static maxNextMonth:number = 3;
+  static maxNextMonth: number = 3;
 
-  static getLabelsSettings(type:LabelState){
+  static getLabelsSettings(type: LabelState) {
     let state;
     switch (type) {
       case  LabelState.focus:
@@ -79,13 +79,12 @@ export class Config {
         };
         break;
       case LabelState.default:
+      default:
         state = {
           color: new Color("#61000000")
-        }
+        };
     }
 
     return state;
   };
 }
-
-

@@ -1,10 +1,10 @@
-import { Action } from '@ngrx/store';
-import { type } from '../../core/';
-import {IUser} from "../../../shared/models/user/user.model";
-import {IAccount} from "../../../shared/models/account/account.model";
+import { Action } from "@ngrx/store";
+import { type } from "../../core/";
+import { IUser } from "../../../shared/models/user/user.model";
+import { IAccount } from "../../../shared/models/account/account.model";
 
 export namespace NUser {
-    export const CATEGORY: string = 'User';
+    export const CATEGORY: string = "User";
 
     export interface IUserActions {
         LOAD: string;
@@ -17,8 +17,9 @@ export namespace NUser {
         UPDATED: string;
         UPDATE_FAILED: string;
     }
-
+    /* tslint:disable:variable-name */
     export const ActionTypes: IUserActions = {
+    /* tslint:enable:variable-name */
         LOAD: type(`${CATEGORY} Load`),
         LOADED: type(`${CATEGORY} Loaded successful`),
         LOAD_FAILED: type(`${CATEGORY} Load Failed`),
@@ -32,7 +33,7 @@ export namespace NUser {
 
     export class LoadAction implements Action {
         type = ActionTypes.LOAD;
-        payload:string = null;
+        payload: string = null;
     }
 
     export class LoadedAction implements Action {
@@ -48,7 +49,7 @@ export namespace NUser {
 
     export class LoadAccountAction implements Action {
         type = ActionTypes.LOAD_ACCOUNT;
-        payload:string = null;
+        payload: string = null;
     }
 
     export class AccountLoadedAction implements Action {
@@ -83,5 +84,10 @@ export namespace NUser {
         = LoadAction
         | LoadedAction
         | LoadFailedAction
-        | LoadAccountAction | AccountLoadedAction | AccountLoadFailedAction | UpdateAction | UpdatedAction | UpdateFailedAction;
+        | LoadAccountAction
+        | AccountLoadedAction
+        | AccountLoadFailedAction
+        | UpdateAction
+        | UpdatedAction
+        | UpdateFailedAction;
 }

@@ -1,14 +1,14 @@
-import {IUser} from "./user.model";
-import {Account} from "../account/account.class";
+import { IUser } from "./user.model";
+import { Account } from "../account/account.class";
 
-export class User implements IUser{
+export class User implements IUser {
     signal;
     password;
     name;
     balance;
     date;
     account;
-    constructor(){
+    constructor() {
         this.account = new Account();
     }
 }

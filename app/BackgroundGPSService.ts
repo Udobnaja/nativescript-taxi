@@ -1,13 +1,13 @@
-import { GPSService } from './shared/services/gps/gps.service';
+import { GPSService } from "./shared/services/gps/gps.service";
 declare var com: any;
 declare var android: any;
 
-import { Accuracy } from 'tns-core-modules/ui/enums';
-import { watchLocation, clearWatch, isEnabled } from 'nativescript-geolocation';
+import { Accuracy } from "tns-core-modules/ui/enums";
+import { watchLocation, clearWatch, isEnabled } from "nativescript-geolocation";
 
-import { LatLng } from './shared/models/latLng/latLng.class';
-import { ReflectiveInjector } from '@angular/core';
-import { Observable } from 'rxjs';
+import { LatLng } from "./shared/models/latLng/latLng.class";
+import { ReflectiveInjector } from "@angular/core";
+import { Observable } from "rxjs";
 
 import { on as applicationOn,
     exitEvent,
@@ -21,9 +21,9 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
     private gpsService;
     public permission$: Observable<boolean>;
 
-    private injectGPSService(){
+    private injectGPSService() {
 
-        if (this.gpsService) return;
+        if (this.gpsService) { return; }
 
         let injector = ReflectiveInjector.resolveAndCreate([
             GPSService
@@ -32,13 +32,13 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
         this.gpsService = injector.get(GPSService);
     }
 
-    public BackgroundGPSService(){
-        this.super('BackgroundGPSService');
+    public BackgroundGPSService() {
+        this.super("BackgroundGPSService");
     }
 
-    public startWatchingLocation(){
+    public startWatchingLocation() {
 
-        if (this.watchId) return;
+        if (this.watchId) { return; }
 
         const OPTIONS = {
             desiredAccuracy: Accuracy.high,
@@ -55,7 +55,7 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
                 this.gpsService.sendLocation(location).subscribe(() => {
 
                 }, (e) => {
-                    console.log("Error in send Location: " + (e.message || e))
+                    console.log("Error in send Location: " + (e.message || e));
                     this.StopWatchingLocation();
                 });
             }
@@ -66,8 +66,8 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
     }
 
 
-    public StopWatchingLocation(){
-        if(this.watchId) {
+    public StopWatchingLocation() {
+        if (this.watchId) {
             clearWatch(this.watchId);
             this.watchId = null;
         }
@@ -76,7 +76,9 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
     protected onHandleIntent(intent): void {
 
         const INTERVAL = 5000;
+        /* tslint:disable:variable-name */
         let __this = this;
+        /* tslint:enable:variable-name */
 
         this.injectGPSService();
 
@@ -92,7 +94,7 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
             console.log("Error subscribe: " + (e.message || e));
             this.StopWatchingLocation();
         }, () => {
-            console.log('Complete Permission Subscribe');
+            console.log("Complete Permission Subscribe");
             this.StopWatchingLocation();
         });
 
@@ -102,5 +104,5 @@ export class BackgroundGPSService extends com.pip3r4o.android.app.IntentService 
             }
         });
     }
-
 }
+

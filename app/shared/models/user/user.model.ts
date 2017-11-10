@@ -1,6 +1,6 @@
-import {IAccount} from "../account/account.model";
+import { IAccount } from "../account/account.model";
 
-export interface IUser{
+export interface IUser {
     signal: string;
     password: string;
     name: string;

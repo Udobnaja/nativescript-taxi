@@ -1,9 +1,10 @@
-import { Observable } from 'rxjs/Observable';
-import {IUser} from "../../../shared/models/user/user.model";
+import { IUser } from "../../../shared/models/user/user.model";
 
 
-export interface IUserState extends IUser{
-    info:{},
-    error: any
+export interface IUserState extends IUser {
+    info: {};
+    error: any;
 }
+/* tslint:disable:variable-name */
 export const UserInitialState: IUserState = null;
+/* tslint:enable:variable-name */

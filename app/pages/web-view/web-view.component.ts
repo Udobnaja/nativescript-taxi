@@ -1,8 +1,8 @@
-import {Component, AfterViewInit, ElementRef, ViewChild, NgZone} from "@angular/core";
-import {RouterExtensions, PageRoute} from "nativescript-angular";
-import {WebView, LoadEventData} from "tns-core-modules/ui/web-view";
+import { Component, AfterViewInit, ElementRef, ViewChild, NgZone } from "@angular/core";
+import { RouterExtensions, PageRoute } from "nativescript-angular";
+import { WebView, LoadEventData } from "tns-core-modules/ui/web-view";
 import "rxjs/add/operator/switchMap";
-import {Config} from "../../modules/core/config";
+import { Config } from "../../modules/core/config";
 import * as dialogs from "ui/dialogs";
 
 @Component({
@@ -10,7 +10,7 @@ import * as dialogs from "ui/dialogs";
     templateUrl: "./web-view.html"
 })
 
-export class WebViewComponent implements AfterViewInit{
+export class WebViewComponent implements AfterViewInit {
     url: string = "";
     title: string = "";
     isLoading: boolean = true;
@@ -18,7 +18,7 @@ export class WebViewComponent implements AfterViewInit{
     @ViewChild("webview") webview: ElementRef;
 
     constructor(private router: RouterExtensions,
-                private route: PageRoute, private zone: NgZone){
+                private route: PageRoute, private zone: NgZone) {
 
         this.route.activatedRoute
             .switchMap(activatedRoute => activatedRoute.queryParams)
@@ -28,7 +28,7 @@ export class WebViewComponent implements AfterViewInit{
             });
     }
 
-    goBack(){
+    goBack() {
         this.router.back();
     }
 
@@ -48,6 +48,6 @@ export class WebViewComponent implements AfterViewInit{
                     okButtonText: Config.messages.button.ok
                 });
             }
-        })
+        });
     }
 }

@@ -5,26 +5,26 @@ import "rxjs/add/operator/map";
 import { ErrorService } from "../error/error.service";
 
 @Injectable()
-export class UserService extends ErrorService{
+export class UserService extends ErrorService {
 
-    constructor(private http: Http){
+    constructor(private http: Http) {
         super();
     }
 
-    getProfile(){
+    getProfile() {
         return this.http.get("driver/info")
-            .map(res => res.json().driver).catch(this.handleErrors)
+            .map(res => res.json().driver).catch(this.handleErrors);
     }
 
-    checkBik(bic){
-        return this.http.get(`validate_bic/${bic}`).map(res => res.json()).catch(this.handleErrors)
+    checkBik(bic) {
+        return this.http.get(`validate_bic/${bic}`).map(res => res.json()).catch(this.handleErrors);
     }
 
-    getDate():string{
+    getDate(): string {
       return  null;
     }
 
-    saveDate(date:string){
+    saveDate(date: string) {
 
     }
 }

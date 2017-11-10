@@ -1,9 +1,9 @@
-import {Component, OnInit, AfterViewInit, ViewChild, ElementRef, NgZone} from "@angular/core";
-import {Router} from "@angular/router";
+import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, NgZone } from "@angular/core";
+import { Router } from "@angular/router";
 import { Page } from "ui/page";
-import {Config} from "../../modules/core/config";
-import {WebView, LoadEventData} from "tns-core-modules/ui/web-view";
-import {AuthService} from "../../shared/services/auth/auth.service";
+import { Config } from "../../modules/core/config";
+import { WebView, LoadEventData } from "tns-core-modules/ui/web-view";
+import { AuthService } from "../../shared/services/auth/auth.service";
 import * as dialogs from "ui/dialogs";
 
 @Component({
@@ -13,8 +13,8 @@ import * as dialogs from "ui/dialogs";
     providers: [AuthService]
 })
 
-export class AgreementComponent implements OnInit, AfterViewInit{
-    url: string = Config.PrivacyPolicyLink;
+export class AgreementComponent implements OnInit, AfterViewInit {
+    url: string = Config.privacyPolicyLink;
     isLoading: boolean = true;
 
     @ViewChild("webview") webview: ElementRef;
@@ -22,25 +22,25 @@ export class AgreementComponent implements OnInit, AfterViewInit{
     constructor(private router: Router,
                 private page: Page,
                 private zone: NgZone,
-                private authService: AuthService){}
+                private authService: AuthService) {}
 
-    ngOnInit(){
-        this.page.androidStatusBarBackground = Config.ActionBarColor;
+    ngOnInit() {
+        this.page.androidStatusBarBackground = Config.actionBarColor;
     }
 
-    close(){
+    close() {
         this.router.navigate(["login"]);
     }
 
-    goNext(){
+    goNext() {
         this.authService.acceptUser().subscribe(() => {
-            localStorage.setItem('agreement', "1");
+            localStorage.setItem("agreement", "1");
             this.router.navigate(["card-info"]);
         }, () => dialogs.alert({
             title: Config.messages.error.title,
             message: Config.messages.error.body.restart,
             okButtonText: Config.messages.button.ok
-        }))
+        }));
     }
 
     ngAfterViewInit() {
@@ -56,9 +56,8 @@ export class AgreementComponent implements OnInit, AfterViewInit{
                     title: Config.messages.error.title,
                     message: Config.messages.error.body.restart,
                     okButtonText: Config.messages.button.ok
-                })
+                });
             }
-        })
+        });
     }
-
 }

@@ -1,6 +1,6 @@
-import { UserInitialState } from '../states/';
-import { NUser } from '../actions/';
-import {IUserState} from "../states/user.state";
+import { UserInitialState } from "../states/";
+import { NUser } from "../actions/";
+import { IUserState } from "../states/user.state";
 
 export function reducer(
     state: IUserState = UserInitialState,

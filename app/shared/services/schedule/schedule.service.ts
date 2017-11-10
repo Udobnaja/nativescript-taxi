@@ -7,17 +7,16 @@ import { ErrorService } from "../error/error.service";
 @Injectable()
 export class ScheduleService extends ErrorService {
 
-    constructor(private http: Http){
+    constructor(private http: Http) {
         super();
     }
 
-    getSchedule(){
+    getSchedule() {
         return this.http.get("driver/schedule")
-            .map(res => res.json().schedule).catch(this.handleErrors)
+            .map(res => res.json().schedule).catch(this.handleErrors);
     }
 
-    getPaymentSchedules(){
+    getPaymentSchedules() {
         return this.http.get("payment_schedules").map(res => res.json().payment_schedules).catch(this.handleErrors);
     }
-
 }

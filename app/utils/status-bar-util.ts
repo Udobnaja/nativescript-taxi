@@ -7,7 +7,8 @@ declare var UIResponder: any;
 declare var UIStatusBarStyle: any;
 declare var UIApplication: any;
 declare var UIApplicationDelegate: any;
-
+/* tslint:disable:variable-name */
+/* tslint:disable:no-bitwise */
 export function setStatusBarColors() {
   // Make the iOS status bar transparent with white text.
   // See https://github.com/burkeholland/nativescript-statusbar/issues/2
@@ -45,3 +46,5 @@ export function setStatusBarColors() {
     });
   }
 }
+/* tslint:enable:no-bitwise */
+/* tslint:enable:variable-name */

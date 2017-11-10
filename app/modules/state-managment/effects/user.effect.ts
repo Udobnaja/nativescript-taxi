@@ -1,32 +1,32 @@
 
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 
-import { Store, Action } from '@ngrx/store';
-import {Effect, Actions} from '@ngrx/effects';
-import { Observable } from 'rxjs/Observable';
+import { Store, Action } from "@ngrx/store";
+import { Effect, Actions } from "@ngrx/effects";
+import { Observable } from "rxjs/Observable";
 
-import { NUser } from '../actions/';
-import {UserService} from "../../../shared/services/user/user.service";
-import {IUser} from "../../../shared/models/user/user.model";
-import {AccountService} from "../../../shared/services/account/account.service";
-import {IAccount} from "../../../shared/models/account/account.model";
-import {RouterExtensions} from "nativescript-angular";
+import { NUser } from "../actions/";
+import { UserService } from "../../../shared/services/user/user.service";
+import { IUser } from "../../../shared/models/user/user.model";
+import { AccountService } from "../../../shared/services/account/account.service";
+import { IAccount } from "../../../shared/models/account/account.model";
+import { RouterExtensions } from "nativescript-angular";
 
 @Injectable()
 export class UserEffects {
 
     constructor(
         private store: Store<any>,
-        private actions$:Actions,
+        private actions$: Actions,
         private userService: UserService,
         private accountService: AccountService,
         private router: RouterExtensions
-    ) { }
+    ) {}
 
     @Effect() load$: Observable<Action> = this.actions$
         .ofType(NUser.ActionTypes.LOAD)
         .switchMap(() =>   this.userService.getProfile())
-        .map((user:IUser) => new NUser.LoadedAction(user))
+        .map((user: IUser) => new NUser.LoadedAction(user))
         .catch(() => Observable.of(new NUser.LoadFailedAction()));
 
     @Effect() loadAccount$: Observable<Action> = this.actions$
@@ -38,11 +38,6 @@ export class UserEffects {
     @Effect() updateAccount$: Observable<Action> = this.actions$
         .ofType(NUser.ActionTypes.UPDATE)
         .switchMap(action => this.accountService.updateAccount(action["payload"])
-            .map((account:IAccount) => {this.router.back(); return new NUser.UpdatedAction(account)})
+            .map((account: IAccount) => { this.router.back(); return new NUser.UpdatedAction(account); })
             .catch((e) => Observable.of(new NUser.UpdateFailedAction(e.status || e.statusText))));
-
-
-
-
 }
-

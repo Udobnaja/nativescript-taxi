@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Http, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers} from '@angular/http';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import {Config} from "../config";
+import { Injectable } from "@angular/core";
+import { Http, ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Headers } from "@angular/http";
+import { Observable } from "rxjs/Observable";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
+import { Config } from "../config";
 
 @Injectable()
 export class InterceptedHttp extends Http {
@@ -40,15 +40,15 @@ export class InterceptedHttp extends Http {
         return Config.APIURL + req ;
     }
 
-    private getRequestOptionArgs(options?: RequestOptionsArgs) : RequestOptionsArgs {
+    private getRequestOptionArgs(options?: RequestOptionsArgs): RequestOptionsArgs {
         if (options == null) {
             options = new RequestOptions();
         }
         if (options.headers == null) {
             options.headers = new Headers();
         }
-        options.headers.append('Content-Type', 'application/json');
-        options.headers.append('X-Driver-Auth', localStorage.getItem("token"));
+        options.headers.append("Content-Type", "application/json");
+        options.headers.append("X-Driver-Auth", localStorage.getItem("token"));
 
         return options;
     }

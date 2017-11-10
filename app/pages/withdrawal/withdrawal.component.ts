@@ -1,14 +1,14 @@
-import {Component, OnInit} from "@angular/core";
-import {DatePicker} from "tns-core-modules/ui/date-picker";
-import {RouterExtensions} from "nativescript-angular";
-import {UserService} from "../../shared/services/user/user.service";
-import {Store} from "@ngrx/store";
-import {IAppState} from "../../modules/ngrx/index";
-import {NUser} from "../../modules/state-managment/actions/user.action";
-import {IAccount} from "../../shared/models/account/account.model";
-import {ConfigBackend} from "../../modules/core/services/config.service";
-import {ScheduleService} from "../../shared/services/schedule/schedule.service";
-import {Config} from "../../modules/core/config";
+import { Component, OnInit } from "@angular/core";
+import { DatePicker } from "tns-core-modules/ui/date-picker";
+import { RouterExtensions } from "nativescript-angular";
+import { UserService } from "../../shared/services/user/user.service";
+import { Store } from "@ngrx/store";
+import { IAppState } from "../../modules/ngrx/index";
+import { NUser } from "../../modules/state-managment/actions/user.action";
+import { IAccount } from "../../shared/models/account/account.model";
+import { ConfigBackend } from "../../modules/core/services/config.service";
+import { ScheduleService } from "../../shared/services/schedule/schedule.service";
+import { Config } from "../../modules/core/config";
 import * as dialogs from "ui/dialogs";
 
 @Component({
@@ -19,7 +19,7 @@ import * as dialogs from "ui/dialogs";
 })
 
 export class WithdrawalComponent implements OnInit {
-    isLoading:boolean;
+    isLoading: boolean;
     date: Date;
     available: boolean;
     account: IAccount;
@@ -32,7 +32,7 @@ export class WithdrawalComponent implements OnInit {
                 private userService: UserService,
                 private store: Store<IAppState>,
                 private config: ConfigBackend,
-                private scheduleService: ScheduleService){
+                private scheduleService: ScheduleService) {
         this.isLoading = true;
         this.available = false;
 
@@ -40,22 +40,22 @@ export class WithdrawalComponent implements OnInit {
         this.reason = Config.messages.schedule.default;
 
         this.store.select("user").subscribe(u => {
-            if (u) this.account = u.account;
+            if (u) { this.account = u.account; }
         });
     }
 
-    private checkDates(val){
+    private checkDates(val) {
         let date = new Date(val).getDate();
         let day = new Date(val).getDay();
 
         this.reason = Config.messages.schedule[this.schedule] || Config.messages.schedule.default;
 
-        switch (this.scheduleEnum[this.schedule]){
+        switch (this.scheduleEnum[this.schedule]) {
             case this.scheduleEnum["1-5"]:
                 this.available = (date >= 1 || date <= 5);
                 break;
             case this.scheduleEnum["1-5_15-20"]:
-                this.available = (date >= 1 || date <= 5 || date >=15 || date <= 20);
+                this.available = (date >= 1 || date <= 5 || date >= 15 || date <= 20);
                 break;
             case this.scheduleEnum["daily"]:
             case this.scheduleEnum["immediately"]:
@@ -80,15 +80,15 @@ export class WithdrawalComponent implements OnInit {
         }
     }
 
-    goBack(){
+    goBack() {
         this.router.back();
     }
 
-    edit(){
-        this.router.navigate(['edit-requisites']);
+    edit() {
+        this.router.navigate(["edit-requisites"]);
     }
 
-    onPickerLoaded(args){
+    onPickerLoaded(args) {
         // if (this.currentDate) return;
 
         let datePicker = <DatePicker>args.object;
@@ -107,12 +107,12 @@ export class WithdrawalComponent implements OnInit {
         datePicker.maxDate = new Date(maxDate.setMonth(today.getMonth() + Config.maxNextMonth));
     }
 
-    onDateChanged(args){
+    onDateChanged(args) {
         this.checkDates(args.value);
         this.date = new Date(args.value);
     }
 
-    saveNewDate(){
+    saveNewDate() {
         /* if success*/
         dialogs.confirm({
             title: Config.messages.success.title,
@@ -125,7 +125,7 @@ export class WithdrawalComponent implements OnInit {
 
     }
 
-    ngOnInit(){
+    ngOnInit() {
         this.store.dispatch(new NUser.LoadAccountAction());
         this.scheduleEnum = this.config.getSchedule();
         this.scheduleService.getSchedule().subscribe(s => {
