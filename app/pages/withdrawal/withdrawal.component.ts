@@ -15,7 +15,6 @@ import * as dialogs from "ui/dialogs";
     selector: "withdrawal",
     templateUrl: "./withdrawal.html",
     styleUrls: ["./withdrawal-common.css", "./withdrawal.css"],
-    providers: [UserService]
 })
 
 export class WithdrawalComponent implements OnInit {

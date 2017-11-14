@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
     }
 
     signUp() {
-        let data = {user: this.user, autopark: this.autopark};
+        let data = { user: this.user, autopark: this.autopark };
 
         this.authService.auth(data)
             .subscribe(

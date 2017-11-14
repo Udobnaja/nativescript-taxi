@@ -3,7 +3,7 @@ import { Page } from "ui/page";
 import { Config } from "../../modules/core/config";
 import { User } from "../../shared/models/user/user.class";
 import { Router } from "@angular/router";
-import { UserService } from "../../shared/services/user/user.service";
+
 import { IUser } from "../../shared/models/user/user.model";
 import { NUser } from "../../modules/state-managment/actions/user.action";
 import { Store } from "@ngrx/store";
@@ -19,7 +19,6 @@ import { isEnabled, enableLocationRequest } from "nativescript-geolocation";
     selector: "card",
     templateUrl: "./card-info.html",
     styleUrls: ["./card-info-common.css", "./card-info.css"],
-    providers: [UserService]
 })
 
 export class CardInfoComponent implements OnInit {
