@@ -1,18 +1,18 @@
 import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from "@angular/core";
 import { RouterExtensions } from "nativescript-angular";
 import { Store } from "@ngrx/store";
-import { IAppState } from "../../../modules/ngrx/index";
-import { IUser } from "../../../shared/models/user/user.model";
-import { User } from "../../../shared/models/user/user.class";
+import { IAppState } from "../../../../modules/ngrx/index";
+import { IUser } from "../../../../shared/models/user/user.model";
+import { User } from "../../../../shared/models/user/user.class";
 import { Layout } from "tns-core-modules/ui/layouts/layout";
-import { FloatLabelsUtil } from "../../../utils/float-labels-util";
-import { LabelState } from "../../../shared/enums/floatLabel.enum";
+import { FloatLabelsUtil } from "../../../../utils/float-labels-util";
+import { LabelState } from "../../../../shared/enums/floatLabel.enum";
 import { TextField } from "tns-core-modules/ui/text-field";
-import { UserService } from "../../../shared/services/user/user.service";
-import { Config } from "../../../modules/core/config";
-import { IAccount } from "../../../shared/models/account/account.model";
-import { Account } from "../../../shared/models/account/account.class";
-import { NUser } from "../../../modules/state-managment/actions/user.action";
+import { UserService } from "../../../../shared/services/user/user.service";
+import { Config } from "../../../../modules/core/config";
+import { IAccount } from "../../../../shared/models/account/account.model";
+import { Account } from "../../../../shared/models/account/account.class";
+import { NUser } from "../../../../modules/state-managment/actions/user.action";
 import * as dialogs from "ui/dialogs";
 
 @Component({

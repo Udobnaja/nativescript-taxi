@@ -17,7 +17,7 @@ import { UserService } from "./shared/services/user/user.service";
 import { AccountService } from "./shared/services/account/account.service";
 
 import { LoginModule } from "./pages/login/login.module";
-import { CardModule } from "./pages/card-info/card.module";
+import { CardModule } from "./pages/card/card.module";
 
 import { AppComponent } from "./app.component";
 import {routes, authProviders} from "./app.routing";

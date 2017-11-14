@@ -17,8 +17,8 @@ import { isEnabled, enableLocationRequest } from "nativescript-geolocation";
 
 @Component({
     selector: "card",
-    templateUrl: "./card-info.html",
-    styleUrls: ["./card-info-common.css", "./card-info.css"],
+    templateUrl: "./card.html",
+    styleUrls: ["./card-common.css"],
 })
 
 export class CardInfoComponent implements OnInit {

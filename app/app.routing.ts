@@ -7,5 +7,5 @@ export const authProviders = [
 ];
 
 export const routes = [
-    { path: "", redirectTo: "/card-info", pathMatch: "full"},
+    { path: "", redirectTo: "/card", pathMatch: "full"},
 ];

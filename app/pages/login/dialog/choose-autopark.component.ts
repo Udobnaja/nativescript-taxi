@@ -6,7 +6,7 @@ import { Autopark } from "../../../shared/models/autopark/autopark.class";
 @Component({
     selector: "modal-content",
     templateUrl: "./choose-autopark.html",
-    styleUrls: ["./choose-autopark-common.css", "./choose-autopark.css"],
+    styleUrls: ["./choose-autopark-common.css"],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 

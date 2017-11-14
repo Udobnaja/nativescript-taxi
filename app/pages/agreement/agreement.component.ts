@@ -9,7 +9,6 @@ import * as dialogs from "ui/dialogs";
 @Component({
     selector: "agreement-content",
     templateUrl: "./agreement.html",
-    styleUrls: ["./agreement-common.css", "./agreement.css"],
     providers: [AuthService]
 })
 
@@ -35,7 +34,7 @@ export class AgreementComponent implements OnInit, AfterViewInit {
     goNext() {
         this.authService.acceptUser().subscribe(() => {
             localStorage.setItem("agreement", "1");
-            this.router.navigate(["card-info"]);
+            this.router.navigate(["card"]);
         }, () => dialogs.alert({
             title: Config.messages.error.title,
             message: Config.messages.error.body.restart,

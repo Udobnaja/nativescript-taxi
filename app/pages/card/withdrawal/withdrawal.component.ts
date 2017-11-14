@@ -1,20 +1,20 @@
 import { Component, OnInit } from "@angular/core";
 import { DatePicker } from "tns-core-modules/ui/date-picker";
 import { RouterExtensions } from "nativescript-angular";
-import { UserService } from "../../shared/services/user/user.service";
 import { Store } from "@ngrx/store";
-import { IAppState } from "../../modules/ngrx/index";
-import { NUser } from "../../modules/state-managment/actions/user.action";
-import { IAccount } from "../../shared/models/account/account.model";
-import { ConfigBackend } from "../../modules/core/services/config.service";
-import { ScheduleService } from "../../shared/services/schedule/schedule.service";
-import { Config } from "../../modules/core/config";
+import { IAppState } from "../../../modules/ngrx/index";
+import { NUser } from "../../../modules/state-managment/actions/user.action";
+import { IAccount } from "../../../shared/models/account/account.model";
+import { ConfigBackend } from "../../../modules/core/services/config.service";
+import { ScheduleService } from "../../../shared/services/schedule/schedule.service";
+import { Config } from "../../../modules/core/config";
 import * as dialogs from "ui/dialogs";
+import {UserService} from "../../../shared/services/user/user.service";
 
 @Component({
     selector: "withdrawal",
     templateUrl: "./withdrawal.html",
-    styleUrls: ["./withdrawal-common.css", "./withdrawal.css"],
+    styleUrls: ["./withdrawal-common.css"],
 })
 
 export class WithdrawalComponent implements OnInit {
@@ -118,7 +118,7 @@ export class WithdrawalComponent implements OnInit {
             message: Config.messages.success.body.withdrawal,
             okButtonText: Config.messages.button.ok
         }).then(() => {
-            this.router.navigate(["card-info"]);
+            this.router.navigate(["card"]);
         });
         // post date to Server
 

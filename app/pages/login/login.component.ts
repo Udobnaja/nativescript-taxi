@@ -27,7 +27,7 @@ import { FloatLabelsUtil } from "../../utils/float-labels-util";
     selector: "my-app",
     providers: [AuthService, AutoparkListService],
     templateUrl: "./login.html",
-    styleUrls: ["./login-common.css", "./login.css"]
+    styleUrls: ["./login-common.css"]
 })
 
 export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
                 res => {
                     if (res.json().driver.info.mob_license_accepted) {
                         localStorage.setItem("agreement", res.json().driver.info.mob_license_accepted);
-                        this.router.navigate(["card-info"]);
+                        this.router.navigate(["card"]);
                     } else {
                         this.router.navigate(["agreement"]);
                     }

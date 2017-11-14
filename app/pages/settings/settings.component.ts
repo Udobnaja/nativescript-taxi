@@ -16,7 +16,7 @@ declare var android: any;
 @Component({
     selector: "settings",
     templateUrl: "./settings.html",
-    styleUrls: ["./settings-common.css", "./settings.css"],
+    styleUrls: ["./settings-common.css"],
 })
 
 export class SettingsComponent implements OnInit {
