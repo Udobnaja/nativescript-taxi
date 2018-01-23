@@ -9,7 +9,6 @@ import { ConfigBackend } from "../../../modules/core/services/config.service";
 import { ScheduleService } from "../../../shared/services/schedule/schedule.service";
 import { Config } from "../../../modules/core/config";
 import * as dialogs from "ui/dialogs";
-import {UserService} from "../../../shared/services/user/user.service";
 
 @Component({
     selector: "withdrawal",
@@ -28,7 +27,6 @@ export class WithdrawalComponent implements OnInit {
     currentDate: Date;
 
     constructor(private router: RouterExtensions,
-                private userService: UserService,
                 private store: Store<IAppState>,
                 private config: ConfigBackend,
                 private scheduleService: ScheduleService) {
@@ -128,9 +126,10 @@ export class WithdrawalComponent implements OnInit {
         this.store.dispatch(new NUser.LoadAccountAction());
         this.scheduleEnum = this.config.getSchedule();
         this.scheduleService.getSchedule().subscribe(s => {
-            this.schedule = s;
-            this.checkDates(this.currentDate);
-            this.isLoading = false;
+            console.dir(s);
+            // this.schedule = s;
+            // this.checkDates(this.currentDate);
+            // this.isLoading = false;
         }, () =>
             dialogs.alert({
                 title: Config.messages.error.title,

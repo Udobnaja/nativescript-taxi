@@ -10,7 +10,7 @@ import { ConfigBackend } from "../../modules/core/services/config.service";
 import { ScheduleService } from "../../shared/services/schedule/schedule.service";
 import { GPSService } from "../../shared/services/gps/gps.service";
 
-elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
+// elementRegistryModule.registerElement("CardView", () => require("nativescript-cardview").CardView);
 
 export function configFactory(config: ConfigBackend) {
     return () => config.load();

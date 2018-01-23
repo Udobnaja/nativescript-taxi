@@ -1,22 +1,16 @@
 import { Injectable } from "@angular/core";
-import { Http } from "@angular/http";
-import "rxjs/add/operator/do";
-import "rxjs/add/operator/map";
-import { ErrorService } from "../error/error.service";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
-export class ScheduleService extends ErrorService {
+export class ScheduleService{
 
-    constructor(private http: Http) {
-        super();
-    }
+    constructor(private http: HttpClient) {}
 
     getSchedule() {
         return this.http.get("driver/schedule")
-            .map(res => res.json().schedule).catch(this.handleErrors);
     }
 
     getPaymentSchedules() {
-        return this.http.get("payment_schedules").map(res => res.json().payment_schedules).catch(this.handleErrors);
+        return this.http.get("payment_schedules");
     }
 }

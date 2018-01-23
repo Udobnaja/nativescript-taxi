@@ -1,25 +1,25 @@
 import { Component,  ElementRef, OnInit, OnDestroy, ViewChild, ViewContainerRef, AfterViewChecked} from "@angular/core";
-import { User } from "../../shared/models/user/user.class";
 import { Router } from "@angular/router";
+
 import { ModalDialogService, ModalDialogOptions } from "nativescript-angular/modal-dialog";
 
 const textFieldModule = require("ui/text-field");
-
 import { Page } from "ui/page";
-
 import { TextField } from "ui/text-field";
+import { Layout } from "ui/layouts/layout";
+import * as dialogs from "ui/dialogs";
 
-import { Autopark } from "../../shared/models/autopark/autopark.class";
-import { AutoparkListService } from "../../shared/services/autopark/autopark-list.service";
-import { DialogContent } from "./dialog/choose-autopark.component";
+import 'rxjs/add/operator/finally';
 
-import { Layout } from "tns-core-modules/ui/layouts/layout";
 import { Config } from "../../modules/core/config";
-import { LabelState } from "../../shared/enums/floatLabel.enum";
+import { User } from "../../shared/models/user/user.class";
+import { Autopark } from "../../shared/models/autopark/autopark.class";
+import { DialogContent } from "./dialog/choose-autopark.component";
 import { IUser } from "../../shared/models/user/user.model";
 import { IAutopark } from "../../shared/models/autopark/autopark.model";
+import { AutoparkListService } from "../../shared/services/autopark/autopark-list.service";
 import { AuthService } from "../../shared/services/auth/auth.service";
-import * as dialogs from "ui/dialogs";
+import { LabelState } from "../../shared/enums/floatLabel.enum";
 import { FloatLabelsUtil } from "../../utils/float-labels-util";
 
 
@@ -86,13 +86,12 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
         this.authService.auth(data)
             .subscribe(
                 res => {
-                    if (res.json().driver.info.mob_license_accepted) {
-                        localStorage.setItem("agreement", res.json().driver.info.mob_license_accepted);
+                    if (res['driver'].info.mob_license_accepted) {
+                        localStorage.setItem("agreement", res['driver'].info.mob_license_accepted);
                         this.router.navigate(["card"]);
                     } else {
                         this.router.navigate(["agreement"]);
                     }
-
                 },
                 e => dialogs.alert({
                     title: Config.messages.error.title,
@@ -124,20 +123,23 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewChecked {
 
         this.layout = <Layout>this.container.nativeElement;
 
-        this.autoparkListService.load().subscribe(loadedAutoparks => {
-                this.autoparkList = loadedAutoparks.sort((a, b) => {
-                    let cityA = a.title.toLowerCase();
-                    let cityB = b.title.toLowerCase();
+        this.autoparkListService
+            .load()
+            .finally(() => this.isLoading = false)
+            .subscribe(data => {
+                this.autoparkList = data["autoparks"]
+                    .map(autopark => new Autopark(autopark.city, autopark.name, autopark.title))
+                    .sort((a, b) => {
+                        let cityA = a.title.toLowerCase();
+                        let cityB = b.title.toLowerCase();
 
-                    return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;
+                        return (cityA < cityB) ? -1 : (cityA > cityB) ? 1 : 0;
                 });
-                this.isLoading = false;
-            }, () => dialogs.alert({
+            }, (e) => dialogs.alert({
                 title: Config.messages.error.title,
                 message: Config.messages.error.body.restart,
                 okButtonText: Config.messages.button.ok
-            })
-        );
+            }));
     }
 
     ngOnDestroy() {

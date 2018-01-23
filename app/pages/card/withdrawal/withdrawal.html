@@ -6,9 +6,9 @@
 </ActionBar>
 <ScrollView>
     <GridLayout rows="auto *" height="500">
-        <CardView class="card" elevation="5" radius="2"  row="0">
-            <DatePicker (loaded)="onPickerLoaded($event)" (dateChange)="onDateChanged($event)" height="175"></DatePicker>
-        </CardView>
+        <!--<CardView class="card" elevation="5" radius="2"  row="0">-->
+            <!--<DatePicker (loaded)="onPickerLoaded($event)" (dateChange)="onDateChanged($event)" height="175"></DatePicker>-->
+        <!--</CardView>-->
         <StackLayout class="container" *ngIf="!available && !isLoading" row="1" verticalAlignment="center" horizontalAlignment="center">
             <Image src="res://ic_action_warning" marginBottom="30" width="44"></Image>
             <Label [text]="reason"

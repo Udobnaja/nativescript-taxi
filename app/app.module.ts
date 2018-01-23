@@ -2,9 +2,11 @@ import { NgModule, Injector, NO_ERRORS_SCHEMA } from "@angular/core";
 import { NativeScriptModule } from "nativescript-angular/nativescript.module";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
-import { XHRBackend, Http, RequestOptions, HttpModule } from "@angular/http";
+// import { RequestOptions } from "@angular/http";
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
+
 import { EffectsModule } from "@ngrx/effects";
-import { StoreModule } from "@ngrx/store";
+// import { StoreModule } from "@ngrx/store";
 
 require("nativescript-localstorage");
 
@@ -20,12 +22,7 @@ import { LoginModule } from "./pages/login/login.module";
 import { CardModule } from "./pages/card/card.module";
 
 import { AppComponent } from "./app.component";
-import {routes, authProviders} from "./app.routing";
-
-
-export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions): Http {
-    return new InterceptedHttp(xhrBackend, requestOptions);
-}
+import { routes, authProviders } from "./app.routing";
 
 @NgModule({
     providers: [
@@ -33,27 +30,27 @@ export function httpFactory(xhrBackend: XHRBackend, requestOptions: RequestOptio
         UserService,
         AccountService,
         {
-            provide: Http,
-            useFactory: httpFactory,
-            deps: [XHRBackend, RequestOptions]
-        },
+            provide: HTTP_INTERCEPTORS,
+            useClass: InterceptedHttp,
+            multi: true,
+        }
     ],
   imports: [
       NativeScriptModule,
       NativeScriptRouterModule,
       NativeScriptRouterModule.forRoot(routes),
       NativeScriptHttpModule,
-      StoreModule.forRoot(reducers, {
-          initialState: {
-              user: UserInitialState
-          }
-      }),
-      EffectsModule.forRoot([
-          UserEffects
-      ]),
-      LoginModule,
+      // StoreModule.forRoot(reducers, {
+      //     initialState: {
+      //         user: UserInitialState
+      //     }
+      // }),
+      // EffectsModule.forRoot([
+      //     UserEffects
+      // ]),
       CardModule,
-      HttpModule],
+      LoginModule,
+      HttpClientModule],
   declarations: [
       AppComponent,
   ],

@@ -10,10 +10,10 @@ import { AcceptedGuard } from "../../shared/guards/accept.guard";
 
 const cardRoutes: Routes = [
     { path: "card", component: CardInfoComponent, canActivate: [AcceptedGuard, AuthGuard] },
-    { path: "settings", component: SettingsComponent },
-    { path: "withdrawal", component: WithdrawalComponent },
-    { path: "webview", component: WebViewComponent },
-    { path: "edit-requisites", component: EditRequisitesComponent }
+    // { path: "settings", component: SettingsComponent },
+    // { path: "withdrawal", component: WithdrawalComponent },
+    // { path: "webview", component: WebViewComponent },
+    // { path: "edit-requisites", component: EditRequisitesComponent }
 ];
 
 export const cardDeclaration = [

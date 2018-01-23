@@ -2,13 +2,14 @@ import { Color } from "tns-core-modules/color";
 import { LabelState } from "../../shared/enums/floatLabel.enum";
 
 export class Config {
-  static APIURL: string = "https://dgorod.com/api/v1/";
+  static BASEURL: string = "http://login.balance.taxi";
+  static APIURL: string = `${Config.BASEURL}/api/v1/`;
 
   static actionBarColor: Color = new Color("#1e88e5");
   static defaultActionBarColor: Color = new Color("#332c2c2c");
 
-  static termOfUseLInk: string = "https://dgorod.com/terms-of-use.html";
-  static privacyPolicyLink: string = "https://dgorod.com/privacy-policy.html";
+  static termOfUseLInk: string = `${Config.BASEURL}/terms-of-use.html`;
+  static privacyPolicyLink: string = `${Config.BASEURL}/privacy-policy.html`;
 
   static bicLength: number = 9;
   static bnkCorrLength: number = 20;

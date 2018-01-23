@@ -1,7 +1,7 @@
 
 import { Injectable } from "@angular/core";
 
-import { Store, Action } from "@ngrx/store";
+import { Action } from "@ngrx/store";
 import { Effect, Actions } from "@ngrx/effects";
 import { Observable } from "rxjs/Observable";
 
@@ -16,7 +16,6 @@ import { RouterExtensions } from "nativescript-angular";
 export class UserEffects {
 
     constructor(
-        private store: Store<any>,
         private actions$: Actions,
         private userService: UserService,
         private accountService: AccountService,

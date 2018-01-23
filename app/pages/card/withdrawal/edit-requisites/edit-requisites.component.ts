@@ -17,7 +17,7 @@ import * as dialogs from "ui/dialogs";
 
 @Component({
     selector: "edit-requisites",
-    templateUrl: "./edit-requisites.html"
+    templateUrl: "./edit-requisites.html",
 })
 /* tslint:disable:variable-name */
 export class EditRequisitesComponent implements OnInit, AfterViewChecked {
